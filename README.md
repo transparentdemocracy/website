@@ -1,10 +1,25 @@
-# Website
+# Transparent Democracy - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+## Technical requirements
+- NodeJS v22.0.0
+- NPM v10.5.1
+
+Installing NodeJS will automatically install the compatible NPM version.
+
+Tip: use [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm) to easily install NodeJS and switch between different NodeJS versions.
+If you have Homebrew installed, run `brew install nvm`.
+
+## Install dependencies
+
+Run `npm install` to install all dependencies.
 
 ## Development server
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Running unit tests
+
+Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Code scaffolding
 
@@ -13,10 +28,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 
