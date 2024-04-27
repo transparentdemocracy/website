@@ -1,0 +1,11 @@
+<search-bar (searchTriggered$)="getNewMotions($event)"></search-bar>
+
+<h2>Motions</h2>
+
+@if (motions$$ | async; as motions) {
+  <ul>
+    @for (motion of motions; track $index) {
+      <li>{{ motion.proposal.description }}</li>
+    }
+  </ul>
+}
