@@ -1,13 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
-import { map } from 'rxjs/internal/operators/map';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/internal/Observable';
+import {map} from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MotionsHttpService {
+  private readonly url = 'http://localhost:8080/motions/';
+
   private motions = [
     {
       proposal: {
@@ -29,37 +30,34 @@ export class MotionsHttpService {
     },
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getMotions(): Observable<Motion[]> {
-    return of(this.motions);
-    // return this.http.get<Motions>('url').pipe(
-    //   map((motions: Motions) => motions.motions)
-    // );
+    console.log("get motions called")
+
+    let observable = this.http.get<Motion[]>(this.url).pipe(
+      map((motions: Motion[]) => {
+          console.log(motions);
+          return motions;
+        }
+      )
+    );
+
+    observable.forEach((x) => console.log(x)).then(r => console.log("Then ?"))
+    console.log(observable)
+    return observable;
   }
 
   getMotion(motionId: string): Observable<Motion> {
-    const parsedMotionId = parseInt(motionId, 10);
-    const motion = this.motions.find(
-      (motion) => motion.proposal.id === parsedMotionId
-    );
-    if (!motion) {
-      console.error('Motion not found');
-      return of(EMPTY_MOTION);
-    } else {
-      return of(motion);
-    }
-    
-    // return this.http.get<Motion>(`url/${motionId}`);
+    return this.http.get<Motion>(this.url + `${motionId}`);
   }
 }
 
-export interface Motions {
-  motions: Motion[];
-}
 
 export interface Motion {
   proposal: Proposal;
+  isExpanded: boolean;
 }
 
 export interface Proposal {
@@ -68,6 +66,7 @@ export interface Proposal {
 }
 
 export const EMPTY_MOTION: Motion = {
+  isExpanded: false,
   proposal: {
     id: 0,
     description: 'No motion found'

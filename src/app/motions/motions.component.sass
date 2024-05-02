@@ -1,0 +1,43 @@
+//motions.component.sass
+@use '../../styles/colors'
+
+.motionList
+  display: flex
+  flex-direction: column
+
+.motionBlock
+  display: flex
+  height: auto
+  flex-direction: row
+  justify-content: space-between
+  margin-bottom: 1rem
+  border: 1px solid colors.$date-background-color
+  border-radius: 8px
+
+.motionContent
+  display: flex
+  flex-direction: column
+  height: auto
+  width: 100%
+  padding: 0.5rem
+
+.motionTitle
+  width: 100%
+  font-weight: bold
+  cursor: pointer
+  -webkit-user-select: none /* Safari */
+  -ms-user-select: none /* IE 10 and IE 11 */
+  user-select: none /* Standard syntax */
+
+.motionDetails
+  width: 100%
+  font-weight: normal
+  padding: 1rem 0
+
+.motionDate
+  cursor: default
+  align-self: flex-start
+  background-color: colors.$date-background-color
+  border-radius: 8px
+  font-weight: lighter
+  padding: 0.6rem 0.5rem

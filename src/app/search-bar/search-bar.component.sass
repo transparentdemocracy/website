@@ -1,0 +1,30 @@
+@use '../../styles/colors'
+p
+  text-align: center
+
+div
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: 0.5rem
+  width: 100%
+
+input
+  border: 1px solid colors.$primary-color
+  border-radius: 8px
+  height: 2rem
+  padding: 0 0.5rem
+  width: 100%
+
+button
+  font-weight: bold
+  border-radius: 8px
+  border: 2px solid transparent
+  width: fit-content
+  padding: 0.5rem 2rem
+  cursor: pointer
+  transition: border-color 0.2s ease-in-out
+  &:hover
+    border: 2px solid colors.$primary-color
+  &:active
+    border: 2px solid colors.$secondary-color

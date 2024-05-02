@@ -1,3 +1,4 @@
+/*motions.component.ts*/
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Motion, MotionsHttpService } from '../services/motions.http-service';
@@ -13,14 +14,14 @@ import { ReplaySubject } from 'rxjs';
 })
 export class MotionsComponent implements OnInit {
   motions$$ = new ReplaySubject<Motion[]>(1);
-
+  isExpanded: boolean = false;
   constructor(private motionsHttpService: MotionsHttpService) {}
 
   ngOnInit(): void {
     this.getMotions();
   }
 
-  getMotions(): void {
+ public getMotions(): void {
     this.motionsHttpService.getMotions().subscribe((motions: Motion[]) => {
       this.motions$$.next(motions);
     });

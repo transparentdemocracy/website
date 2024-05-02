@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { MotionsComponent } from './motions/motions.component';
-import { RouterModule } from '@angular/router';
+import {Component} from '@angular/core';
+import {MotionsComponent} from './motions/motions.component';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'root',
