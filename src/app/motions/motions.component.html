@@ -9,15 +9,23 @@
     @for (motion of motions; track $index) {
       <div class="motionBlock">
         <div class="motionContent">
-          <div class="motionTitle" (click)="motion.isExpanded=!motion.isExpanded">This is motion {{ motion.proposal.id }}</div>
+          <div class="motionTitleBar">
+          <div class="motionTitle" (click)="motion.isExpanded=!motion.isExpanded">{{ motion.title }}</div>
+            @if (motion.votingResult){
+              <div class="motionResultAccepted" (click)="motion.isExpanded=!motion.isExpanded">
+                aangenomen
+              </div>
+            } @else if (!motion.votingResult) {
+              <div class="motionResultRejected" (click)="motion.isExpanded=!motion.isExpanded">
+                verworpen
+              </div>
+            }
+          </div>
           <div class="motionDetails" [style.opacity]="motion.isExpanded ? '100' : '0'" [style.display]="motion.isExpanded ? 'block' : 'none'">
-            {{ motion.proposal.description }} <br/><br/>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed nisl ultrices augue eleifend varius. Vivamus molestie faucibus arcu nec vulputate. Ut nec euismod orci. In finibus hendrerit magna, eu maximus enim consectetur non. Vivamus malesuada tempus vulputate. Quisque ac mi erat. Nullam semper bibendum aliquet. Aenean arcu quam, dignissim in accumsan sit amet, lacinia et elit.
-
-            Nunc pretium, metus quis sagittis hendrerit, dui est feugiat purus, ac congue odio erat eu leo. Fusce at arcu sit amet tellus volutpat laoreet. Vestibulum hendrerit lobortis nibh, eget sodales nisi ullamcorper sed. Sed ornare sagittis rhoncus. Donec et ligula orci. Sed rhoncus ullamcorper orci eu mattis. Praesent molestie ut odio sit amet feugiat. Curabitur eget magna nibh. Vestibulum eu dui nulla. Vestibulum volutpat dictum libero, eu posuere justo consectetur eu. Phasellus a faucibus nisi.
+            {{ motion.description }} <br/><br/>
           </div>
         </div>
-        <div class="motionDate">30/04/2024</div>
+        <div class="motionDate">{{ motion.votingDate }}</div>
       </div>
     }
   </div>

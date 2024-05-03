@@ -3,8 +3,8 @@ import { MotionsComponent } from './motions.component';
 import { Motion, MotionsHttpService } from '../services/motions.http-service';
 import { of } from 'rxjs/internal/observable/of';
 
-const FIRST_PROPOSAL = { isExpanded:false, proposal: { id: 1, description: 'First proposal' } };
-const SECOND_PROPOSAL = { isExpanded:false, proposal: { id: 2, description: 'Second proposal' } };
+const FIRST_PROPOSAL = { title: "FIRST_PROPOSAL", isExpanded:false, votingDate: "14/02/2024", votingResult: true, description: "First proposal"};
+const SECOND_PROPOSAL = { title: "FIRST_PROPOSAL", isExpanded:false, votingDate: "14/02/2024", votingResult: true, description: "Second proposal" };
 const MOTIONS = [FIRST_PROPOSAL, SECOND_PROPOSAL];
 
 describe('MotionsComponent', () => {

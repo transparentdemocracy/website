@@ -44,8 +44,6 @@ export class MotionsHttpService {
       )
     );
 
-    observable.forEach((x) => console.log(x)).then(r => console.log("Then ?"))
-    console.log(observable)
     return observable;
   }
 
@@ -54,21 +52,18 @@ export class MotionsHttpService {
   }
 }
 
-
 export interface Motion {
-  proposal: Proposal;
+  title: string;
+  description: string;
+  votingDate: string;
+  votingResult: boolean;
   isExpanded: boolean;
 }
 
-export interface Proposal {
-  id: number;
-  description: string;
-}
-
 export const EMPTY_MOTION: Motion = {
+  description: "N/A",
+  title: "N/A",
+  votingDate: "N/A",
+  votingResult: false,
   isExpanded: false,
-  proposal: {
-    id: 0,
-    description: 'No motion found'
-  }
 }
