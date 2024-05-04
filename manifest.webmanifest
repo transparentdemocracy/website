@@ -1,0 +1,25 @@
+{
+  "name": "Transparent Democracy",
+  "short_name": "Transparent Democracy",
+  "description": "Visualisation of the vote in the Belgian Federal Parliament (chamber)",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "any",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/favicon/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/favicon/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
