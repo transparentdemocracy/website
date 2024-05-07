@@ -1,7 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {map} from 'rxjs/internal/operators/map';
+import {of} from "rxjs/internal/observable/of";
+import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -9,46 +10,59 @@ import {map} from 'rxjs/internal/operators/map';
 export class MotionsHttpService {
   private readonly url = 'http://localhost:8080/motions/';
 
-  private motions = [
-    {
-      proposal: {
-        id: 1,
-        description: 'First proposal',
-      },
-    },
-    {
-      proposal: {
-        id: 2,
-        description: 'Second proposal',
-      },
-    },
-    {
-      proposal: {
-        id: 3,
-        description: 'Third proposal',
-      },
-    },
-  ];
 
   constructor(private http: HttpClient) {
   }
 
   getMotions(): Observable<Motion[]> {
     console.log("get motions called")
+    //Hardcoded motions
+    // return this.hardCodedMotions();
 
-    let observable = this.http.get<Motion[]>(this.url).pipe(
-      map((motions: Motion[]) => {
-          console.log(motions);
+    //Actual http call
+    let fetchBackendMotions: Observable<BackendMotion[]> = this.fetchBackendMotions();
+    return fetchBackendMotions
+      .pipe(map((backendArray: BackendMotion[]) => backendArray.map((bm: BackendMotion) => new ActualMotion(bm))));
+  }
+
+
+  private fetchBackendMotions() {
+    return this.http.get<BackendMotion[]>(this.url).pipe(
+      map((motions: BackendMotion[]) => {
+          //TODO improve returning array with one element of list
           return motions;
         }
       )
     );
+  }
 
-    return observable;
+  private hardCodedMotions() {
+    return of(DummyData.motions);
   }
 
   getMotion(motionId: string): Observable<Motion> {
-    return this.http.get<Motion>(this.url + `${motionId}`);
+    //Actual http call
+    return this.fetchBackendMotion(motionId)
+      .pipe(map(x => new ActualMotion(x)));
+
+    //Hardcoded motions
+    // return this.hardCodedMotion(motionId);
+  }
+
+  private fetchBackendMotion(motionId: string) {
+    return this.http.get<BackendMotion>(this.url + `${motionId}`);
+  }
+
+  private hardCodedMotion(motionId: string) {
+    const motion = DummyData.motions.find(
+      (motion) => motion.title === motionId
+    );
+    if (!motion) {
+      console.error('Motion not found');
+      return of(EMPTY_MOTION);
+    } else {
+      return of(motion);
+    }
   }
 }
 
@@ -57,7 +71,34 @@ export interface Motion {
   description: string;
   votingDate: string;
   votingResult: boolean;
+  /**
+   * This view field should not come back from the service?
+   */
   isExpanded: boolean;
+}
+
+class ActualMotion {
+
+  constructor(backend: BackendMotion) {
+    this.title = backend.title;
+    this.description = backend.description;
+    this.votingDate = backend.votingDate;
+    this.votingResult = backend.votingResult;
+    this.isExpanded = false;
+  }
+
+  title: string;
+  description: string;
+  votingDate: string;
+  votingResult: boolean;
+  isExpanded: boolean;
+}
+
+interface BackendMotion {
+  description: string;
+  title: string;
+  votingDate: string;
+  votingResult: boolean;
 }
 
 export const EMPTY_MOTION: Motion = {
@@ -66,4 +107,31 @@ export const EMPTY_MOTION: Motion = {
   votingDate: "N/A",
   votingResult: false,
   isExpanded: false,
+}
+
+namespace DummyData {
+  export const motions = [
+    {
+      title: "1",
+      description: "first proposal",
+      votingDate: "2024-05-07",
+      votingResult: true,
+      isExpanded: false
+    },
+    {
+      title: "2",
+      description: "second proposal",
+      votingDate: "2024-04-07",
+      votingResult: true,
+      isExpanded: false
+    },
+    {
+      title: "3",
+      description: "third proposal",
+      votingDate: "2023-05-07",
+      votingResult: true,
+      isExpanded: false
+    },
+  ];
+
 }
