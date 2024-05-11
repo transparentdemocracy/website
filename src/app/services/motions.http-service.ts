@@ -10,23 +10,23 @@ import {map} from "rxjs";
 export class MotionsHttpService {
   private readonly url = 'http://localhost:8080/motions/';
 
-
   constructor(private http: HttpClient) {
   }
 
   getMotions(): Observable<Motion[]> {
     console.log("get motions called")
-    //Hardcoded motions
+    // Hardcoded motions
     // return this.hardCodedMotions();
 
-    //Actual http call
-    let fetchBackendMotions: Observable<BackendMotion[]> = this.fetchBackendMotions();
-    return fetchBackendMotions
-      .pipe(map((backendArray: BackendMotion[]) => backendArray.map((bm: BackendMotion) => new ActualMotion(bm))));
+    // Actual http call
+    return this.fetchBackendMotions().pipe(
+      map((backendArray: BackendMotion[]) => backendArray.map((bm: BackendMotion) => new ActualMotion(bm)))
+    );
+    
   }
 
 
-  private fetchBackendMotions() {
+  private fetchBackendMotions(): Observable<BackendMotion[]> {
     return this.http.get<BackendMotion[]>(this.url).pipe(
       map((motions: BackendMotion[]) => {
           //TODO improve returning array with one element of list
@@ -43,7 +43,14 @@ export class MotionsHttpService {
   getMotion(motionId: string): Observable<Motion> {
     //Actual http call
     return this.fetchBackendMotion(motionId)
-      .pipe(map(x => new ActualMotion(x)));
+      .pipe(map((x: BackendMotion) => {
+        // TODO: depending on how the backend handles non-existing motions, this might need to be adjusted
+        if (!x) {
+          return EMPTY_MOTION;
+        } else {
+          return new ActualMotion(x);
+        }
+      }));
 
     //Hardcoded motions
     // return this.hardCodedMotion(motionId);

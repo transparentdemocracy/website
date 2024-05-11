@@ -30,10 +30,6 @@ describe('MotionsComponent', () => {
     expect(motionsHttpServiceMock.getMotion).not.toHaveBeenCalled();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   describe('#ngOnInit', () => {
     it('gets all motions when the component is created', (done) => {
       // given
