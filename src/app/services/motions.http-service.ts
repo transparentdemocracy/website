@@ -1,7 +1,7 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/internal/Observable';
-import {map} from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,39 +9,36 @@ import {map} from "rxjs";
 export class MotionsHttpService {
   private readonly url = 'http://localhost:8080/motions/';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getMotions(): Observable<Motion[]> {
-    console.log("get motions called")
     return this.fetchBackendMotions().pipe(
-      map((backendArray: BackendMotion[]) => backendArray.map((bm: BackendMotion) => new ActualMotion(bm)))
+      map((backendArray: BackendMotion[]) =>
+        backendArray.map((bm: BackendMotion) => new ActualMotion(bm))
+      )
     );
-
   }
-
 
   findMotions(searchTerm: string): Observable<Motion[]> {
-    return this.findBackendMotion(searchTerm)
-      .pipe(map((backendArray: BackendMotion[]) => backendArray.map((bm: BackendMotion) => new ActualMotion(bm))));
+    return this.findBackendMotion(searchTerm).pipe(
+      map((backendArray: BackendMotion[]) =>
+        backendArray.map((bm: BackendMotion) => new ActualMotion(bm))
+      )
+    );
   }
-
 
   private fetchBackendMotions(): Observable<BackendMotion[]> {
     return this.http.get<BackendMotion[]>(this.url).pipe(
       map((motions: BackendMotion[]) => {
-          //TODO improve returning array with one element of list
-          return motions;
-        }
-      )
+        //TODO improve returning array with one element of list
+        return motions;
+      })
     );
   }
 
   private findBackendMotion(motionId: string): Observable<BackendMotion[]> {
     return this.http.get<BackendMotion[]>(this.url + `${motionId}`);
   }
-
-
 }
 
 export interface Motion {
@@ -54,11 +51,9 @@ export interface Motion {
   nrOfYesVotes: number;
   nrOfNoVotes: number;
   nrOfAbsentVotes: number;
-
 }
 
 class ActualMotion {
-
   constructor(backend: BackendMotion) {
     this.titleNL = backend.titleNL;
     this.titleFR = backend.titleFR;
@@ -67,9 +62,9 @@ class ActualMotion {
     this.votingDate = backend.votingDate;
     this.votingDate = backend.votingDate;
     this.votingResult = backend.votingResult;
-    this.nrOfYesVotes = backend.nrOfYesVotes
-    this.nrOfNoVotes = backend.nrOfNoVotes
-    this.nrOfAbsentVotes = backend.nrOfAbsentVotes
+    this.nrOfYesVotes = backend.nrOfYesVotes;
+    this.nrOfNoVotes = backend.nrOfNoVotes;
+    this.nrOfAbsentVotes = backend.nrOfAbsentVotes;
   }
 
   titleNL: string;
@@ -96,12 +91,13 @@ interface BackendMotion {
 }
 
 export const EMPTY_MOTION: Motion = {
-  nrOfAbsentVotes: 0, nrOfNoVotes: 0, nrOfYesVotes: 0,
-  descriptionNL: "N/A",
-  descriptionFR: "N/A",
-  titleNL: "N/A",
-  titleFR: "N/A",
-  votingDate: "N/A",
-  votingResult: false
-}
-
+  nrOfAbsentVotes: 0,
+  nrOfNoVotes: 0,
+  nrOfYesVotes: 0,
+  descriptionNL: 'N/A',
+  descriptionFR: 'N/A',
+  titleNL: 'N/A',
+  titleFR: 'N/A',
+  votingDate: 'N/A',
+  votingResult: false,
+};

@@ -46,8 +46,8 @@ describe('MotionsComponent', () => {
     });
   });
 
-  describe('#getMotions', () => {
-    it('gets all motions', (done) => {
+  describe('#getPage', () => {
+    it('gets a page of motions', (done) => {
       // given
       fixture.detectChanges();
 

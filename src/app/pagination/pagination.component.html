@@ -1,0 +1,13 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class]="setActiveIfCurrentPage(1)">
+      <a class="page-link" href="#" (click)="decreasePage($event)"><<</a> 
+    </li>
+    <li class="page-item" [class]="setActiveIfCurrentPage(1)"><a class="page-link" href="#" (click)="setPage($event, 1)">1</a></li>
+    <li class="page-item" [class]="setActiveIfCurrentPage(2)"><a class="page-link" href="#" (click)="setPage($event, 2)">2</a></li>
+    <li class="page-item" [class]="setActiveIfCurrentPage(3)"><a class="page-link" href="#" (click)="setPage($event, 3)">3</a></li>
+    <li class="page-item" [class]="setActiveIfCurrentPage(3)">
+      <a class="page-link" href="#" (click)="increasePage($event)">>></a>
+    </li>
+  </ul>
+</nav>

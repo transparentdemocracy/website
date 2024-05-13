@@ -1,5 +1,3 @@
-<!--motions.component.html-->
-
 <search-bar (searchTriggered$)="getNewMotions($event)"></search-bar>
 
 <h2>Motions</h2>
@@ -33,3 +31,5 @@
     }
   </div>
 }
+
+<pagination [maxPage]="3" (pageChanged$$)="getPage($event)"></pagination>

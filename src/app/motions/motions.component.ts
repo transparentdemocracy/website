@@ -1,37 +1,45 @@
 /*motions.component.ts*/
-import {CommonModule} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {Motion, MotionsHttpService} from '../services/motions.http-service';
-import {SearchBarComponent} from '../search-bar/search-bar.component';
-import {ReplaySubject} from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Motion, MotionsHttpService } from '../services/motions.http-service';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'motions',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent],
+  imports: [CommonModule, SearchBarComponent, PaginationComponent],
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass',
 })
-export class MotionsComponent implements OnInit {
+export class MotionsComponent {
   motions$$ = new ReplaySubject<ViewMotion[]>(1);
 
-  constructor(private motionsHttpService: MotionsHttpService) {
-  }
+  constructor(private motionsHttpService: MotionsHttpService) {}
 
-  ngOnInit(): void {
-    this.getMotions();
-  }
-
-  public getMotions(): void {
-    this.motionsHttpService.getMotions().subscribe((motions: Motion[]) => {
-      this.motions$$.next(motions.map(x => new ViewMotion(x)));
-    });
+  private getMotions(): Observable<Motion[]> {
+    return this.motionsHttpService.getMotions().pipe(take(1));
   }
 
   getNewMotions(searchTerm: string): void {
-    this.motionsHttpService.findMotions(searchTerm).subscribe((motions: Motion[]) => {
-      this.motions$$.next(motions.map(x => new ViewMotion(x)));
-    });
+    this.motionsHttpService
+      .findMotions(searchTerm)
+      .pipe(untilDestroyed(this), take(1))
+      .subscribe((motions: Motion[]) => {
+        this.motions$$.next(motions.map((x) => new ViewMotion(x)));
+      });
+  }
+
+  getPage(page: number): void {
+    console.log(`we can fetch page ${page} here`);
+    this.getMotions()
+      .pipe(untilDestroyed(this))
+      .subscribe((motions: Motion[]) => {
+        this.motions$$.next(motions.map((x) => new ViewMotion(x)));
+      });
   }
 }
 
@@ -77,8 +85,8 @@ class ViewMotion {
     this.isExpanded = false;
   }
 
-  motion: Motion
-  isExpanded: boolean
+  motion: Motion;
+  isExpanded: boolean;
 }
 
 @Component({
@@ -86,6 +94,4 @@ class ViewMotion {
   standalone: true,
   template: '<ng-content></ng-content>',
 })
-export class MotionsComponentMock {
-}
-
+export class MotionsComponentMock {}
