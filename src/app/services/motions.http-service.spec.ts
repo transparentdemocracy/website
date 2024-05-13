@@ -49,10 +49,10 @@ describe('MotionsHttpService', () => {
   describe('#getMotion', () => {
     it('should return observable of 1 motion', (done) => {
       // given
-      service.getMotion('1').subscribe((motion) => {
+      service.findMotions('1').subscribe((motion) => {
         // then
-        expect(motion.title).toBe('1');
-        expect(motion.description).toBe('first proposal');
+        expect(motion.titleNL).toBe('1');
+        expect(motion.descriptionNL).toBe('first proposal');
         done();
       });
 
@@ -67,10 +67,10 @@ describe('MotionsHttpService', () => {
 
     it('should return an observable with EMPTY_MOTION when searching for unexisting motion', (done) => {
       // given
-      service.getMotion('4').subscribe((motion) => {
+      service.findMotions('4').subscribe((motion) => {
         // then
-        expect(motion.title).toBe('N/A');
-        expect(motion.description).toBe('N/A');
+        expect(motion.titleNL).toBe('N/A');
+        expect(motion.descriptionNL).toBe('N/A');
         done();
       });
 

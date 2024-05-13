@@ -10,7 +10,7 @@
       <div class="motionBlock">
         <div class="motionContent">
           <div class="motionTitleBar">
-          <div class="motionTitle" (click)="motion.isExpanded=!motion.isExpanded">{{ motion.title }}</div>
+          <div class="motionTitle" (click)="motion.isExpanded=!motion.isExpanded">{{ motion.titleNL }}</div>
             @if (motion.votingResult){
               <div class="motionResultAccepted" (click)="motion.isExpanded=!motion.isExpanded">
                 aangenomen
@@ -22,7 +22,10 @@
             }
           </div>
           <div class="motionDetails" [style.opacity]="motion.isExpanded ? '100' : '0'" [style.display]="motion.isExpanded ? 'block' : 'none'">
-            {{ motion.description }} <br/><br/>
+            {{ motion.descriptionNL }} <br/><br/>
+            Yes votes: {{ motion.nrOfYesVotes }} <br/><br/>
+            No votes: {{ motion.nrOfNoVotes }} <br/><br/>
+            Abscent votes: {{ motion.nrOfAbsentVotes }} <br/><br/>
           </div>
         </div>
         <div class="motionDate">{{ motion.votingDate }}</div>

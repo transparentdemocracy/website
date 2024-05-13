@@ -1,7 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {of} from "rxjs/internal/observable/of";
 import {map} from "rxjs";
 
 @Injectable({
@@ -15,14 +14,16 @@ export class MotionsHttpService {
 
   getMotions(): Observable<Motion[]> {
     console.log("get motions called")
-    // Hardcoded motions
-    // return this.hardCodedMotions();
-
-    // Actual http call
     return this.fetchBackendMotions().pipe(
       map((backendArray: BackendMotion[]) => backendArray.map((bm: BackendMotion) => new ActualMotion(bm)))
     );
-    
+
+  }
+
+
+  findMotions(searchTerm: string): Observable<Motion[]> {
+    return this.findBackendMotion(searchTerm)
+      .pipe(map((backendArray: BackendMotion[]) => backendArray.map((bm: BackendMotion) => new ActualMotion(bm))));
   }
 
 
@@ -36,109 +37,71 @@ export class MotionsHttpService {
     );
   }
 
-  private hardCodedMotions() {
-    return of(DummyData.motions);
+  private findBackendMotion(motionId: string): Observable<BackendMotion[]> {
+    return this.http.get<BackendMotion[]>(this.url + `${motionId}`);
   }
 
-  getMotion(motionId: string): Observable<Motion> {
-    //Actual http call
-    return this.fetchBackendMotion(motionId)
-      .pipe(map((x: BackendMotion) => {
-        // TODO: depending on how the backend handles non-existing motions, this might need to be adjusted
-        if (!x) {
-          return EMPTY_MOTION;
-        } else {
-          return new ActualMotion(x);
-        }
-      }));
 
-    //Hardcoded motions
-    // return this.hardCodedMotion(motionId);
-  }
-
-  private fetchBackendMotion(motionId: string) {
-    return this.http.get<BackendMotion>(this.url + `${motionId}`);
-  }
-
-  private hardCodedMotion(motionId: string) {
-    const motion = DummyData.motions.find(
-      (motion) => motion.title === motionId
-    );
-    if (!motion) {
-      console.error('Motion not found');
-      return of(EMPTY_MOTION);
-    } else {
-      return of(motion);
-    }
-  }
 }
 
 export interface Motion {
-  title: string;
-  description: string;
+  titleNL: string;
+  titleFR: string;
+  descriptionNL: string;
+  descriptionFR: string;
   votingDate: string;
   votingResult: boolean;
-  /**
-   * This view field should not come back from the service?
-   */
-  isExpanded: boolean;
+  nrOfYesVotes: number;
+  nrOfNoVotes: number;
+  nrOfAbsentVotes: number;
+
 }
 
 class ActualMotion {
 
   constructor(backend: BackendMotion) {
-    this.title = backend.title;
-    this.description = backend.description;
+    this.titleNL = backend.titleNL;
+    this.titleFR = backend.titleFR;
+    this.descriptionNL = backend.descriptionNL;
+    this.descriptionFR = backend.descriptionFR;
+    this.votingDate = backend.votingDate;
     this.votingDate = backend.votingDate;
     this.votingResult = backend.votingResult;
-    this.isExpanded = false;
+    this.nrOfYesVotes = backend.nrOfYesVotes
+    this.nrOfNoVotes = backend.nrOfNoVotes
+    this.nrOfAbsentVotes = backend.nrOfAbsentVotes
   }
 
-  title: string;
-  description: string;
+  titleNL: string;
+  titleFR: string;
+  descriptionNL: string;
+  descriptionFR: string;
   votingDate: string;
   votingResult: boolean;
-  isExpanded: boolean;
+  nrOfYesVotes: number;
+  nrOfNoVotes: number;
+  nrOfAbsentVotes: number;
 }
 
 interface BackendMotion {
-  description: string;
-  title: string;
+  descriptionNL: string;
+  descriptionFR: string;
+  titleNL: string;
+  titleFR: string;
   votingDate: string;
   votingResult: boolean;
+  nrOfYesVotes: number;
+  nrOfNoVotes: number;
+  nrOfAbsentVotes: number;
 }
 
 export const EMPTY_MOTION: Motion = {
-  description: "N/A",
-  title: "N/A",
+  nrOfAbsentVotes: 0, nrOfNoVotes: 0, nrOfYesVotes: 0,
+  descriptionNL: "N/A",
+  descriptionFR: "N/A",
+  titleNL: "N/A",
+  titleFR: "N/A",
   votingDate: "N/A",
-  votingResult: false,
-  isExpanded: false,
+  votingResult: false
 }
 
-namespace DummyData {
-  export const motions = [
-    {
-      title: "1",
-      description: "first proposal",
-      votingDate: "2024-05-07",
-      votingResult: true,
-      isExpanded: false
-    },
-    {
-      title: "2",
-      description: "second proposal",
-      votingDate: "2024-04-07",
-      votingResult: true,
-      isExpanded: false
-    },
-    {
-      title: "3",
-      description: "third proposal",
-      votingDate: "2023-05-07",
-      votingResult: true,
-      isExpanded: false
-    },
-  ];
-
-}
