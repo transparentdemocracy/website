@@ -4,12 +4,15 @@
       <a class="page-link" href="#" (click)="decreasePage($event)"><<</a>
     </li>
     @for (num of totalPagesArray; track $index) {
-      <li class="page-item" [class]="setActiveIfCurrentPage(num)"><a class="page-link" href="#" (click)="setPage($event, num)">{{ num }}</a></li>
+    <li class="page-item" [class]="setActiveIfCurrentPage(num)">
+      <a class="page-link" href="#" (click)="setPage($event, num)">{{ num }}</a>
+    </li>
     }
 
-
-
-    <li class="page-item" [class]="setActiveIfCurrentPage(totalPagesArray.length)">
+    <li
+      class="page-item"
+      [class]="setActiveIfCurrentPage(totalPagesArray.length)"
+    >
       <a class="page-link" href="#" (click)="increasePage($event)">>></a>
     </li>
   </ul>

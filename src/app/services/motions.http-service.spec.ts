@@ -1,16 +1,26 @@
 import { TestBed } from '@angular/core/testing';
-import { EMPTY_MOTION, MotionsHttpService } from './motions.http-service';
+import {
+  BackendMotion,
+  Motion,
+  MotionsHttpService,
+  Pagination,
+} from './motions.http-service';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 
-const MOTION = {
-  title: '1',
-  description: 'first proposal',
+const MOTION: BackendMotion = {
+  titleNL: '1',
+  titleFR: '1',
+  descriptionNL: 'first proposal',
+  descriptionFR: 'first proposal',
   votingDate: '2024-05-07',
   votingResult: true,
+  nrOfYesVotes: 2,
+  nrOfNoVotes: 3,
+  nrOfAbsentVotes: 4,
 };
 
 describe('MotionsHttpService', () => {
@@ -30,28 +40,36 @@ describe('MotionsHttpService', () => {
   describe('#getMotions', () => {
     it('should return observable of motions', (done) => {
       // given
-      service.getMotions().subscribe((motions) => {
+      const PAGED_MOTIONS = {
+        pageNr: 1,
+        pageSize: 5,
+        totalPages: 1,
+        values: [MOTION, MOTION, MOTION],
+      };
+
+      service.getMotions(1).subscribe((motions: Pagination<Motion>) => {
         // then
-        expect(motions.length).toBe(3);
+        expect(motions.pageNr).toBe(1);
+        expect(motions.values.length).toBe(3);
         done();
       });
 
       const req = httpTestingController.expectOne(
-        'http://localhost:8080/motions/'
+        'http://localhost:8080/motions/?page=1&size=5'
       );
 
       // when
-      req.flush([MOTION, MOTION, MOTION]);
+      req.flush(PAGED_MOTIONS);
       httpTestingController.verify();
     });
   });
 
-  describe('#getMotion', () => {
+  describe('#findMotions', () => {
     it('should return observable of 1 motion', (done) => {
       // given
       service.findMotions('1').subscribe((motion) => {
         // then
-        expect(motion.length).toBe(1)
+        expect(motion.length).toBe(1);
         let singleMotion = motion.pop();
         expect(singleMotion?.titleNL).toBe('1');
         expect(singleMotion?.descriptionNL).toBe('first proposal');
@@ -63,7 +81,7 @@ describe('MotionsHttpService', () => {
       );
 
       // when
-      req.flush(MOTION);
+      req.flush([MOTION]);
       httpTestingController.verify();
     });
 
@@ -71,18 +89,16 @@ describe('MotionsHttpService', () => {
       // given
       service.findMotions('none').subscribe((motion) => {
         // then
-        expect(motion.length).toBe(0)
-        // expect(motion.titleNL).toBe('N/A');
-        // expect(motion.descriptionNL).toBe('N/A');
+        expect(motion.length).toBe(0);
         done();
       });
 
       const req = httpTestingController.expectOne(
-        'http://localhost:8080/motions/4'
+        'http://localhost:8080/motions/none'
       );
 
       // when
-      req.flush(EMPTY_MOTION);
+      req.flush([]);
       httpTestingController.verify();
     });
   });

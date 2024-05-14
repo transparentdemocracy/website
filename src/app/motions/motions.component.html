@@ -1,4 +1,4 @@
-<search-bar (searchTriggered$)="getNewMotions($event)"></search-bar>
+<search-bar (searchTriggered$)="searchMotions($event)"></search-bar>
 
 <h2>Motions</h2>
 
@@ -32,4 +32,4 @@
   </div>
 }
 
-<pagination [maxPage]="nrOfPages" (pageChanged$$)="getMotionsPage($event)"></pagination>
+<pagination [maxPage]="nrOfPages" (pageChanged$$)="getPagedMotions($event)"></pagination>
