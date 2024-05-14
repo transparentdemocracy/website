@@ -1,23 +1,37 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/internal/Observable';
+import {map} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MotionsHttpService {
-  private readonly url = 'http://localhost:8080/motions/';
+  private readonly url = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getMotions(): Observable<Motion[]> {
-    return this.fetchBackendMotions().pipe(
-      map((backendArray: BackendMotion[]) =>
-        backendArray.map((bm: BackendMotion) => new ActualMotion(bm))
+  getMotions(page: number): Observable<Pagination<Motion>> {
+    return this.fetchBackendMotions(page).pipe(
+      map((backendArray: Pagination<BackendMotion>) => {
+          let actualMotions = backendArray.values.map((bm: BackendMotion) => new ActualMotion(bm));
+          return this.extracted(backendArray, actualMotions);
+        }
       )
     );
   }
+
+  private extracted(pagination: Pagination<BackendMotion>, actualMotions: ActualMotion[]) {
+    const newPagination: Pagination<Motion> = {
+      pageNr: pagination.pageNr,
+      pageSize: pagination.pageSize,
+      totalPages: pagination.totalPages,
+      values: actualMotions
+    }
+    return newPagination;
+  }
+
 
   findMotions(searchTerm: string): Observable<Motion[]> {
     return this.findBackendMotion(searchTerm).pipe(
@@ -27,17 +41,12 @@ export class MotionsHttpService {
     );
   }
 
-  private fetchBackendMotions(): Observable<BackendMotion[]> {
-    return this.http.get<BackendMotion[]>(this.url).pipe(
-      map((motions: BackendMotion[]) => {
-        //TODO improve returning array with one element of list
-        return motions;
-      })
-    );
+  private fetchBackendMotions(page: number): Observable<Pagination<BackendMotion>> {
+    return this.http.get<Pagination<BackendMotion>>(`${this.url}motions/?page=${page}&size=5`);
   }
 
   private findBackendMotion(motionId: string): Observable<BackendMotion[]> {
-    return this.http.get<BackendMotion[]>(this.url + `${motionId}`);
+    return this.http.get<BackendMotion[]>(this.url + `motions/${motionId}`);
   }
 }
 
@@ -77,6 +86,14 @@ class ActualMotion {
   nrOfNoVotes: number;
   nrOfAbsentVotes: number;
 }
+
+export interface Pagination<T> {
+  pageNr: number;
+  pageSize: number;
+  totalPages: number;
+  values: T[];
+}
+
 
 interface BackendMotion {
   descriptionNL: string;

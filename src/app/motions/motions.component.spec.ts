@@ -1,10 +1,30 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MotionsComponent } from './motions.component';
-import { Motion, MotionsHttpService } from '../services/motions.http-service';
-import { of } from 'rxjs/internal/observable/of';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {MotionsComponent} from './motions.component';
+import {Motion, MotionsHttpService} from '../services/motions.http-service';
+import {of} from 'rxjs/internal/observable/of';
 
-const FIRST_PROPOSAL = { title: "FIRST_PROPOSAL", isExpanded:false, votingDate: "14/02/2024", votingResult: true, description: "First proposal"};
-const SECOND_PROPOSAL = { title: "FIRST_PROPOSAL", isExpanded:false, votingDate: "14/02/2024", votingResult: true, description: "Second proposal" };
+const FIRST_PROPOSAL: Motion = {
+  titleNL: "FIRST_PROPOSAL",
+  titleFR: "FIRST_PROPOSAL",
+  votingDate: "14/02/2024",
+  votingResult: true,
+  descriptionNL: "First proposal",
+  descriptionFR: "First proposal",
+  nrOfNoVotes: 2,
+  nrOfAbsentVotes: 4,
+  nrOfYesVotes: 5
+};
+const SECOND_PROPOSAL: Motion = {
+  titleNL: "SECOND_PROPOSAL",
+  titleFR: "SECOND",
+  votingDate: "14/02/2024",
+  votingResult: true,
+  descriptionNL: "Second proposal",
+  descriptionFR: "Second proposal",
+  nrOfNoVotes: 2,
+  nrOfAbsentVotes: 4,
+  nrOfYesVotes: 5
+};
 const MOTIONS = [FIRST_PROPOSAL, SECOND_PROPOSAL];
 
 describe('MotionsComponent', () => {
@@ -17,7 +37,7 @@ describe('MotionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MotionsComponent],
-      providers: [{ provide: MotionsHttpService, useValue: motionsHttpServiceMock }],
+      providers: [{provide: MotionsHttpService, useValue: motionsHttpServiceMock}],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MotionsComponent);
@@ -52,7 +72,7 @@ describe('MotionsComponent', () => {
       fixture.detectChanges();
 
       // when
-      component.getMotions();
+      component.getMotionsPage(1);
 
       // then
       component.motions$$.subscribe((motions: Motion[]) => {
@@ -74,7 +94,7 @@ describe('MotionsComponent', () => {
       // then
       component.motions$$.subscribe((motions: Motion[]) => {
         expect(motionsHttpServiceMock.getMotion).toHaveBeenCalled();
-        expect(motions).toEqual([FIRST_PROPOSAL]);
+        expect(motions[0]).toEqual(FIRST_PROPOSAL);
         done();
       });
     });
