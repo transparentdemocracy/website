@@ -9,8 +9,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SearchBarComponent {
   @Output() searchTriggered$ = new EventEmitter<string>();
-  
-  protected triggerSearch(motionId: string) {
-    this.searchTriggered$.emit(motionId);
+
+  protected triggerSearch(searchTerm: string) {
+    this.searchTriggered$.emit(searchTerm);
   }
 }

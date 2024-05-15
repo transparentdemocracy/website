@@ -1,15 +1,11 @@
 /*motions.component.ts*/
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import {
-  Motion,
-  MotionsHttpService,
-  Pagination,
-} from '../services/motions.http-service';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { Observable, ReplaySubject, take } from 'rxjs';
-import { PaginationComponent } from '../pagination/pagination.component';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import {CommonModule} from '@angular/common';
+import {Component} from '@angular/core';
+import {Motion, MotionsHttpService, Page, Votes,} from '../services/motions.http-service';
+import {SearchBarComponent} from '../search-bar/search-bar.component';
+import {Observable, ReplaySubject, take} from 'rxjs';
+import {PaginationComponent} from '../pagination/pagination.component';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
@@ -22,30 +18,38 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class MotionsComponent {
   motions$$ = new ReplaySubject<ViewMotion[]>(1);
   nrOfPages: number = 1;
+  searchTerm: string = "";
 
-  constructor(private motionsHttpService: MotionsHttpService) {}
+  constructor(private motionsHttpService: MotionsHttpService) {
+  }
 
   searchMotions(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+    this.executeNewSearch();
+  }
+
+  private executeNewSearch() {
     this.motionsHttpService
-      .findMotions(searchTerm)
+      .getMotions(1, this.searchTerm)
       .pipe(untilDestroyed(this), take(1))
-      .subscribe((motions: Motion[]) => {
-        this.motions$$.next(motions.map((x) => new ViewMotion(x)));
+      .subscribe((page: Page<Motion>) => {
+        this.motions$$.next(page.values.map((x) => new ViewMotion(x)));
+        this.nrOfPages = page.totalPages;
       });
   }
 
   getPagedMotions(page: number): void {
-    this.loadAllMotions(page)
+    this.loadMotions(page)
       .pipe(untilDestroyed(this))
-      .subscribe((page: Pagination<Motion>) => {
+      .subscribe((page: Page<Motion>) => {
         this.motions$$.next(page.values.map((x) => new ViewMotion(x)));
         this.nrOfPages = page.totalPages;
       });
   }
 
   //TODO: is .take still necessary
-  private loadAllMotions(page: number): Observable<Pagination<Motion>> {
-    return this.motionsHttpService.getMotions(page).pipe(take(1));
+  private loadMotions(page: number): Observable<Page<Motion>> {
+    return this.motionsHttpService.getMotions(page, this.searchTerm).pipe(take(1));
   }
 }
 
@@ -69,17 +73,14 @@ class ViewMotion {
   get descriptionFR(): string {
     return this.motion.descriptionFR;
   }
-
-  get nrOfYesVotes(): number {
-    return this.motion.nrOfYesVotes;
+  get yesVotes(): Votes {
+    return this.motion.yesVotes
   }
-
-  get nrOfNoVotes(): number {
-    return this.motion.nrOfNoVotes;
+  get noVotes(): Votes {
+    return this.motion.noVotes
   }
-
-  get nrOfAbsentVotes(): number {
-    return this.motion.nrOfAbsentVotes;
+  get absVotes(): Votes {
+    return this.motion.absVotes
   }
 
   get votingResult(): boolean {
@@ -100,4 +101,5 @@ class ViewMotion {
   standalone: true,
   template: '<ng-content></ng-content>',
 })
-export class MotionsComponentMock {}
+export class MotionsComponentMock {
+}

@@ -21,9 +21,35 @@
           </div>
           <div class="motionDetails" [style.opacity]="motion.isExpanded ? '100' : '0'" [style.display]="motion.isExpanded ? 'block' : 'none'">
             {{ motion.descriptionNL }} <br/><br/>
-            Yes votes: {{ motion.nrOfYesVotes }} <br/><br/>
-            No votes: {{ motion.nrOfNoVotes }} <br/><br/>
-            Abscent votes: {{ motion.nrOfAbsentVotes }} <br/><br/>
+            <div class="voteOverView">
+              <h2>Per partij</h2>
+              <div class="votePerPartyTable">
+                <div class="perPartyYesVotes">
+                  <div class="votesHeader">Ja ({{ motion.yesVotes.nrOfVotes }} stemmen)</div>
+                  <div class="yesVotesParties">
+                    @for (partyYesVotes of motion.yesVotes.partyVotes; track $index) {
+                      <div>{{ partyYesVotes.partyName}} {{ partyYesVotes.votePercentage}}%</div>
+                    }
+                  </div>
+                </div>
+                <div class="perPartyNoVotes">
+                  <div class="votesHeader">Nee ({{ motion.noVotes.nrOfVotes }} stemmen)</div>
+                  <div class="noVotesParties">
+                    @for (partyNoVotes of motion.noVotes.partyVotes; track $index) {
+                      <div>{{ partyNoVotes.partyName}} {{ partyNoVotes.votePercentage}}%</div>
+                    }
+                  </div>
+                </div>
+                <div class="perPartyAbsenteesVotes">
+                  <div class="votesHeader">Onthouding ({{ motion.absVotes.nrOfVotes }} stemmen)</div>
+                  <div class="absVotesParties">
+                    @for (partyAbsVotes of motion.absVotes.partyVotes; track $index) {
+                      <div>{{ partyAbsVotes.partyName}} {{ partyAbsVotes.votePercentage}}%</div>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="motionDate">{{ motion.votingDate }}</div>
@@ -32,4 +58,4 @@
   </div>
 }
 
-<pagination [maxPage]="nrOfPages" (pageChanged$$)="getPagedMotions($event)"></pagination>
+<pagination [nrOfPages]="nrOfPages" (pageChanged$$)="getPagedMotions($event)"></pagination>

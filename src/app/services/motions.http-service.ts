@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/internal/Observable';
+import {map} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,50 +9,48 @@ import { map } from 'rxjs';
 export class MotionsHttpService {
   private readonly url = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getMotions(page: number): Observable<Pagination<Motion>> {
-    return this.fetchBackendMotions(page).pipe(
-      map((backendArray: Pagination<BackendMotion>) => {
-        let actualMotions = backendArray.values.map(
-          (bm: BackendMotion) => new ActualMotion(bm)
-        );
-        return this.extracted(backendArray, actualMotions);
-      })
+  getMotions(page: number, searchTerm: string): Observable<Page<Motion>> {
+    return this.fetchBackendMotions(page, searchTerm).pipe(
+      this.mapBackendMotionPage()
     );
   }
 
   private fetchBackendMotions(
-    page: number
-  ): Observable<Pagination<BackendMotion>> {
-    return this.http.get<Pagination<BackendMotion>>(
-      `${this.url}motions/?page=${page}&size=5`
-    );
+    page: number, searchTerm: string | null
+  ): Observable<Page<BackendMotion>> {
+    let completeUrl = this.buildUrl(searchTerm, page);
+    return this.http.get<Page<BackendMotion>>(completeUrl);
   }
 
-  private extracted(
-    pagination: Pagination<BackendMotion>,
+  private buildUrl(searchTerm: string | null, page: number) {
+    let motionUrl = `${this.url}motions/`;
+    let searchTermPart = (searchTerm == null || searchTerm == ``) ? `` : `search=${searchTerm}&`;
+    let pagePart = `page=${page}&size=5`;
+    return `${motionUrl}?${searchTermPart}${pagePart}`;
+  }
+
+  private mapBackendMotionPage() {
+    return map((backendPage: Page<BackendMotion>) => {
+      let actualMotions = backendPage.values.map(
+        (bm: BackendMotion) => new ActualMotion(bm)
+      );
+      return this.createMotionPage(backendPage, actualMotions);
+    });
+  }
+
+  private createMotionPage(
+    pagination: Page<BackendMotion>,
     actualMotions: ActualMotion[]
-  ) {
-    const newPagination: Pagination<Motion> = {
+  ): Page<Motion> {
+    return {
       pageNr: pagination.pageNr,
       pageSize: pagination.pageSize,
       totalPages: pagination.totalPages,
       values: actualMotions,
     };
-    return newPagination;
-  }
-
-  findMotions(searchTerm: string): Observable<Motion[]> {
-    return this.findBackendMotion(searchTerm).pipe(
-      map((backendArray: BackendMotion[]) =>
-        backendArray.map((bm: BackendMotion) => new ActualMotion(bm))
-      )
-    );
-  }
-
-  private findBackendMotion(motionId: string): Observable<BackendMotion[]> {
-    return this.http.get<BackendMotion[]>(this.url + `motions/${motionId}`);
   }
 }
 
@@ -63,12 +61,29 @@ export interface Motion {
   descriptionFR: string;
   votingDate: string;
   votingResult: boolean;
-  nrOfYesVotes: number;
-  nrOfNoVotes: number;
-  nrOfAbsentVotes: number;
+  yesVotes: Votes;
+  noVotes: Votes;
+  absVotes: Votes;
 }
 
-class ActualMotion {
+export interface Votes {
+  nrOfVotes: number;
+  partyVotes: PartyVotes[]
+}
+
+export interface PartyVotes {
+  partyName: string;
+  votePercentage: number;
+}
+
+export interface Page<T> {
+  pageNr: number;
+  pageSize: number;
+  totalPages: number;
+  values: T[];
+}
+
+class ActualMotion implements Motion {
   constructor(backend: BackendMotion) {
     this.titleNL = backend.titleNL;
     this.titleFR = backend.titleFR;
@@ -77,9 +92,9 @@ class ActualMotion {
     this.votingDate = backend.votingDate;
     this.votingDate = backend.votingDate;
     this.votingResult = backend.votingResult;
-    this.nrOfYesVotes = backend.nrOfYesVotes;
-    this.nrOfNoVotes = backend.nrOfNoVotes;
-    this.nrOfAbsentVotes = backend.nrOfAbsentVotes;
+    this.yesVotes =  backend.yesVotes
+    this.noVotes = backend.noVotes
+    this.absVotes = backend.absVotes
   }
 
   titleNL: string;
@@ -88,38 +103,20 @@ class ActualMotion {
   descriptionFR: string;
   votingDate: string;
   votingResult: boolean;
-  nrOfYesVotes: number;
-  nrOfNoVotes: number;
-  nrOfAbsentVotes: number;
+  yesVotes: Votes;
+  noVotes: Votes;
+  absVotes: Votes;
 }
 
-export interface Pagination<T> {
-  pageNr: number;
-  pageSize: number;
-  totalPages: number;
-  values: T[];
-}
-
-export interface BackendMotion {
+interface BackendMotion {
   descriptionNL: string;
   descriptionFR: string;
   titleNL: string;
   titleFR: string;
   votingDate: string;
   votingResult: boolean;
-  nrOfYesVotes: number;
-  nrOfNoVotes: number;
-  nrOfAbsentVotes: number;
+  yesVotes: Votes;
+  noVotes: Votes;
+  absVotes: Votes;
 }
 
-export const EMPTY_MOTION: BackendMotion = {
-  nrOfAbsentVotes: 0,
-  nrOfNoVotes: 0,
-  nrOfYesVotes: 0,
-  descriptionNL: 'N/A',
-  descriptionFR: 'N/A',
-  titleNL: 'N/A',
-  titleFR: 'N/A',
-  votingDate: 'N/A',
-  votingResult: false,
-};

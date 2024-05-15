@@ -18,7 +18,7 @@ import { BehaviorSubject, take } from 'rxjs';
   styleUrl: './pagination.component.sass',
 })
 export class PaginationComponent implements OnInit {
-  @Input() maxPage!: number;
+  @Input() nrOfPages!: number;
 
   @Output() pageChanged$$ = new EventEmitter<number>();
 
@@ -29,8 +29,8 @@ export class PaginationComponent implements OnInit {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    let change = changes['maxPage'];
-    this.maxPage = change.currentValue;
+    let change = changes['nrOfPages'];
+    this.nrOfPages = change.currentValue;
     this.setTotalPagesArray();
   }
 
@@ -55,7 +55,7 @@ export class PaginationComponent implements OnInit {
 
   increasePage($event: any): void {
     $event.preventDefault();
-    if (this.currentPage$$.getValue() < this.maxPage)
+    if (this.currentPage$$.getValue() < this.nrOfPages)
       this.currentPage$$.next(this.currentPage$$.getValue() + 1);
   }
 
@@ -65,7 +65,7 @@ export class PaginationComponent implements OnInit {
   }
 
   setTotalPagesArray(): void {
-    this.totalPagesArray = Array(this.maxPage)
+    this.totalPagesArray = Array(this.nrOfPages)
       .fill(0)
       .map((x, i) => i + 1);
   }
