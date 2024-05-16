@@ -1,13 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BehaviorSubject, take } from 'rxjs';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges,} from '@angular/core';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {BehaviorSubject} from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -24,9 +17,11 @@ export class PaginationComponent implements OnInit {
 
   totalPagesArray: number[] = [];
 
+  private readonly maxWindowSize = 10;
   private currentPage$$ = new BehaviorSubject<number>(1);
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     let change = changes['nrOfPages'];
@@ -46,6 +41,7 @@ export class PaginationComponent implements OnInit {
     $event.preventDefault();
     if (this.currentPage$$.getValue() > 1)
       this.currentPage$$.next(this.currentPage$$.getValue() - 1);
+    this.setTotalPagesArray();
   }
 
   setPage($event: any, page: number): void {
@@ -57,16 +53,32 @@ export class PaginationComponent implements OnInit {
     $event.preventDefault();
     if (this.currentPage$$.getValue() < this.nrOfPages)
       this.currentPage$$.next(this.currentPage$$.getValue() + 1);
+    this.setTotalPagesArray();
   }
 
-  setActiveIfCurrentPage(page: number): string {
+  disableIfCurrentPage(page: number): string {
     if (this.currentPage$$.getValue() == page) return 'disabled';
     else return '';
   }
 
+
   setTotalPagesArray(): void {
-    this.totalPagesArray = Array(this.nrOfPages)
-      .fill(0)
-      .map((x, i) => i + 1);
+    let start = 0;
+    let maxPageNr = this.nrOfPages;
+
+    if (this.nrOfPages > this.maxWindowSize) {
+      let currentPage = this.currentPage$$.getValue();
+      let offset = this.maxWindowSize / 2;
+      start = Math.max(0, currentPage - offset);
+      maxPageNr = this.maxWindowSize
+    }
+
+    this.fillPageArray(maxPageNr, start);
+  }
+
+  private fillPageArray(maxPageNr: number, start: number) {
+    this.totalPagesArray = Array(maxPageNr)
+      .fill(start + 1)
+      .map((x, i) => x + i);
   }
 }
