@@ -23,6 +23,10 @@ export class MotionsComponent {
   constructor(private motionsHttpService: MotionsHttpService) {
   }
 
+  removeSpaces(input: string): string {
+    return input.replace(/\s+/g, '');
+  }
+
   searchMotions(searchTerm: string): void {
     this.searchTerm = searchTerm;
     this.executeNewSearch();
@@ -51,6 +55,8 @@ export class MotionsComponent {
   private loadMotions(page: number): Observable<Page<Motion>> {
     return this.motionsHttpService.getMotions(page, this.searchTerm).pipe(take(1));
   }
+
+  protected readonly console = console;
 }
 
 class ViewMotion {

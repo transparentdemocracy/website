@@ -74,6 +74,7 @@ export interface Votes {
 export interface PartyVotes {
   partyName: string;
   votePercentage: number;
+  numberOfVotes: number;
 }
 
 export interface Page<T> {

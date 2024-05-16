@@ -1,6 +1,10 @@
 //motions.component.sass
 @use '../../styles/colors'
 
+$les-engages-color-class: 'Les Engagés-color'
+$open-vld-color-class: 'Open Vld'
+
+
 search-bar
   margin-bottom: 1.5rem
 
@@ -71,7 +75,84 @@ search-bar
 .votePerPartyTable
   display: flex
   justify-content: space-between
-  border: 1px solid black
 
 .votesHeader
-  border: 1px solid black
+  display: flex
+  justify-content: center
+  gap: 0.3rem
+  align-items: center
+  border: 1px solid #999999
+  border-radius: 0.3rem
+  height: 3rem
+
+.abstVotesColumn,
+.noVotesColumn,
+.yesVotesColumn
+  flex: 1
+  display: flex
+  flex-direction: column
+
+.votesPartyList
+  padding: 1rem 2rem
+  border: 1px solid #777
+  border-radius: 0.3rem
+
+.partyVoteResult
+  display: flex
+  justify-content: space-between
+  margin-bottom: 0.5rem
+  min-width: 100%
+
+.voteResultsPartyName
+  text-align: right
+  margin-right: 0.1rem
+
+.partyNameTag
+  padding: 0.2rem 0.5rem
+  border-radius: 0.3rem
+  text-transform: uppercase
+  color: #FFFFFF
+
+.partyVotePercentage
+  text-align: left
+  margin-left: 0.3rem
+
+.MR-color
+  background-color: colors.$MR-color
+.PS-color
+  background-color: colors.$PS-color
+.INDEP-color
+  background-color: colors.$INDEP-color
+.Ecolo-Groen-color
+  background-color: colors.$groen-ecolo-color
+.sp\.a-color
+  background-color: colors.$vooruit-color
+.DéFI-color
+  background-color: colors.$defi-color
+.VB-color
+  background-color: colors.$vb-color
+.N-VA-color
+  background-color: colors.$nva-color
+.unknown-color
+  background-color: colors.$unknown-color
+
+.LesEngagés-color
+  background-color: colors.$les-engages-color
+
+.OpenVld-color
+  background-color: colors.$openvld-color
+
+.Vooruit-color
+  background-color: colors.$vooruit-color
+
+.ONAFH-color
+  background-color: colors.$onafh-color
+
+.PVDA-PTB-color
+  background-color: colors.$pvda-color
+
+.cd\&v-color
+  background-color: colors.$cdnv-color
+
+.partyName
+  background-color: colors.$cdnv-color

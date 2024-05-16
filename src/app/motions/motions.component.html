@@ -24,27 +24,28 @@
             <div class="voteOverView">
               <h2>Per partij</h2>
               <div class="votePerPartyTable">
-                <div class="perPartyYesVotes">
+                <div class="yesVotesColumn">
                   <div class="votesHeader">Ja ({{ motion.yesVotes.nrOfVotes }} stemmen)</div>
-                  <div class="yesVotesParties">
+                  <div class="votesPartyList">
                     @for (partyYesVotes of motion.yesVotes.partyVotes; track $index) {
-                      <div>{{ partyYesVotes.partyName}} {{ partyYesVotes.votePercentage}}%</div>
+                      <div class="partyVoteResult"><div class="voteResultsPartyName"><span class="partyNameTag" [ngClass]="removeSpaces(partyYesVotes.partyName) + '-color'">{{ partyYesVotes.partyName}}</span></div> <span class="partyVotePercentage">{{ partyYesVotes.votePercentage}}% ({{ partyYesVotes.numberOfVotes }})</span></div>
                     }
                   </div>
                 </div>
-                <div class="perPartyNoVotes">
+                <div class="noVotesColumn">
                   <div class="votesHeader">Nee ({{ motion.noVotes.nrOfVotes }} stemmen)</div>
-                  <div class="noVotesParties">
+                  <div class="votesPartyList">
                     @for (partyNoVotes of motion.noVotes.partyVotes; track $index) {
-                      <div>{{ partyNoVotes.partyName}} {{ partyNoVotes.votePercentage}}%</div>
+                      <div class="partyVoteResult"><div class="voteResultsPartyName"><span class="partyNameTag" [ngClass]="removeSpaces(partyNoVotes.partyName) + '-color'">{{ partyNoVotes.partyName}}</span></div> <span class="partyVotePercentage">{{ partyNoVotes.votePercentage}}%</span></div>
                     }
                   </div>
                 </div>
-                <div class="perPartyAbsenteesVotes">
+                <div class="abstVotesColumn">
                   <div class="votesHeader">Onthouding ({{ motion.absVotes.nrOfVotes }} stemmen)</div>
-                  <div class="absVotesParties">
+                  <div class="votesPartyList">
                     @for (partyAbsVotes of motion.absVotes.partyVotes; track $index) {
-                      <div>{{ partyAbsVotes.partyName}} {{ partyAbsVotes.votePercentage}}%</div>
+                      {{console.log(partyAbsVotes.numberOfVotes)}}
+                      <div class="partyVoteResult"><div class="voteResultsPartyName"><span class="partyNameTag" [ngClass]="removeSpaces(partyAbsVotes.partyName) + '-color'">{{ partyAbsVotes.partyName}}</span></div> <span class="partyVotePercentage">{{ partyAbsVotes.votePercentage}}%</span></div>
                     }
                   </div>
                 </div>
