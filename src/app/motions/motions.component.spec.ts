@@ -15,6 +15,7 @@ const FIRST_PROPOSAL: Motion = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 2,
         votePercentage: 35
       }
     ]
@@ -24,6 +25,7 @@ const FIRST_PROPOSAL: Motion = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 4,
         votePercentage: 35
       }
     ]
@@ -33,6 +35,7 @@ const FIRST_PROPOSAL: Motion = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 1,
         votePercentage: 35
       }
     ]
@@ -50,6 +53,7 @@ const SECOND_PROPOSAL: Motion = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 2,
         votePercentage: 35
       }
     ]
@@ -59,6 +63,7 @@ const SECOND_PROPOSAL: Motion = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 4,
         votePercentage: 35
       }
     ]
@@ -68,6 +73,7 @@ const SECOND_PROPOSAL: Motion = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 5,
         votePercentage: 35
       }
     ]

@@ -15,6 +15,7 @@ const MOTION = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 2,
         votePercentage: 35
       }
     ]
@@ -24,6 +25,7 @@ const MOTION = {
     partyVotes: PartyVotes[] = [
       {
         partyName: "CD&V",
+        numberOfVotes: 3,
         votePercentage: 35
       }
     ]
@@ -33,6 +35,7 @@ const MOTION = {
   partyVotes: PartyVotes[] = [
     {
       partyName: "CD&V",
+      numberOfVotes: 4,
       votePercentage: 35
     }
   ]

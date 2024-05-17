@@ -1,0 +1,6 @@
+<div [className]="languageSelector">Select language:
+  <select #languageSelector (change)="triggerLanguageChange(languageSelector.value)">
+    <option>Nederlands</option>
+    <option>Français</option>
+  </select>
+</div>

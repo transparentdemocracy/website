@@ -28,7 +28,7 @@ export class MotionsHttpService {
   private buildUrl(searchTerm: string | null, page: number) {
     let motionUrl = `${this.url}motions/`;
     let searchTermPart = (searchTerm == null || searchTerm == ``) ? `` : `search=${searchTerm}&`;
-    let pagePart = `page=${page}&size=5`;
+    let pagePart = `page=${page}&size=10`;
     return `${motionUrl}?${searchTermPart}${pagePart}`;
   }
 
@@ -91,11 +91,22 @@ class ActualMotion implements Motion {
     this.descriptionNL = backend.descriptionNL;
     this.descriptionFR = backend.descriptionFR;
     this.votingDate = backend.votingDate;
-    this.votingDate = backend.votingDate;
+    this.votingDate = this.dateConversion(backend.votingDate);
     this.votingResult = backend.votingResult;
     this.yesVotes =  backend.yesVotes
     this.noVotes = backend.noVotes
     this.absVotes = backend.absVotes
+  }
+
+  dateConversion(votingDate : string) {
+    const dateParts = votingDate.split('-');
+
+    if (dateParts.length !== 3) {
+      throw new Error('Invalid date format. Expected format: YYYY-MM-DD');
+    }
+    const [year, month, day] = dateParts;
+
+    return `${day}-${month}-${year}`;
   }
 
   titleNL: string;
