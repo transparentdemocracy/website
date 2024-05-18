@@ -1,4 +1,23 @@
-<header><img src="assets/images/logo-v1.svg" class="appLogo"/><h1>{{ title }}</h1></header>
-<language-selector></language-selector>
-<motions></motions>
+<header>
+  <div class="headerLogo">
+    <img
+      src="assets/images/logo.svg"
+      class="logoImage"
+      alt="Transparent Democracy logo"
+    />
+    <p class="logoText">{{ title }}</p>
+  </div>
+
+  <div class="headerIntro">
+    <h1>Visualizing voting in the Belgian Federal Parliament (chamber)</h1>
+  </div>
+</header>
+
+<main>
+  <language-selector></language-selector>
+  <motions></motions>
+</main>
+
+<footer></footer>
+
 <router-outlet />
