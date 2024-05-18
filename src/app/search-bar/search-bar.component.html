@@ -1,9 +1,9 @@
 <div class="searchBox">
   <label
-    >Search for motions on specific keywords:
-
+    >Zoek naar moties op specifieke trefwoorden:
     <input
       #searchBox
+      type="search"
       class="searchInput"
       id="searchInput"
       (keydown.enter)="triggerSearch(searchBox.value)"
@@ -11,6 +11,6 @@
   </label>
 
   <button class="searchBtn" (click)="triggerSearch(searchBox.value)">
-    <i class="fa-solid fa-magnifying-glass"></i> Search
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Zoeken
   </button>
 </div>

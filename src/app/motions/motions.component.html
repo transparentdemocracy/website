@@ -4,7 +4,7 @@
 ></search-bar>
 
 <div class="motionsHeader">
-  <h2>Motions</h2>
+  <h2>Moties</h2>
 
   <pagination
     class="motionsPagination"
@@ -19,10 +19,12 @@
   <div
     [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
     class="motionBlock"
-    (click)="motion.isExpanded = !motion.isExpanded"
   >
     <div class="motionContent">
-      <div class="motionTitleBar">
+      <div
+        class="motionTitleBar"
+        (click)="motion.isExpanded = !motion.isExpanded"
+      >
         <div class="chevronIcon">
           <i
             class="fa-solid fa-chevron-right"
@@ -135,9 +137,13 @@
     <div class="motionResultDateBox">
       <div class="motionResult">
         @if (motion.votingResult){
-        <div class="accepted"><i class="fa-solid fa-check-circle"></i>  Aangenomen</div>
+        <div class="accepted">
+          <i class="fa-solid fa-check-circle" aria-hidden="true"></i> Aangenomen
+        </div>
         } @else if (!motion.votingResult) {
-        <div class="rejected"><i class="fa-solid fa-times-circle"></i>  Verworpen</div>
+        <div class="rejected">
+          <i class="fa-solid fa-times-circle" aria-hidden="true"></i> Verworpen
+        </div>
         }
       </div>
       <div class="motionDate">{{ motion.votingDate }}</div>

@@ -1,3 +1,4 @@
+<!-- TODO: move <header> to a component -->
 <header>
   <div class="headerLogo">
     <img
@@ -8,18 +9,21 @@
     <p class="logoText">{{ title }}</p>
   </div>
 
-  <language-selector></language-selector>
+  <language-selector class="headerLanguage"></language-selector>
 </header>
 
 <main>
-  <div class="headerIntro">
+  <div class="mainIntro">
     <h1>
-      Visualization of the votes in the Belgian Federal Parliament (chamber)
+      Visualisatie van de stemmingen in het Belgische Federale Parlement (kamer)
     </h1>
   </div>
   <motions class="motions"></motions>
 </main>
 
-<footer></footer>
+<!-- TODO: move <footer> to a component -->
+<footer>
+  De data gebruikt op deze website is vrij beschikbaar onder de <a href="https://choosealicense.com/licenses/mit/" target="_blank">MIT license</a>
+</footer>
 
 <router-outlet />
