@@ -1,25 +1,39 @@
 //motions.component.sass
-@use '../../styles/_colors'
+@use '../../styles/colors'
 
-$les-engages-color-class: 'Les Engagés-color'
+$color-les-engages-class: 'Les Engagés-color'
 $open-vld-color-class: 'Open Vld'
 
+.searchBar
+  margin-bottom: 2rem
 
-search-bar
-  margin-bottom: 1.5rem
+.motionsHeader
+  display: flex
+  justify-content: center
+  align-items: center
+  margin-bottom: 1.25rem
+
+  & h2
+    font-weight: 700
+    margin: 0
+
+  & .motionsPagination
+    margin-left: auto
 
 .motionList
   display: flex
   flex-direction: column
+  gap: 1rem
 
 .motionBlock
   display: flex
   height: auto
+  min-height: 4rem
   flex-direction: row
   justify-content: space-between
-  margin-bottom: 1rem
-  border: 1px solid colors.$date-background-color
+  border: 2px solid colors.$color-primary-light
   border-radius: 8px
+  background-color: colors.$color-white
 
 .motionContent
   display: flex
@@ -41,20 +55,18 @@ search-bar
 
 .motionTitle
   width: 100%
-  font-weight: bold
-  -webkit-user-select: none /* Safari */
-  -ms-user-select: none /* IE 10 and IE 11 */
-  user-select: none /* Standard syntax */
+  font-weight: 700
+  -webkit-user-select: none
+  user-select: none
 
 .motionDetails
   width: 100%
-  font-weight: normal
   padding: 1rem 2rem 0 2.2rem
 
 .motionDate
   font-size: 0.9rem
-  background-color: colors.$date-background-color
-  border-radius: 8px
+  background-color: colors.$color-primary-light
+  border-radius: 0 4px 4px 0
   padding: 0.6rem 0.5rem
   min-width: fit-content
 
@@ -63,7 +75,7 @@ search-bar
   text-transform: uppercase
   height: fit-content
   font-size: 0.7rem
-  font-weight: bold
+  font-weight: 700
   margin-left: 1rem
   display: flex
   justify-content: center
@@ -124,49 +136,49 @@ search-bar
   margin-left: 0.3rem
 
 .MR-color
-  background-color: colors.$MR-color
+  background-color: colors.$color-mr
 
 .PS-color
-  background-color: colors.$PS-color
+  background-color: colors.$color-ps
 
 .INDEP-color
-  background-color: colors.$INDEP-color
+  background-color: colors.$color-indep
 
 .Ecolo-Groen-color
-  background-color: colors.$groen-ecolo-color
+  background-color: colors.$color-groen-ecolo
 
 .sp\.a-color
-  background-color: colors.$vooruit-color
+  background-color: colors.$color-vooruit
 
 .DéFI-color
-  background-color: colors.$defi-color
+  background-color: colors.$color-defi
 
 .VB-color
-  background-color: colors.$vb-color
+  background-color: colors.$color-vb
 
 .N-VA-color
-  background-color: colors.$nva-color
+  background-color: colors.$color-nva
 
 .unknown-color
-  background-color: colors.$unknown-color
+  background-color: colors.$color-unknown
 
 .LesEngagés-color
-  background-color: colors.$les-engages-color
+  background-color: colors.$color-les-engages
 
 .OpenVld-color
-  background-color: colors.$openvld-color
+  background-color: colors.$color-openvld
 
 .Vooruit-color
-  background-color: colors.$vooruit-color
+  background-color: colors.$color-vooruit
 
 .ONAFH-color
-  background-color: colors.$onafh-color
+  background-color: colors.$color-onafh
 
 .PVDA-PTB-color
-  background-color: colors.$pvda-color
+  background-color: colors.$color-pvda
 
 .cd\&v-color
-  background-color: colors.$cdnv-color
+  background-color: colors.$color-cdnv
 
 .partyName
-  background-color: colors.$cdnv-color
+  background-color: colors.$color-cdnv

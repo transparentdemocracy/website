@@ -1,0 +1,17 @@
+@use '../../styles/colors'
+
+.pagination
+  margin: 0
+
+  & .page-link
+    color: colors.$color-primary-light
+    background-color: colors.$color-secondary
+    border-color: colors.$color-tertiary-light
+
+    &:hover
+      background-color: colors.$color-tertiary
+
+  & .disabled > .page-link
+    color: colors.$color-tertiary-light
+    background-color: colors.$color-primary-light
+    border-color: colors.$color-tertiary-light
