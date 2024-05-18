@@ -4,12 +4,14 @@
   margin: 0
 
   & .page-link
-    color: colors.$color-primary-light
+    color: colors.$color-tertiary-light
     background-color: colors.$color-secondary
     border-color: colors.$color-tertiary-light
 
-    &:hover
-      background-color: colors.$color-tertiary
+    &:hover, &:active, &:focus
+      background-color: colors.$color-tertiary !important
+      box-shadow: none
+      outline: unset
 
   & .disabled > .page-link
     color: colors.$color-tertiary-light

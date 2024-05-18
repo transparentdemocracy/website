@@ -1,4 +1,7 @@
-<search-bar class="searchBar" (searchTriggered$)="searchMotions($event)"></search-bar>
+<search-bar
+  class="searchBar"
+  (searchTriggered$)="searchMotions($event)"
+></search-bar>
 
 <div class="motionsHeader">
   <h2>Motions</h2>
@@ -13,7 +16,11 @@
 @if (motions$$ | async; as motions) {
 <div class="motionList">
   @for (motion of motions; track $index) {
-  <div class="motionBlock">
+  <div
+    [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
+    class="motionBlock"
+    (click)="motion.isExpanded = !motion.isExpanded"
+  >
     <div class="motionContent">
       <div class="motionTitleBar">
         <div class="chevronIcon">
@@ -22,47 +29,27 @@
             [style.transform]="
               motion.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
             "
-            (click)="motion.isExpanded = !motion.isExpanded"
           ></i>
         </div>
-        <div
-          class="motionTitle"
-          (click)="motion.isExpanded = !motion.isExpanded"
-        >
+        <div class="motionTitle">
           {{ motion.titleNL }}
         </div>
-        @if (motion.votingResult){
-        <div
-          class="motionResultAccepted"
-          (click)="motion.isExpanded = !motion.isExpanded"
-        >
-          aangenomen
-        </div>
-        } @else if (!motion.votingResult) {
-        <div
-          class="motionResultRejected"
-          (click)="motion.isExpanded = !motion.isExpanded"
-        >
-          verworpen
-        </div>
-        }
       </div>
+
       <div
         class="motionDetails"
-        [style.opacity]="motion.isExpanded ? '100' : '0'"
-        [style.display]="motion.isExpanded ? 'block' : 'none'"
+        [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
       >
-        {{ motion.descriptionNL }} <br /><br />
+        <p class="motionDescription">{{ motion.descriptionNL }}</p>
         <div class="voteOverView">
-          <h3>Stemresultaten</h3>
-          <h4>Per partij:</h4>
+          <div class="voteOverViewTitle">Stemresultaten per partij:</div>
           <div class="votePerPartyTable">
             <div class="yesVotesColumn">
               <div class="votesHeader">
-                <strong>Ja</strong>&nbsp;({{
-                  motion.yesVotes.nrOfVotes
-                }}
-                stemmen)
+                <span class="typeOfVote">Ja</span>
+                <span class="nrOfVotes"
+                  >{{ motion.yesVotes.nrOfVotes }} stemmen</span
+                >
               </div>
               <div class="votesPartyList">
                 @for (partyYesVotes of motion.yesVotes.partyVotes; track $index)
@@ -78,9 +65,8 @@
                     >
                   </div>
                   <span class="partyVotePercentage"
-                    >{{ partyYesVotes.votePercentage }}% &nbsp;–&nbsp; ({{
-                      partyYesVotes.numberOfVotes
-                    }})</span
+                    >{{ partyYesVotes.numberOfVotes }} &nbsp;·&nbsp;
+                    {{ partyYesVotes.votePercentage }}%</span
                   >
                 </div>
                 }
@@ -88,10 +74,10 @@
             </div>
             <div class="noVotesColumn">
               <div class="votesHeader">
-                <strong>Nee</strong>&nbsp;({{
-                  motion.noVotes.nrOfVotes
-                }}
-                stemmen)
+                <span class="typeOfVote">Nee</span
+                ><span class="nrOfVotes"
+                  >{{ motion.noVotes.nrOfVotes }} stemmen</span
+                >
               </div>
               <div class="votesPartyList">
                 @for (partyNoVotes of motion.noVotes.partyVotes; track $index) {
@@ -106,9 +92,8 @@
                     >
                   </div>
                   <span class="partyVotePercentage"
-                    >{{ partyNoVotes.votePercentage }}% &nbsp;–&nbsp; ({{
-                      partyNoVotes.numberOfVotes
-                    }})</span
+                    >{{ partyNoVotes.numberOfVotes }} &nbsp;·&nbsp;
+                    {{ partyNoVotes.votePercentage }}%</span
                   >
                 </div>
                 }
@@ -116,10 +101,10 @@
             </div>
             <div class="abstVotesColumn">
               <div class="votesHeader">
-                <strong>Onthouding</strong>&nbsp;({{
-                  motion.absVotes.nrOfVotes
-                }}
-                stemmen)
+                <span class="typeOfVote">Onthouding</span
+                ><span class="nrOfVotes"
+                  >{{ motion.absVotes.nrOfVotes }} stemmen</span
+                >
               </div>
               <div class="votesPartyList">
                 @for (partyAbsVotes of motion.absVotes.partyVotes; track $index)
@@ -135,9 +120,8 @@
                     >
                   </div>
                   <span class="partyVotePercentage"
-                    >{{ partyAbsVotes.votePercentage }}% &nbsp;–&nbsp; ({{
-                      partyAbsVotes.numberOfVotes
-                    }})</span
+                    >{{ partyAbsVotes.numberOfVotes }} &nbsp;·&nbsp;
+                    {{ partyAbsVotes.votePercentage }}%</span
                   >
                 </div>
                 }
@@ -147,7 +131,17 @@
         </div>
       </div>
     </div>
-    <div class="motionDate">{{ motion.votingDate }}</div>
+
+    <div class="motionResultDateBox">
+      <div class="motionResult">
+        @if (motion.votingResult){
+        <div class="accepted"><i class="fa-solid fa-check-circle"></i>  Aangenomen</div>
+        } @else if (!motion.votingResult) {
+        <div class="rejected"><i class="fa-solid fa-times-circle"></i>  Verworpen</div>
+        }
+      </div>
+      <div class="motionDate">{{ motion.votingDate }}</div>
+    </div>
   </div>
   }
 </div>

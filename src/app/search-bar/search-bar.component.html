@@ -1,11 +1,15 @@
-<p>Search for motions on specific keywords</p>
 <div class="searchBox">
-  <input
-    #searchBox
-    class="searchInput"
-    placeholder="Search for politicians, themes, keywords, date, ..."
-    (keydown.enter)="triggerSearch(searchBox.value)"
-  />
+  <label
+    >Search for motions on specific keywords:
+
+    <input
+      #searchBox
+      class="searchInput"
+      id="searchInput"
+      (keydown.enter)="triggerSearch(searchBox.value)"
+    />
+  </label>
+
   <button class="searchBtn" (click)="triggerSearch(searchBox.value)">
     <i class="fa-solid fa-magnifying-glass"></i> Search
   </button>
