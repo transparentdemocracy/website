@@ -1,6 +1,11 @@
-<div [className]="languageSelector">Select language:
-  <select #languageSelector (change)="triggerLanguageChange(languageSelector.value)">
-    <option>Nederlands</option>
-    <option>Français</option>
+<label class="languageBox" aria-label="Select language"
+  ><i class="fa-solid fa-globe" aria-hidden="true"></i>
+  <select
+    #languageSelector
+    class="languageSelector"
+    (change)="triggerLanguageChange(languageSelector.value)"
+  >
+    <option>NL</option>
+    <option>FR</option>
   </select>
-</div>
+</label>

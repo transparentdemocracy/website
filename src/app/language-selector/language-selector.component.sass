@@ -1,33 +1,13 @@
 @use '../../styles/colors'
-p
-  text-align: center
 
-div
+.languageBox
   display: flex
   justify-content: center
   align-items: center
-  gap: 0.5rem
-  width: 100%
+  gap: 0.25rem
+  margin-top: 0.5rem
 
-input
-  border: 1px solid colors.$primary-color
-  border-radius: 8px
-  height: 2rem
-  padding: 0 0.5rem
-  width: 100%
-
-button
-  font-weight: bold
-  border-radius: 8px
-  border: 2px solid transparent
-  width: 180px
-  padding: 0.2rem 2rem
-  cursor: pointer
-  transition: border-color 0.2s ease-in-out
-  &:hover
-    border: 2px solid colors.$primary-color
-  &:active
-    border: 2px solid colors.$secondary-color
-
-.fa-magnifying-glass
-  display: inline
+  & .languageSelector
+    border: none
+    background-color: transparent
+    cursor: pointer

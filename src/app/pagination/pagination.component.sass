@@ -1,0 +1,21 @@
+@use '../../styles/colors'
+
+.pagination
+  margin: 0
+
+  & .page-link
+    min-width: 2.75rem
+    text-align: center
+    color: colors.$color-tertiary-light
+    background-color: colors.$color-secondary
+    border-color: colors.$color-tertiary-light
+
+    &:hover, &:active, &:focus
+      background-color: colors.$color-tertiary !important
+      box-shadow: none
+      outline: unset
+
+  & .disabled > .page-link
+    color: colors.$color-tertiary-light
+    background-color: colors.$color-primary-light
+    border-color: colors.$color-tertiary-light

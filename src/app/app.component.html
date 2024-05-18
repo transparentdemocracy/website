@@ -1,3 +1,4 @@
+<!-- TODO: move <header> to a component -->
 <header>
   <div class="headerLogo">
     <img
@@ -8,16 +9,30 @@
     <p class="logoText">{{ title }}</p>
   </div>
 
-  <div class="headerIntro">
-    <h1>Visualization of the votes in the Belgian Federal Parliament (chamber)</h1>
-  </div>
+  <language-selector class="headerLanguage"></language-selector>
 </header>
 
 <main>
-  <language-selector></language-selector>
-  <motions></motions>
+  <div class="mainIntro">
+    <h1>
+      Visualisatie van de stemmingen in het Belgische Federale Parlement (kamer)
+    </h1>
+    <p>
+      Wij geloven dat het in een democratie transparant en gemakkelijk te
+      begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben
+      gestemd. Dit project wil het stemgedrag van de politici in het Belgische
+      Federale Parlement (Kamer) in 2024 visualiseren.
+    </p>
+  </div>
+  <motions class="motions"></motions>
 </main>
 
-<footer></footer>
+<!-- TODO: move <footer> to a component -->
+<footer>
+  De data gebruikt op deze website is vrij beschikbaar onder de
+  <a href="https://choosealicense.com/licenses/mit/" target="_blank"
+    >MIT license</a
+  >
+</footer>
 
 <router-outlet />
