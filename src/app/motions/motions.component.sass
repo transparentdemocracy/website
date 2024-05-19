@@ -1,5 +1,6 @@
 //motions.component.sass
 @use '../../styles/colors'
+@use '../../styles/breakpoints'
 
 $color-les-engages-class: 'Les Engagés-color'
 $open-vld-color-class: 'Open Vld'
@@ -12,6 +13,10 @@ $open-vld-color-class: 'Open Vld'
   justify-content: center
   align-items: center
   margin-bottom: 1.25rem
+  @media (max-width: breakpoints.$screen-md)
+    flex-direction: column
+    gap: 1rem
+    align-items: flex-start
 
   & h2
     font-weight: 700
