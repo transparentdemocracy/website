@@ -56,7 +56,10 @@
               <div class="votesPartyList">
                 @for (partyYesVotes of motion.yesVotes.partyVotes; track $index)
                 {
-                <div class="partyVoteResult">
+                <div
+                  class="partyVoteResult"
+                  [class.noVotes]="partyYesVotes.numberOfVotes === 0"
+                >
                   <div class="voteResultsPartyName">
                     <span
                       class="partyNameTag"
@@ -83,7 +86,10 @@
               </div>
               <div class="votesPartyList">
                 @for (partyNoVotes of motion.noVotes.partyVotes; track $index) {
-                <div class="partyVoteResult">
+                <div
+                  class="partyVoteResult"
+                  [class.noVotes]="partyNoVotes.numberOfVotes === 0"
+                >
                   <div class="voteResultsPartyName">
                     <span
                       class="partyNameTag"
@@ -111,7 +117,10 @@
               <div class="votesPartyList">
                 @for (partyAbsVotes of motion.absVotes.partyVotes; track $index)
                 {
-                <div class="partyVoteResult">
+                <div
+                  class="partyVoteResult"
+                  [class.noVotes]="partyAbsVotes.numberOfVotes === 0"
+                >
                   <div class="voteResultsPartyName">
                     <span
                       class="partyNameTag"
