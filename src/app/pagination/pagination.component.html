@@ -1,22 +1,23 @@
-<!-- TODO: replace <a> for <button> and add aria-label -->
 <nav>
   <ul class="pagination">
     <li class="page-item" [class]="disableIfCurrentPage(1)">
-      <a class="page-link" href="#" (click)="decreasePage($event)"
-        ><i class="fa-solid fa-arrow-left" aria-hidden="true"></i
-      ></a>
+      <button class="page-link" (click)="decreasePage($event)">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+      </button>
     </li>
 
     @for (num of totalPagesArray; track $index) {
     <li class="page-item" [class]="disableIfCurrentPage(num)">
-      <a class="page-link" href="#" (click)="setPage($event, num)">{{ num }}</a>
+      <button class="page-link" (click)="setPage($event, num)">
+        {{ num }}
+      </button>
     </li>
     }
 
     <li class="page-item" [class]="disableIfCurrentPage(nrOfPages)">
-      <a class="page-link" href="#" (click)="increasePage($event)"
-        ><i class="fa-solid fa-arrow-right" aria-hidden="true"></i
-      ></a>
+      <button class="page-link" (click)="increasePage($event)">
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </button>
     </li>
   </ul>
 </nav>
