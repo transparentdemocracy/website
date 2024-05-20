@@ -1,27 +1,37 @@
 /*motions.component.ts*/
-import {CommonModule} from '@angular/common';
-import {Component} from '@angular/core';
-import {Motion, MotionsHttpService, Page, Votes,} from '../services/motions.http-service';
-import {SearchBarComponent} from '../search-bar/search-bar.component';
-import {Observable, ReplaySubject, take} from 'rxjs';
-import {PaginationComponent} from '../pagination/pagination.component';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  Motion,
+  MotionsHttpService,
+  Page,
+  Votes,
+} from '../services/motions.http-service';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { Observable, ReplaySubject, take } from 'rxjs';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { SortVotesPipe } from '../sort-votes/sort-votes.pipe';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
   selector: 'motions',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent, PaginationComponent],
+  imports: [
+    CommonModule,
+    SearchBarComponent,
+    PaginationComponent,
+    SortVotesPipe,
+  ],
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass',
 })
 export class MotionsComponent {
   motions$$ = new ReplaySubject<ViewMotion[]>(1);
   nrOfPages: number = 1;
-  searchTerm: string = "";
+  searchTerm: string = '';
 
-  constructor(private motionsHttpService: MotionsHttpService) {
-  }
+  constructor(private motionsHttpService: MotionsHttpService) {}
 
   removeSpaces(input: string): string {
     return input.replace(/\s+/g, '');
@@ -53,7 +63,9 @@ export class MotionsComponent {
 
   //TODO: is .take still necessary
   private loadMotions(page: number): Observable<Page<Motion>> {
-    return this.motionsHttpService.getMotions(page, this.searchTerm).pipe(take(1));
+    return this.motionsHttpService
+      .getMotions(page, this.searchTerm)
+      .pipe(take(1));
   }
 
   protected readonly console = console;
@@ -80,13 +92,13 @@ class ViewMotion {
     return this.motion.descriptionFR;
   }
   get yesVotes(): Votes {
-    return this.motion.yesVotes
+    return this.motion.yesVotes;
   }
   get noVotes(): Votes {
-    return this.motion.noVotes
+    return this.motion.noVotes;
   }
   get absVotes(): Votes {
-    return this.motion.absVotes
+    return this.motion.absVotes;
   }
 
   get votingResult(): boolean {
@@ -107,5 +119,4 @@ class ViewMotion {
   standalone: true,
   template: '<ng-content></ng-content>',
 })
-export class MotionsComponentMock {
-}
+export class MotionsComponentMock {}
