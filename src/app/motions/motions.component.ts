@@ -1,6 +1,6 @@
 /*motions.component.ts*/
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   Motion,
   MotionsHttpService,
@@ -8,10 +8,11 @@ import {
   Votes,
 } from '../services/motions.http-service';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { Observable, ReplaySubject, take } from 'rxjs';
+import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { SortVotesPipe } from '../sort-votes/sort-votes.pipe';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import {LanguageService} from "../services/language.service";
 
 @UntilDestroy()
 @Component({
@@ -26,12 +27,20 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass',
 })
-export class MotionsComponent {
+export class MotionsComponent implements OnInit, OnDestroy {
   motions$$ = new ReplaySubject<ViewMotion[]>(1);
   nrOfPages: number = 1;
   searchTerm: string = '';
+  selectedLanguage: string = 'NL';
+  private languageSubscription: Subscription = new Subscription();
 
-  constructor(private motionsHttpService: MotionsHttpService) {}
+  constructor(private motionsHttpService: MotionsHttpService, private languageService: LanguageService) {}
+
+  ngOnInit() {
+    this.languageSubscription = this.languageService.language$.subscribe((language) => {
+      this.selectedLanguage = language;
+    })
+  }
 
   removeSpaces(input: string): string {
     return input.replace(/\s+/g, '');
@@ -69,6 +78,12 @@ export class MotionsComponent {
   }
 
   protected readonly console = console;
+
+  ngOnDestroy() {
+    if (this.languageSubscription) {
+      this.languageSubscription.unsubscribe();
+    }
+  }
 }
 
 class ViewMotion {

@@ -4,6 +4,7 @@
 ></search-bar>
 
 <div class="motionsHeader">
+
   <h2>Moties</h2>
 
   <pagination
@@ -33,8 +34,11 @@
             "
           ></i>
         </div>
-        <div class="motionTitle">
+        <div *ngIf="selectedLanguage === 'NL'" class="motionTitle">
           {{ motion.titleNL }}
+        </div>
+        <div *ngIf="selectedLanguage === 'FR'" class="motionTitle">
+          {{ motion.titleFR }}
         </div>
       </div>
 
@@ -42,7 +46,8 @@
         class="motionDetails"
         [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
       >
-        <p class="motionDescription">{{ motion.descriptionNL }}</p>
+        <p *ngIf="selectedLanguage === 'NL'" class="motionDescription">{{ motion.descriptionNL }}</p>
+        <p *ngIf="selectedLanguage === 'FR'" class="motionDescription">{{ motion.descriptionFR }}</p>
         <div class="voteOverView">
           <div class="voteOverViewTitle">Stemresultaten per partij:</div>
           <div class="votePerPartyTable">
