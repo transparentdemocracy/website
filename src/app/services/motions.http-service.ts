@@ -2,6 +2,8 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {map} from 'rxjs';
+import {Page} from "./pages";
+import {dateConversion} from "./date-service";
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +16,22 @@ export class MotionsHttpService {
 
   getMotions(page: number, searchTerm: string): Observable<Page<Motion>> {
     return this.fetchBackendMotions(page, searchTerm).pipe(
-      this.mapBackendMotionPage()
+      map((backendPage: Page<BackendMotion>) => {
+        return this.mapMotionPage(backendPage);
+      })
     );
+  }
+
+  getMotion(motionId: string): Observable<Page<Motion>> {
+    let completeUrl = this.buildUrlById(motionId);
+    return this.fetchById(completeUrl).pipe(
+      map((backendPage: BackendMotion | null) => {
+        return this.mapSingleBackendMotion(backendPage);
+      }));
+  }
+
+  private fetchById(completeUrl: string): Observable<BackendMotion|null> {
+    return this.http.get<BackendMotion>(completeUrl);
   }
 
   private fetchBackendMotions(
@@ -32,16 +48,19 @@ export class MotionsHttpService {
     return `${motionUrl}?${searchTermPart}${pagePart}`;
   }
 
-  private mapBackendMotionPage() {
-    return map((backendPage: Page<BackendMotion>) => {
-      let actualMotions = backendPage.values.map(
-        (bm: BackendMotion) => new ActualMotion(bm)
-      );
-      return this.createMotionPage(backendPage, actualMotions);
-    });
+  private buildUrlById(motionId: string) {
+    let motionUrl = `${this.url}motions/`;
+    return `${motionUrl}${motionId}`;
   }
 
-  private createMotionPage(
+  private mapMotionPage(backendPage: Page<BackendMotion>): Page<Motion> {
+    let actualMotions = backendPage.values.map(
+      (bm: BackendMotion) => new ActualMotion(bm)
+    );
+    return this.createPageMotion(backendPage, actualMotions);
+  }
+
+  private createPageMotion(
     pagination: Page<BackendMotion>,
     actualMotions: ActualMotion[]
   ): Page<Motion> {
@@ -52,9 +71,22 @@ export class MotionsHttpService {
       values: actualMotions,
     };
   }
+
+  private mapSingleBackendMotion(bm: BackendMotion | null): Page<Motion> {
+    let values: ActualMotion[] = []
+    if (bm !== null)
+      values = [new ActualMotion(bm)];
+    return {
+      pageNr: 1,
+      pageSize: 1,
+      totalPages: 1,
+      values: values
+    };
+  }
 }
 
 export interface Motion {
+  id: string;
   titleNL: string;
   titleFR: string;
   descriptionNL: string;
@@ -77,38 +109,24 @@ export interface PartyVotes {
   numberOfVotes: number;
 }
 
-export interface Page<T> {
-  pageNr: number;
-  pageSize: number;
-  totalPages: number;
-  values: T[];
-}
 
 class ActualMotion implements Motion {
   constructor(backend: BackendMotion) {
+    this.id = backend.id;
     this.titleNL = backend.titleNL;
     this.titleFR = backend.titleFR;
     this.descriptionNL = backend.descriptionNL;
     this.descriptionFR = backend.descriptionFR;
     this.votingDate = backend.votingDate;
-    this.votingDate = this.dateConversion(backend.votingDate);
+    this.votingDate = dateConversion(backend.votingDate);
     this.votingResult = backend.votingResult;
-    this.yesVotes =  backend.yesVotes
+    this.yesVotes = backend.yesVotes
     this.noVotes = backend.noVotes
     this.absVotes = backend.absVotes
   }
 
-  dateConversion(votingDate : string) {
-    const dateParts = votingDate.split('-');
 
-    if (dateParts.length !== 3) {
-      throw new Error('Invalid date format. Expected format: YYYY-MM-DD');
-    }
-    const [year, month, day] = dateParts;
-
-    return `${day}-${month}-${year}`;
-  }
-
+  id: string;
   titleNL: string;
   titleFR: string;
   descriptionNL: string;
@@ -121,6 +139,7 @@ class ActualMotion implements Motion {
 }
 
 interface BackendMotion {
+  id: string;
   descriptionNL: string;
   descriptionFR: string;
   titleNL: string;

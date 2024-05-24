@@ -1,18 +1,15 @@
 /*motions.component.ts*/
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {
-  Motion,
-  MotionsHttpService,
-  Page,
-  Votes,
-} from '../services/motions.http-service';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
+import {Motion, MotionsHttpService, Votes,} from '../services/motions.http-service';
+import {SearchBarComponent} from '../search-bar/search-bar.component';
 import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
-import { PaginationComponent } from '../pagination/pagination.component';
-import { SortVotesPipe } from '../sort-votes/sort-votes.pipe';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import {PaginationComponent} from '../pagination/pagination.component';
+import {SortVotesPipe} from '../sort-votes/sort-votes.pipe';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {LanguageService} from "../services/language.service";
+import {Page} from "../services/pages";
+import {ActivatedRoute} from "@angular/router";
 
 @UntilDestroy()
 @Component({
@@ -31,15 +28,28 @@ export class MotionsComponent implements OnInit, OnDestroy {
   motions$$ = new ReplaySubject<ViewMotion[]>(1);
   nrOfPages: number = 1;
   searchTerm: string = '';
+  motionId: string = '';
   selectedLanguage: string = 'NL';
   private languageSubscription: Subscription = new Subscription();
 
-  constructor(private motionsHttpService: MotionsHttpService, private languageService: LanguageService) {}
+  constructor(private route: ActivatedRoute,
+              private motionsHttpService: MotionsHttpService,
+              private languageService: LanguageService) {
+  }
 
   ngOnInit() {
     this.languageSubscription = this.languageService.language$.subscribe((language) => {
       this.selectedLanguage = language;
     })
+    this.route.params.subscribe(params => {
+      this.motionId = params['id'];
+      if (this.motionId === undefined)// Access the 'id' parameter from the URL
+        this.motionId = ''
+      if (this.motionId && '' != this.motionId) {
+        this.searchTerm = ''
+        this.getById()
+      }
+    });
   }
 
   removeSpaces(input: string): string {
@@ -48,6 +58,7 @@ export class MotionsComponent implements OnInit, OnDestroy {
 
   searchMotions(searchTerm: string): void {
     this.searchTerm = searchTerm;
+    this.motionId = '';
     this.executeNewSearch();
   }
 
@@ -61,7 +72,20 @@ export class MotionsComponent implements OnInit, OnDestroy {
       });
   }
 
+  private getById() {
+    this.motionsHttpService
+      .getMotion(this.motionId)
+      .pipe(untilDestroyed(this), take(1))
+      .subscribe((page: Page<Motion>) => {
+        this.motions$$.next(page.values.map((x) => new ViewMotion(x)));
+        this.nrOfPages = page.totalPages;
+      });
+  }
+
   getPagedMotions(page: number): void {
+    if (this.motionId.trim().length !== 0) {
+      return
+    }
     this.loadMotions(page)
       .pipe(untilDestroyed(this))
       .subscribe((page: Page<Motion>) => {
@@ -77,7 +101,6 @@ export class MotionsComponent implements OnInit, OnDestroy {
       .pipe(take(1));
   }
 
-  protected readonly console = console;
 
   ngOnDestroy() {
     if (this.languageSubscription) {
@@ -95,6 +118,10 @@ class ViewMotion {
     return this.motion.titleNL;
   }
 
+  get id(): string {
+    return this.motion.id;
+  }
+
   get descriptionNL(): string {
     return this.motion.descriptionNL;
   }
@@ -106,12 +133,15 @@ class ViewMotion {
   get descriptionFR(): string {
     return this.motion.descriptionFR;
   }
+
   get yesVotes(): Votes {
     return this.motion.yesVotes;
   }
+
   get noVotes(): Votes {
     return this.motion.noVotes;
   }
+
   get absVotes(): Votes {
     return this.motion.absVotes;
   }
@@ -134,4 +164,5 @@ class ViewMotion {
   standalone: true,
   template: '<ng-content></ng-content>',
 })
-export class MotionsComponentMock {}
+export class MotionsComponentMock {
+}
