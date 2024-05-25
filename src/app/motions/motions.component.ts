@@ -1,19 +1,17 @@
 /*motions.component.ts*/
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  Motion,
-  MotionsHttpService,
-  Votes,
-} from '../services/motions.http-service';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
-import { PaginationComponent } from '../pagination/pagination.component';
-import { SortPipe } from '../sort-votes/sort-votes.pipe';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { LanguageService } from '../services/language.service';
-import { Page } from '../services/pages';
-import { ActivatedRoute } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MotionsHttpService} from '../services/motions.http-service';
+import {SearchBarComponent} from '../search-bar/search-bar.component';
+import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
+import {PaginationComponent} from '../pagination/pagination.component';
+import {SortPipe} from '../sort-votes/sort-votes.pipe';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {LanguageService} from "../services/language.service";
+import {Page} from "../services/pages";
+import {ActivatedRoute} from "@angular/router";
+import {Motion, MotionGroup, Votes} from "../services/motions";
+import {dateConversion} from "../services/date-service";
 
 @UntilDestroy()
 @Component({
@@ -24,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './motions.component.sass',
 })
 export class MotionsComponent implements OnInit, OnDestroy {
-  motions$$ = new ReplaySubject<ViewMotion[]>(1);
+  motionsGroups$$ = new ReplaySubject<ViewMotionGroup[]>(1);
   nrOfPages: number = 1;
   searchTerm: string = '';
   motionId: string = '';
@@ -69,8 +67,8 @@ export class MotionsComponent implements OnInit, OnDestroy {
     this.motionsHttpService
       .getMotions(1, this.searchTerm)
       .pipe(untilDestroyed(this), take(1))
-      .subscribe((page: Page<Motion>) => {
-        this.motions$$.next(page.values.map((x) => new ViewMotion(x)));
+      .subscribe((page: Page<MotionGroup>) => {
+        this.motionsGroups$$.next(page.values.map((x) => new ViewMotionGroup(x)));
         this.nrOfPages = page.totalPages;
       });
   }
@@ -79,8 +77,8 @@ export class MotionsComponent implements OnInit, OnDestroy {
     this.motionsHttpService
       .getMotion(this.motionId)
       .pipe(untilDestroyed(this), take(1))
-      .subscribe((page: Page<Motion>) => {
-        this.motions$$.next(page.values.map((x) => new ViewMotion(x)));
+      .subscribe((page: Page<MotionGroup>) => {
+        this.motionsGroups$$.next(page.values.map((x) => new ViewMotionGroup(x)));
         this.nrOfPages = page.totalPages;
       });
   }
@@ -91,14 +89,14 @@ export class MotionsComponent implements OnInit, OnDestroy {
     }
     this.loadMotions(page)
       .pipe(untilDestroyed(this))
-      .subscribe((page: Page<Motion>) => {
-        this.motions$$.next(page.values.map((x) => new ViewMotion(x)));
+      .subscribe((page: Page<MotionGroup>) => {
+        this.motionsGroups$$.next(page.values.map((x) => new ViewMotionGroup(x)));
         this.nrOfPages = page.totalPages;
       });
   }
 
-  // TODO: is .take still necessary
-  private loadMotions(page: number): Observable<Page<Motion>> {
+  //TODO: is .take still necessary
+  private loadMotions(page: number): Observable<Page<MotionGroup>> {
     return this.motionsHttpService
       .getMotions(page, this.searchTerm)
       .pipe(take(1));
@@ -111,9 +109,39 @@ export class MotionsComponent implements OnInit, OnDestroy {
   }
 }
 
+class ViewMotionGroup {
+
+  constructor(m: MotionGroup) {
+    this.motionGroup = m;
+    this.isExpanded = false
+    this.viewMotions = m.motions.map((motion) => new ViewMotion(motion))
+  }
+
+  get titleNL(): string {
+    return this.motionGroup.titleNL;
+  }
+
+  get motions(): ViewMotion[] {
+    return this.viewMotions;
+  }
+
+  get id(): string {
+    return this.motionGroup.id;
+  }
+
+
+  get titleFR(): string {
+    return this.motionGroup.titleFR;
+  }
+
+  isExpanded: boolean
+  viewMotions: ViewMotion[]
+  motionGroup: MotionGroup;
+}
+
 class ViewMotion {
   get votingDate(): string {
-    return this.motion.votingDate;
+    return dateConversion(this.motion.votingDate);
   }
 
   get titleNL(): string {

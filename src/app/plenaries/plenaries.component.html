@@ -5,6 +5,13 @@
 
 <div class="plenariesHeader">
   <h2>Plenaries</h2>
+
+  <pagination
+    class="plenariesPagination"
+    [nrOfPages]="nrOfPages"
+    (pageChanged$$)="getPagedPlenaries($event)"
+  ></pagination>
+
 </div>
 
 @if (plenaries$$ | async; as plenaries) {
