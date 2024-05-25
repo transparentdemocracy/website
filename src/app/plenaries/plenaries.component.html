@@ -8,9 +8,9 @@
 </div>
 
 @if (plenaries$$ | async; as plenaries) {
-<div class="plenariesList">
+<ul class="plenariesList">
   @for (plenary of plenaries; track $index) {
-  <div
+  <li
     [ngClass]="[plenary.isExpanded ? 'expanded' : 'closed']"
     [class.noMotions]="plenary.nrOfMotions === 0"
     class="plenariesBlock"
@@ -56,9 +56,9 @@
       <div class="plenaryNbMotions">{{ plenary.nrOfMotions }} moties</div>
       <div class="plenaryDate">{{ plenary.date }}</div>
     </div>
-  </div>
+  </li>
   }
-</div>
+</ul>
 }
 
 <pagination
