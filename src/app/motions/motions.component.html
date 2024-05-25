@@ -29,6 +29,10 @@
       <div *ngIf="selectedLanguage === 'FR'" class="motionGroupTitle">
         <p>{{ motionGroup.titleFR }}</p>
       </div>
+      <div class="motionGroupDateBox">
+        <div class="motionGroupNrMotions">{{ motionGroup.motions.length }} motions</div>
+        <div class="motionGroupDate">{{ motionGroup.votingDate }}</div>
+      </div>
     </div>
     <div
       class="motionList"

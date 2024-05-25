@@ -134,6 +134,10 @@ class ViewMotionGroup {
     return this.motionGroup.titleFR;
   }
 
+  get votingDate(): string {
+    return dateConversion(this.motionGroup.votingDate);
+  }
+
   isExpanded: boolean
   viewMotions: ViewMotion[]
   motionGroup: MotionGroup;
