@@ -28,7 +28,7 @@ header
   z-index: 10
   background-color: colors.$color-tertiary-light
 
-button
+button:not(.btnLinkStyle)
   min-width: 2.75rem
   min-height: 2.75rem
   border-radius: 8px
@@ -41,6 +41,16 @@ button
 
   &:hover
     background-color: colors.$color-secondary
+
+button.btnLinkStyle
+  color: colors.$color-tertiary
+  background-color: transparent
+  border: none
+  font-weight: 600
+  text-decoration: underline
+
+  &:hover, &:focus, &:active, &:focus-visible, &:focus-within
+    color: colors.$color-secondary
 
 a
   color: colors.$color-tertiary

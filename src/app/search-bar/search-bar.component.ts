@@ -1,16 +1,38 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'search-bar',
   standalone: true,
   imports: [],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.sass'
+  styleUrl: './search-bar.component.sass',
 })
 export class SearchBarComponent {
+  @ViewChild('searchBox', { static: true }) searchBox!: ElementRef;
   @Output() searchTriggered$ = new EventEmitter<string>();
 
   protected triggerSearch(searchTerm: string) {
-    this.searchTriggered$.emit(searchTerm);
+    if (this.isValidSearch(searchTerm)) {
+      this.searchTriggered$.emit(searchTerm);
+    }
+  }
+
+  hintSearch(keyword: string) {
+    this.searchBox.nativeElement.value = keyword;
+    this.triggerSearch(keyword);
+  }
+
+  isValidSearch(keyword: string): boolean {
+    return (
+      keyword.length > 0 &&
+      keyword.length <= 100 &&
+      /^[a-zA-Z0-9\s]+$/.test(keyword)
+    );
   }
 }
