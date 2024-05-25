@@ -34,13 +34,14 @@ $open-vld-color-class: 'Open Vld'
     justify-content: space-between
     border: 2px solid colors.$color-secondary-light
     border-radius: 8px
-    background-color: colors.$color-yellow
+    background-color: colors.$color-white
     transition: background-color .15s ease-in-out
     overflow: hidden
     position: relative
 
     & .motionGroupDateBox
       position: absolute
+      top: 0
       right: 0
       display: flex
       height: 100%
@@ -53,15 +54,25 @@ $open-vld-color-class: 'Open Vld'
       padding: 0.5rem
       gap: 1rem
 
+      & .motionGroupNrMotions
+        font-weight: 600
+        text-transform: uppercase
+
 .motionGroupTitleBar
   display: flex
   width: 100%
   cursor: pointer
+  padding: 0.5rem
+
+  &:hover
+    background-color: colors.$color-secondary-light
 
 .motionGroupTitle
-  width: 100%
   min-height: 4rem
   font-size: 1.25rem
+  margin-right: 12rem
+  & > p
+    margin: 0
 
 .motionList
   display: flex
@@ -76,9 +87,9 @@ $open-vld-color-class: 'Open Vld'
   height: auto
   flex-direction: row
   justify-content: space-between
-  border: 2px solid colors.$color-primary-light
-  border-radius: 8px
-  background-color: colors.$color-white
+  background-color: colors.$color-tertiary-light
+  border-top: 1px solid transparent
+  box-shadow: 0 -1px 0 colors.$color-white
   transition: background-color .15s ease-in-out
   overflow: hidden
   position: relative
@@ -87,9 +98,10 @@ $open-vld-color-class: 'Open Vld'
     background-color: colors.$color-secondary-light
 
   &.expanded
+    border-color: colors.$color-secondary-light
     background-color: colors.$color-white
 
-    & .motionResultDateBox
+    & .motionResultBox
       height: auto
       border-radius: 0 0 0 8px
 
@@ -98,26 +110,23 @@ $open-vld-color-class: 'Open Vld'
   flex-direction: column
   height: auto
   width: 100%
-  padding: 0.5rem
+  padding: 0.5rem 0.5rem 0.5rem 2rem
 
 .motionTitleBar
   display: flex
   cursor: pointer
-  margin-right: 10rem
+  margin-right: 12rem
 
 .chevronIcon
   margin: 0.10rem 1rem 0 0.5rem
-  transition: 0.2s ease-in-out
 
-.fa-chevron-right
+.fa-chevron-right, .fa-plus-circle, .fa-minus-circle
   transition: 0.2s ease-in-out
 
 .motionTitle
   width: 100%
-  min-height: 4rem
-  font-size: 1.25rem
-  -webkit-user-select: none
-  user-select: none
+  min-height: 3rem
+  font-size: 1rem
 
 .motionDetails
   width: 100%
@@ -131,7 +140,7 @@ $open-vld-color-class: 'Open Vld'
     font-size: 0.9rem
     margin-bottom: 2rem
 
-.motionResultDateBox
+.motionResultBox
   position: absolute
   right: 0
   display: flex

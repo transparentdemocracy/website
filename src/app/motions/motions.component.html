@@ -11,6 +11,7 @@
 <ul class="motionGroupList">
   @for (motionGroup of motionGroups; track $index) {
   <li class="motionGroup">
+    <!-- Motion group -->
     <div
       class="motionGroupTitleBar"
       (click)="motionGroup.isExpanded = !motionGroup.isExpanded"
@@ -30,10 +31,14 @@
         <p>{{ motionGroup.titleFR }}</p>
       </div>
       <div class="motionGroupDateBox">
-        <div class="motionGroupNrMotions">{{ motionGroup.motions.length }} motions</div>
+        <div class="motionGroupNrMotions">
+          {{ motionGroup.motions.length }} motions
+        </div>
         <div class="motionGroupDate">{{ motionGroup.votingDate }}</div>
       </div>
     </div>
+
+    <!-- Motions -->
     <div
       class="motionList"
       [ngClass]="[motionGroup.isExpanded ? 'expanded' : 'closed']"
@@ -50,7 +55,7 @@
           >
             <div class="chevronIcon">
               <i
-                class="fa-solid fa-chevron-right"
+                class="fa-solid fa-caret-right"
                 [style.transform]="
                   motion.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
                 "
@@ -176,7 +181,7 @@
           </div>
         </div>
 
-        <div class="motionResultDateBox">
+        <div class="motionResultBox">
           <div class="motionResult">
             @if (motion.votingResult) {
             <div class="accepted">
@@ -190,7 +195,6 @@
             </div>
             }
           </div>
-          <div class="motionDate">{{ motion.votingDate }}</div>
         </div>
       </div>
       }
