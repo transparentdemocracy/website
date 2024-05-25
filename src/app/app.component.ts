@@ -3,7 +3,8 @@ import { MotionsComponent } from './motions/motions.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import {PlenariesComponent} from "./plenaries/plenaries.component";
+import { PlenariesComponent } from './plenaries/plenaries.component';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'root',
@@ -12,4 +13,12 @@ import {PlenariesComponent} from "./plenaries/plenaries.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        console.log('Current route:', this.router.url);
+      }
+    });
+  }
+}

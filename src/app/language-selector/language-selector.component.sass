@@ -6,6 +6,15 @@
   align-items: center
   color: colors.$color-tertiary
   gap: 0.25rem
+  position: relative
+
+  &::after
+    content: ''
+    width: calc(100% - 1rem)
+    position: absolute
+    left: 0
+    bottom: 1px
+    border-bottom: 1px solid colors.$color-tertiary
 
   & .languageSelector
     font-weight: 600

@@ -1,4 +1,14 @@
 <nav class="mainMenu">
-  <a routerLink="/motions">Moties</a>
-  <a routerLink="/plenaries">Plenaries</a>
+  <a
+    routerLink="/motions"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Moties</a
+  >
+  <a
+    routerLink="/plenaries"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Plenaries</a
+  >
 </nav>

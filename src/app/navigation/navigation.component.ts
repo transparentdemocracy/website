@@ -1,15 +1,11 @@
-import {Component} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import { Component } from '@angular/core';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'navigation',
   standalone: true,
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.sass',
-  imports: [
-    RouterLink
-  ]
+  imports: [RouterLink, RouterModule],
 })
-export class NavigationComponent {
-
-}
+export class NavigationComponent {}
