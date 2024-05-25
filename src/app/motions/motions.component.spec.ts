@@ -120,7 +120,7 @@ describe('MotionsComponent', () => {
       component.getPagedMotions(1);
 
       // then
-      component.motions$$.subscribe((motions) => {
+      component.motionsGroups$$.subscribe((motions) => {
         expect(motionsHttpServiceMock.getMotions).toHaveBeenCalled();
         expect(motions[0].titleNL).toEqual(FIRST_PROPOSAL.titleNL);
         expect(motions[1].titleNL).toEqual(SECOND_PROPOSAL.titleNL);
@@ -137,7 +137,7 @@ describe('MotionsComponent', () => {
       component.searchMotions('1');
 
       // then
-      component.motions$$.subscribe((motion) => {
+      component.motionsGroups$$.subscribe((motion) => {
         expect(motionsHttpServiceMock.getMotions).toHaveBeenCalled();
         expect(motion[0].titleNL).toEqual(FIRST_PROPOSAL.titleNL);
         done();

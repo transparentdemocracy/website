@@ -22,11 +22,48 @@ $open-vld-color-class: 'Open Vld'
     font-weight: 700
     margin: 0
 
+  & .motionsPagination
+    margin-left: auto
+
+.motionGroupList
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  margin-bottom: 1.25rem
+
+  .motionGroup
+    height: auto
+    flex-direction: row
+    justify-content: space-between
+    border: 2px solid colors.$color-secondary-light
+    border-radius: 8px
+    background-color: colors.$color-yellow
+    transition: background-color .15s ease-in-out
+    overflow: hidden
+    position: relative
+
+.motionGroupTitleBar
+  display: flex
+  cursor: pointer
+  margin-right: 10rem
+
+.motionGroupTitle
+  width: 100%
+  min-height: 4rem
+  font-size: 1.25rem
+  -webkit-user-select: none
+  user-select: none
+
 .motionList
   display: flex
   flex-direction: column
   gap: 1rem
   margin-bottom: 2rem
+  display: none
+
+  &.expanded
+    display: block
 
 .motionBlock
   display: flex
