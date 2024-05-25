@@ -1,9 +1,9 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/internal/Observable';
-import {map} from 'rxjs';
-import {Page} from "./pages";
-import {dateConversion} from "./date-service";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs';
+import { Page } from './pages';
+import { dateConversion } from './date-service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,7 @@ import {dateConversion} from "./date-service";
 export class MotionsHttpService {
   private readonly url = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getMotions(page: number, searchTerm: string): Observable<Page<Motion>> {
     return this.fetchBackendMotions(page, searchTerm).pipe(
@@ -27,15 +26,17 @@ export class MotionsHttpService {
     return this.fetchById(completeUrl).pipe(
       map((backendPage: BackendMotion | null) => {
         return this.mapSingleBackendMotion(backendPage);
-      }));
+      })
+    );
   }
 
-  private fetchById(completeUrl: string): Observable<BackendMotion|null> {
+  private fetchById(completeUrl: string): Observable<BackendMotion | null> {
     return this.http.get<BackendMotion>(completeUrl);
   }
 
   private fetchBackendMotions(
-    page: number, searchTerm: string | null
+    page: number,
+    searchTerm: string | null
   ): Observable<Page<BackendMotion>> {
     let completeUrl = this.buildUrl(searchTerm, page);
     return this.http.get<Page<BackendMotion>>(completeUrl);
@@ -43,7 +44,8 @@ export class MotionsHttpService {
 
   private buildUrl(searchTerm: string | null, page: number) {
     let motionUrl = `${this.url}motions/`;
-    let searchTermPart = (searchTerm == null || searchTerm == ``) ? `` : `search=${searchTerm}&`;
+    let searchTermPart =
+      searchTerm == null || searchTerm == `` ? `` : `search=${searchTerm}&`;
     let pagePart = `page=${page}&size=10`;
     return `${motionUrl}?${searchTermPart}${pagePart}`;
   }
@@ -73,14 +75,13 @@ export class MotionsHttpService {
   }
 
   private mapSingleBackendMotion(bm: BackendMotion | null): Page<Motion> {
-    let values: ActualMotion[] = []
-    if (bm !== null)
-      values = [new ActualMotion(bm)];
+    let values: ActualMotion[] = [];
+    if (bm !== null) values = [new ActualMotion(bm)];
     return {
       pageNr: 1,
       pageSize: 1,
       totalPages: 1,
-      values: values
+      values: values,
     };
   }
 }
@@ -100,7 +101,7 @@ export interface Motion {
 
 export interface Votes {
   nrOfVotes: number;
-  partyVotes: PartyVotes[]
+  partyVotes: PartyVotes[];
 }
 
 export interface PartyVotes {
@@ -108,7 +109,6 @@ export interface PartyVotes {
   votePercentage: number;
   numberOfVotes: number;
 }
-
 
 class ActualMotion implements Motion {
   constructor(backend: BackendMotion) {
@@ -120,11 +120,10 @@ class ActualMotion implements Motion {
     this.votingDate = backend.votingDate;
     this.votingDate = dateConversion(backend.votingDate);
     this.votingResult = backend.votingResult;
-    this.yesVotes = backend.yesVotes
-    this.noVotes = backend.noVotes
-    this.absVotes = backend.absVotes
+    this.yesVotes = backend.yesVotes;
+    this.noVotes = backend.noVotes;
+    this.absVotes = backend.absVotes;
   }
-
 
   id: string;
   titleNL: string;
@@ -150,4 +149,3 @@ interface BackendMotion {
   noVotes: Votes;
   absVotes: Votes;
 }
-

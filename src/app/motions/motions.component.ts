@@ -1,26 +1,25 @@
 /*motions.component.ts*/
-import {CommonModule} from '@angular/common';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Motion, MotionsHttpService, Votes,} from '../services/motions.http-service';
-import {SearchBarComponent} from '../search-bar/search-bar.component';
-import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
-import {PaginationComponent} from '../pagination/pagination.component';
-import {SortPipe} from '../sort-votes/sort-votes.pipe';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {LanguageService} from "../services/language.service";
-import {Page} from "../services/pages";
-import {ActivatedRoute} from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Motion,
+  MotionsHttpService,
+  Votes,
+} from '../services/motions.http-service';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { SortPipe } from '../sort-votes/sort-votes.pipe';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { LanguageService } from '../services/language.service';
+import { Page } from '../services/pages';
+import { ActivatedRoute } from '@angular/router';
 
 @UntilDestroy()
 @Component({
   selector: 'motions',
   standalone: true,
-  imports: [
-    CommonModule,
-    SearchBarComponent,
-    PaginationComponent,
-    SortPipe,
-  ],
+  imports: [CommonModule, SearchBarComponent, PaginationComponent, SortPipe],
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass',
 })
@@ -32,22 +31,26 @@ export class MotionsComponent implements OnInit, OnDestroy {
   selectedLanguage: string = 'NL';
   private languageSubscription: Subscription = new Subscription();
 
-  constructor(private route: ActivatedRoute,
-              private motionsHttpService: MotionsHttpService,
-              private languageService: LanguageService) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private motionsHttpService: MotionsHttpService,
+    private languageService: LanguageService
+  ) {}
 
   ngOnInit() {
-    this.languageSubscription = this.languageService.language$.subscribe((language) => {
-      this.selectedLanguage = language;
-    })
-    this.route.params.subscribe(params => {
+    this.languageSubscription = this.languageService.language$.subscribe(
+      (language) => {
+        this.selectedLanguage = language;
+      }
+    );
+    this.route.params.subscribe((params) => {
       this.motionId = params['id'];
-      if (this.motionId === undefined)// Access the 'id' parameter from the URL
-        this.motionId = ''
+      if (this.motionId === undefined)
+        // Access the 'id' parameter from the URL
+        this.motionId = '';
       if (this.motionId && '' != this.motionId) {
-        this.searchTerm = ''
-        this.getById()
+        this.searchTerm = '';
+        this.getById();
       }
     });
   }
@@ -84,7 +87,7 @@ export class MotionsComponent implements OnInit, OnDestroy {
 
   getPagedMotions(page: number): void {
     if (this.motionId.trim().length !== 0) {
-      return
+      return;
     }
     this.loadMotions(page)
       .pipe(untilDestroyed(this))
@@ -94,13 +97,12 @@ export class MotionsComponent implements OnInit, OnDestroy {
       });
   }
 
-  //TODO: is .take still necessary
+  // TODO: is .take still necessary
   private loadMotions(page: number): Observable<Page<Motion>> {
     return this.motionsHttpService
       .getMotions(page, this.searchTerm)
       .pipe(take(1));
   }
-
 
   ngOnDestroy() {
     if (this.languageSubscription) {
@@ -164,5 +166,4 @@ class ViewMotion {
   standalone: true,
   template: '<ng-content></ng-content>',
 })
-export class MotionsComponentMock {
-}
+export class MotionsComponentMock {}
