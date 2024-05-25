@@ -57,8 +57,8 @@
                 >
               </div>
               <div class="votesPartyList">
-                @for (partyYesVotes of motion.yesVotes.partyVotes | sortVotes;
-                track $index) {
+                @for (partyYesVotes of motion.yesVotes.partyVotes | sort:
+                'numberOfVotes': 'desc'; track $index) {
                 <div
                   class="partyVoteResult"
                   [class.noVotes]="partyYesVotes.numberOfVotes === 0"
@@ -88,8 +88,8 @@
                 >
               </div>
               <div class="votesPartyList">
-                @for (partyNoVotes of motion.noVotes.partyVotes | sortVotes;
-                track $index) {
+                @for (partyNoVotes of motion.noVotes.partyVotes | sort:
+                'numberOfVotes': 'desc'; track $index) {
                 <div
                   class="partyVoteResult"
                   [class.noVotes]="partyNoVotes.numberOfVotes === 0"
@@ -119,8 +119,8 @@
                 >
               </div>
               <div class="votesPartyList">
-                @for (partyAbsVotes of motion.absVotes.partyVotes | sortVotes;
-                track $index) {
+                @for (partyAbsVotes of motion.absVotes.partyVotes | sort:
+                'numberOfVotes': 'desc'; track $index) {
                 <div
                   class="partyVoteResult"
                   [class.noVotes]="partyAbsVotes.numberOfVotes === 0"

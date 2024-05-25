@@ -5,7 +5,7 @@ import {Motion, MotionsHttpService, Votes,} from '../services/motions.http-servi
 import {SearchBarComponent} from '../search-bar/search-bar.component';
 import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
 import {PaginationComponent} from '../pagination/pagination.component';
-import {SortVotesPipe} from '../sort-votes/sort-votes.pipe';
+import {SortPipe} from '../sort-votes/sort-votes.pipe';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {LanguageService} from "../services/language.service";
 import {Page} from "../services/pages";
@@ -19,7 +19,7 @@ import {ActivatedRoute} from "@angular/router";
     CommonModule,
     SearchBarComponent,
     PaginationComponent,
-    SortVotesPipe,
+    SortPipe,
   ],
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass',

@@ -1,20 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'sortVotes',
+  name: 'sort',
   standalone: true,
 })
-export class SortVotesPipe implements PipeTransform {
-  transform(array: any[]): any[] {
+export class SortPipe implements PipeTransform {
+  transform(array: any[], property: string, direction: 'asc' | 'desc' = 'desc'): any[] {
     if (!array || array.length === 0) {
       return [];
     }
 
     return array.sort((a, b) => {
-      if (b.numberOfVotes !== a.numberOfVotes) {
-        return b.numberOfVotes - a.numberOfVotes;
+      const multiplier = direction === 'asc' ? 1 : -1;
+      if (a[property] !== b[property]) {
+        return (a[property] > b[property] ? 1 : -1) * multiplier;
       }
-      return b.votePercentage - a.votePercentage;
+      return 0; // If values are equal, keep the same order
     });
   }
 }
