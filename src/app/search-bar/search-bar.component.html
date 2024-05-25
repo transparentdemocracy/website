@@ -8,6 +8,16 @@
       id="searchInput"
       (keydown.enter)="triggerSearch(searchBox.value)"
     />
+    Probeer
+    <button #keyword1 class="btnLinkStyle" (click)="hintSearch(keyword1.innerText)">
+      klimaat</button
+    >,
+    <button #keyword2 class="btnLinkStyle" (click)="hintSearch(keyword2.innerText)">
+      immigratie</button
+    >,
+    <button #keyword3 class="btnLinkStyle" (click)="hintSearch(keyword3.innerText)">
+      belastingen</button
+    >, ...
   </label>
 
   <button class="searchBtn" (click)="triggerSearch(searchBox.value)">
