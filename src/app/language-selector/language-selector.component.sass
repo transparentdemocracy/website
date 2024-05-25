@@ -4,10 +4,15 @@
   display: flex
   justify-content: center
   align-items: center
+  color: colors.$color-tertiary
   gap: 0.25rem
-  margin-top: 0.5rem
 
   & .languageSelector
+    font-weight: 600
     border: none
     background-color: transparent
     cursor: pointer
+    color: colors.$color-tertiary
+
+  &:hover > *
+    color: colors.$color-secondary

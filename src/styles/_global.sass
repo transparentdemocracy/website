@@ -36,8 +36,15 @@ button
   padding: 0.2rem 2rem
   cursor: pointer
   color: colors.$color-tertiary-light
-  background-color: colors.$color-primary
+  background-color: colors.$color-tertiary
   transition: background-color .15s ease-in-out
 
   &:hover
-    background-color: colors.$color-tertiary
+    background-color: colors.$color-secondary
+
+a
+  color: colors.$color-tertiary
+  font-weight: 600
+
+  &:hover, &:focus, &:active, &:focus-visible, &:focus-within
+    color: colors.$color-secondary

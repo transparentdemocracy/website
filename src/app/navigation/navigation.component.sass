@@ -1,40 +1,8 @@
-@use '../../styles/breakpoints'
 @use '../../styles/colors'
 
-.headerWrapper
+.mainMenu
   display: flex
-  width: 100%
-  max-width: 72rem
-  gap: 1rem
-  margin: 1rem auto
-  padding: 0 2rem
-  align-items: center
-  justify-content: center
-  position: relative
-
-  & .headerLogo
-    display: flex
-    align-items: center
-
-    & .logoImage
-      height: 4rem
-
-    & .logoText
-      font-size: 2.5rem
-      line-height: 1
-      font-weight: 700
-      margin: 0 1rem
-
-      @media (max-width: breakpoints.$screen-md)
-        font-size: 2rem
-
-  & .headerLanguage
-    position: absolute
-    right: 2rem
-
-nav
   a
-    padding: 1rem
-    font-size: 1rem
-    line-height: 2
-    font-weight: 100
+    border-right: 2px solid colors.$color-primary-light
+    padding: 0 1.5rem
+    font-weight: 600

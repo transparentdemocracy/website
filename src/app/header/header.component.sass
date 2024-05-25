@@ -1,5 +1,4 @@
 @use '../../styles/breakpoints'
-@use '../../styles/colors'
 
 .headerWrapper
   display: flex
@@ -23,15 +22,12 @@
       font-size: 2.5rem
       line-height: 1
       font-weight: 700
-      margin: 0 1rem
+      margin: 0 0.75rem
 
       @media (max-width: breakpoints.$screen-md)
         font-size: 2rem
 
-  & .headerLanguage
-    position: absolute
-    right: 2rem
-
-.navigationBar
-      padding: 0.5rem
-
+.headerMenu
+  display: flex
+  gap: 1.5rem
+  margin: 0.75rem 0 0 auto

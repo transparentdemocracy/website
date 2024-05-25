@@ -1,28 +1,31 @@
 @use '../../styles/colors'
 
-.pagination
-  margin: 0
+.navBox
+  margin: 0 auto
 
-  & .page-item:first-child .page-link
-    border-radius: 8px 0 0 8px
+  & .pagination
+    margin: 0
 
-  & .page-item:last-child .page-link
-    border-radius: 0 8px 8px 0
+    & .page-item:first-child .page-link
+      border-radius: 8px 0 0 8px
 
-  & .page-link
-    min-width: 2.75rem
-    text-align: center
-    border-radius: 0
-    color: colors.$color-tertiary-light
-    background-color: colors.$color-secondary
-    border-color: colors.$color-tertiary-light
+    & .page-item:last-child .page-link
+      border-radius: 0 8px 8px 0
 
-    &:hover, &:active, &:focus
-      background-color: colors.$color-tertiary !important
-      box-shadow: none
-      outline: unset
+    & .page-link
+      min-width: 2.75rem
+      text-align: center
+      border-radius: 0
+      color: colors.$color-tertiary-light
+      background-color: colors.$color-secondary
+      border-color: colors.$color-tertiary-light
 
-  & .disabled > .page-link
-    color: colors.$color-tertiary-light
-    background-color: colors.$color-primary-light
-    border-color: colors.$color-tertiary-light
+      &:hover, &:active, &:focus
+        background-color: colors.$color-tertiary !important
+        box-shadow: none
+        outline: unset
+
+    & .disabled > .page-link
+      color: colors.$color-tertiary-light
+      background-color: colors.$color-primary-light
+      border-color: colors.$color-tertiary-light
