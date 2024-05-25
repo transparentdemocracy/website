@@ -1,12 +1,12 @@
 {
   "name": "Transparent Democracy",
   "short_name": "Transparent Democracy",
-  "description": "Visualisation of the vote in the Belgian Federal Parliament (chamber)",
+  "description": "Visualisation of votes in the Belgian Federal Parliament (chamber)",
   "scope": "/",
   "start_url": "/",
   "orientation": "any",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "theme_color": "#5375a9",
+  "background_color": "#eef0f2",
   "display": "standalone",
   "icons": [
     {
