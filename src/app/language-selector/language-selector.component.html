@@ -3,9 +3,9 @@
   <select
     #languageSelector
     class="languageSelector"
-    (change)="triggerLanguageChange(languageSelector.value)"
+    (change)="triggerLanguageChange($event)"
   >
-    <option>NL</option>
-    <option>FR</option>
+    <option [selected]="language === 'nl'" value="nl">NL</option>
+    <option [selected]="language === 'fr'" value="fr">FR</option>
   </select>
 </label>
