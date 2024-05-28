@@ -1,10 +1,9 @@
-import { dateConversion } from './date-service';
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/internal/Observable';
-import {map} from 'rxjs';
-import {Page} from "./pages";
-import {Motion, MotionGroup} from "./motions";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs';
+import { Page } from './pages';
+import { MotionGroup } from './motions';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +31,8 @@ export class MotionsHttpService {
   }
 
   private fetchBackendMotions(
-    page: number, searchTerm: string | null
+    page: number,
+    searchTerm: string | null
   ): Observable<Page<MotionGroup>> {
     let completeUrl = this.buildUrl(searchTerm, page);
     return this.http.get<Page<MotionGroup>>(completeUrl);
@@ -51,11 +51,9 @@ export class MotionsHttpService {
     return `${motionUrl}${motionId}`;
   }
 
-
   private mapSingleBackendMotion(bm: MotionGroup | null): Page<MotionGroup> {
-    let values: MotionGroup[] = []
-    if (bm !== null)
-      values = [bm];
+    let values: MotionGroup[] = [];
+    if (bm !== null) values = [bm];
     return {
       pageNr: 1,
       pageSize: 1,
@@ -64,5 +62,3 @@ export class MotionsHttpService {
     };
   }
 }
-
-

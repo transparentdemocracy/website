@@ -26,6 +26,6 @@ export class LanguageSelector implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     const selectedLanguage = selectElement.value;
     this.languageService.setLanguage(selectedLanguage);
-    this.languageConfigurationService.setLanguage(selectedLanguage)
+    this.languageConfigurationService.setLanguage(selectedLanguage);
   }
 }

@@ -27,7 +27,6 @@ export class LanguageConfigurationService {
   }
 
   public setLanguage(_language: string): void {
-    // If language is not supported, fallback to default language
     const selectedLanguage =
       this.supportedLanguages.indexOf(_language) !== -1
         ? _language

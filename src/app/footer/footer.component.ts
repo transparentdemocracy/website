@@ -6,8 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslateModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.sass'
+  styleUrl: './footer.component.sass',
 })
-export class FooterComponent {
-
-}
+export class FooterComponent {}
