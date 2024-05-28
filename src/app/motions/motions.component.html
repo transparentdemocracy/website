@@ -4,7 +4,7 @@
 ></search-bar>
 
 <div class="motionsHeader">
-  <h2>Moties</h2>
+  <h2>{{ "motions.title" | translate }}</h2>
 </div>
 
 @if (motionsGroups$$ | async; as motionGroups) {
@@ -24,15 +24,18 @@
           "
         ></i>
       </div>
-      <div *ngIf="selectedLanguage === 'NL'" class="motionGroupTitle">
+      <div *ngIf="selectedLanguage === 'nl'" class="motionGroupTitle">
         <p>{{ motionGroup.titleNL }}</p>
       </div>
-      <div *ngIf="selectedLanguage === 'FR'" class="motionGroupTitle">
+      <div *ngIf="selectedLanguage === 'fr'" class="motionGroupTitle">
         <p>{{ motionGroup.titleFR }}</p>
       </div>
       <div class="motionGroupDateBox">
         <div class="motionGroupNrMotions">
-          {{ motionGroup.motions.length }} motions
+          {{ motionGroup.motions.length }}
+          {{
+            "motions.pluralize" | languagePlural: motionGroup.motions.length | translate
+          }}
         </div>
         <div class="motionGroupDate">{{ motionGroup.votingDate }}</div>
       </div>
@@ -61,10 +64,10 @@
                 "
               ></i>
             </div>
-            <div *ngIf="selectedLanguage === 'NL'" class="motionTitle">
+            <div *ngIf="selectedLanguage === 'nl'" class="motionTitle">
               {{ motion.titleNL }}
             </div>
-            <div *ngIf="selectedLanguage === 'FR'" class="motionTitle">
+            <div *ngIf="selectedLanguage === 'fr'" class="motionTitle">
               {{ motion.titleFR }}
             </div>
           </div>
@@ -74,10 +77,10 @@
             [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
           >
             <p>id: {{ motion.id }}</p>
-            <p *ngIf="selectedLanguage === 'NL'" class="motionDescription">
+            <p *ngIf="selectedLanguage === 'nl'" class="motionDescription">
               {{ motion.descriptionNL }}
             </p>
-            <p *ngIf="selectedLanguage === 'FR'" class="motionDescription">
+            <p *ngIf="selectedLanguage === 'fr'" class="motionDescription">
               {{ motion.descriptionFR }}
             </p>
             <div class="voteOverView">

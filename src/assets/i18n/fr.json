@@ -1,9 +1,13 @@
 {
+  "common": {
+    "motions": "Motions",
+    "plenaries": "Plénières"
+  },
   "header": {
     "title": "Transparent Democracy",
     "nav": {
-      "motions": "Motions",
-      "plenaries": "Plénières"
+      "motions": "{{ 'common.motions' | translate }}",
+      "plenaries": "{{ 'common.plenaries' | translate }}"
     }
   },
   "main": {
@@ -18,7 +22,18 @@
     "immigration": "immigration",
     "taxes": "impôts"
   },
-  "footer":{
+  "motions": {
+    "title": "{{ 'common.motions' | translate }}",
+    "pluralize": {
+      "none": "",
+      "singular": "Motion",
+      "plural": "Motions"
+    }
+  },
+  "plenaries": {
+    "title": "{{ 'common.plenaries' | translate }}"
+  },
+  "footer": {
     "license": "Les données utilisées sur ce site sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"
   }
 }

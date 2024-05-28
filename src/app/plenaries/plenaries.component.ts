@@ -1,15 +1,20 @@
 /*plenaries.component.ts*/
-import {CommonModule} from '@angular/common';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SearchBarComponent} from '../search-bar/search-bar.component';
-import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
-import {PaginationComponent} from '../pagination/pagination.component';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {LanguageService} from "../services/language.service";
-import {MotionLink, PlenariesHttpService, Plenary} from "../services/plenaries.http-service";
-import {Page} from "../services/pages";
-import {RouterLink} from "@angular/router";
-import {dateConversion} from "../services/date-service";
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { LanguageService } from '../services/language.service';
+import {
+  MotionLink,
+  PlenariesHttpService,
+  Plenary,
+} from '../services/plenaries.http-service';
+import { Page } from '../services/pages';
+import { RouterLink } from '@angular/router';
+import { dateConversion } from '../services/date-service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @UntilDestroy()
 @Component({
@@ -19,7 +24,8 @@ import {dateConversion} from "../services/date-service";
     CommonModule,
     SearchBarComponent,
     PaginationComponent,
-    RouterLink
+    RouterLink,
+    TranslateModule,
   ],
   templateUrl: './plenaries.component.html',
   styleUrl: './plenaries.component.sass',
@@ -28,16 +34,20 @@ export class PlenariesComponent implements OnInit, OnDestroy {
   plenaries$$ = new ReplaySubject<ViewPlenary[]>(1);
   nrOfPages: number = 1;
   searchTerm: string = '';
-  selectedLanguage: string = 'NL';
+  selectedLanguage: string = 'nl';
   private languageSubscription: Subscription = new Subscription();
 
-  constructor(private plenariesHttpService: PlenariesHttpService, private languageService: LanguageService) {
-  }
+  constructor(
+    private plenariesHttpService: PlenariesHttpService,
+    private languageService: LanguageService
+  ) {}
 
   ngOnInit() {
-    this.languageSubscription = this.languageService.language$.subscribe((language) => {
-      this.selectedLanguage = language;
-    })
+    this.languageSubscription = this.languageService.language$.subscribe(
+      (language) => {
+        this.selectedLanguage = language;
+      }
+    );
   }
 
   ngOnDestroy() {
@@ -75,16 +85,15 @@ export class PlenariesComponent implements OnInit, OnDestroy {
       .getPlenaries(page, this.searchTerm)
       .pipe(take(1));
   }
-
 }
 
 class ViewPlenary {
   get titleNL(): string {
-    return "Plenaire vergadering " + this.plenary.id;
+    return 'Plenaire vergadering ' + this.plenary.id;
   }
 
   get titleFR(): string {
-    return "Réunion plénière " + this.plenary.id;
+    return 'Réunion plénière ' + this.plenary.id;
   }
 
   get date(): string {
@@ -103,7 +112,6 @@ class ViewPlenary {
     return this.plenary.motions;
   }
 
-
   constructor(p: Plenary) {
     this.plenary = p;
     this.isExpanded = false;
@@ -112,4 +120,3 @@ class ViewPlenary {
   plenary: Plenary;
   isExpanded: boolean;
 }
-
