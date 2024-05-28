@@ -1,0 +1,46 @@
+{
+  "header": {
+    "title": "Transparent Democracy",
+    "nav": {
+      "motions": "Motions",
+      "plenaries": "Plénières"
+    }
+  },
+  "main": {
+    "title": "Visualisation des votes du Parlement Fédéral Belge (chambre)",
+    "intro": "Nous souhaitons que, dans une démocratie, il soit transparent et facile de comprendre ce que les politiciens, qui représentent le peuple, ont voté. Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature du Parlement fédéral belge (Chambre)"
+  },
+  "searchBar": {
+    "label": "Rechercher des motions par mots-clés spécifiques",
+    "searchBtn": "Rechercher",
+    "try": "Essayez",
+    "climate": "climat",
+    "immigration": "immigration",
+    "taxes": "impôts"
+  },
+  "motions": {
+    "title": "Motions",
+    "motionPluralize": {
+      "none": "",
+      "singular": "Motion",
+      "plural": "Motions"
+    },
+    "resultsByParty": "Résultats du vote par parti",
+    "yes": "Oui",
+    "no": "Non",
+    "abstention": "Abstention",
+    "votePluralize": {
+      "none": "vote",
+      "singular": "vote",
+      "plural": "votes"
+    },
+    "accepted": "Adopté",
+    "rejected": "Rejeté"
+  },
+  "plenaries": {
+    "title": "Plénières"
+  },
+  "footer": {
+    "license": "Les données utilisées sur ce site sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"
+  }
+}

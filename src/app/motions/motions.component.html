@@ -4,7 +4,7 @@
 ></search-bar>
 
 <div class="motionsHeader">
-  <h2>Moties</h2>
+  <h2>{{ "motions.title" | translate }}</h2>
 </div>
 
 @if (motionsGroups$$ | async; as motionGroups) {
@@ -24,15 +24,20 @@
           "
         ></i>
       </div>
-      <div *ngIf="selectedLanguage === 'NL'" class="motionGroupTitle">
+      <div *ngIf="selectedLanguage === 'nl'" class="motionGroupTitle">
         <p>{{ motionGroup.titleNL }}</p>
       </div>
-      <div *ngIf="selectedLanguage === 'FR'" class="motionGroupTitle">
+      <div *ngIf="selectedLanguage === 'fr'" class="motionGroupTitle">
         <p>{{ motionGroup.titleFR }}</p>
       </div>
       <div class="motionGroupDateBox">
         <div class="motionGroupNrMotions">
-          {{ motionGroup.motions.length }} motions
+          {{ motionGroup.motions.length }}
+          {{
+            "motions.motionPluralize"
+              | languagePlural : motionGroup.motions.length
+              | translate
+          }}
         </div>
         <div class="motionGroupDate">{{ motionGroup.votingDate }}</div>
       </div>
@@ -61,10 +66,10 @@
                 "
               ></i>
             </div>
-            <div *ngIf="selectedLanguage === 'NL'" class="motionTitle">
+            <div *ngIf="selectedLanguage === 'nl'" class="motionTitle">
               {{ motion.titleNL }}
             </div>
-            <div *ngIf="selectedLanguage === 'FR'" class="motionTitle">
+            <div *ngIf="selectedLanguage === 'fr'" class="motionTitle">
               {{ motion.titleFR }}
             </div>
           </div>
@@ -74,20 +79,29 @@
             [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
           >
             <p>id: {{ motion.id }}</p>
-            <p *ngIf="selectedLanguage === 'NL'" class="motionDescription">
+            <p *ngIf="selectedLanguage === 'nl'" class="motionDescription">
               {{ motion.descriptionNL }}
             </p>
-            <p *ngIf="selectedLanguage === 'FR'" class="motionDescription">
+            <p *ngIf="selectedLanguage === 'fr'" class="motionDescription">
               {{ motion.descriptionFR }}
             </p>
             <div class="voteOverView">
-              <div class="voteOverViewTitle">Stemresultaten per partij</div>
+              <div class="voteOverViewTitle">
+                {{ "motions.resultsByParty" | translate }}
+              </div>
               <div class="votePerPartyTable">
                 <div class="yesVotesColumn">
                   <div class="votesHeader">
-                    <span class="typeOfVote">Ja</span>
+                    <span class="typeOfVote">{{
+                      "motions.yes" | translate
+                    }}</span>
                     <span class="nrOfVotes"
-                      >{{ motion.yesVotes.nrOfVotes }} stemmen</span
+                      >{{ motion.yesVotes.nrOfVotes }}
+                      {{
+                        "motions.votePluralize"
+                          | languagePlural : motion.yesVotes.nrOfVotes
+                          | translate
+                      }}</span
                     >
                   </div>
                   <div class="votesPartyList">
@@ -116,9 +130,16 @@
                 </div>
                 <div class="noVotesColumn">
                   <div class="votesHeader">
-                    <span class="typeOfVote">Nee</span
+                    <span class="typeOfVote">{{
+                      "motions.no" | translate
+                    }}</span
                     ><span class="nrOfVotes"
-                      >{{ motion.noVotes.nrOfVotes }} stemmen</span
+                      >{{ motion.noVotes.nrOfVotes }}
+                      {{
+                        "motions.votePluralize"
+                          | languagePlural : motion.noVotes.nrOfVotes
+                          | translate
+                      }}</span
                     >
                   </div>
                   <div class="votesPartyList">
@@ -147,9 +168,16 @@
                 </div>
                 <div class="abstVotesColumn">
                   <div class="votesHeader">
-                    <span class="typeOfVote">Onthouding</span>
+                    <span class="typeOfVote">{{
+                      "motions.abstention" | translate
+                    }}</span>
                     <span class="nrOfVotes"
-                      >{{ motion.absVotes.nrOfVotes }} stemmen</span
+                      >{{ motion.absVotes.nrOfVotes }}
+                      {{
+                        "motions.votePluralize"
+                          | languagePlural : motion.absVotes.nrOfVotes
+                          | translate
+                      }}</span
                     >
                   </div>
                   <div class="votesPartyList">
@@ -186,12 +214,12 @@
             @if (motion.votingResult) {
             <div class="accepted">
               <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
-              Aangenomen
+              {{ "motions.accepted" | translate }}
             </div>
             } @else if (!motion.votingResult) {
             <div class="rejected">
               <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
-              Verworpen
+              {{ "motions.rejected" | translate }}
             </div>
             }
           </div>

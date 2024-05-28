@@ -1,32 +1,42 @@
 /*motions.component.ts*/
-import {CommonModule} from '@angular/common';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MotionsHttpService} from '../services/motions.http-service';
-import {SearchBarComponent} from '../search-bar/search-bar.component';
-import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
-import {PaginationComponent} from '../pagination/pagination.component';
-import {SortPipe} from '../sort-votes/sort-votes.pipe';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {LanguageService} from "../services/language.service";
-import {Page} from "../services/pages";
-import {ActivatedRoute} from "@angular/router";
-import {Motion, MotionGroup, Votes} from "../services/motions";
-import {dateConversion} from "../services/date-service";
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MotionsHttpService } from '../services/motions.http-service';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { SortPipe } from '../sort-votes/sort-votes.pipe';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { LanguageService } from '../services/language.service';
+import { Page } from '../services/pages';
+import { ActivatedRoute } from '@angular/router';
+import { Motion, MotionGroup, Votes } from '../services/motions';
+import { dateConversion } from '../services/date-service';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
 
 @UntilDestroy()
 @Component({
   selector: 'motions',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent, PaginationComponent, SortPipe],
+  imports: [
+    CommonModule,
+    SearchBarComponent,
+    PaginationComponent,
+    SortPipe,
+    TranslateModule,
+    LanguagePluralPipe,
+  ],
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass',
 })
 export class MotionsComponent implements OnInit, OnDestroy {
+  paco = 5;
   motionsGroups$$ = new ReplaySubject<ViewMotionGroup[]>(1);
   nrOfPages: number = 1;
   searchTerm: string = '';
   motionId: string = '';
-  selectedLanguage: string = 'NL';
+  selectedLanguage: string = 'nl';
   private languageSubscription: Subscription = new Subscription();
 
   constructor(
@@ -68,7 +78,9 @@ export class MotionsComponent implements OnInit, OnDestroy {
       .getMotions(1, this.searchTerm)
       .pipe(untilDestroyed(this), take(1))
       .subscribe((page: Page<MotionGroup>) => {
-        this.motionsGroups$$.next(page.values.map((x) => new ViewMotionGroup(x)));
+        this.motionsGroups$$.next(
+          page.values.map((x) => new ViewMotionGroup(x))
+        );
         this.nrOfPages = page.totalPages;
       });
   }
@@ -78,7 +90,9 @@ export class MotionsComponent implements OnInit, OnDestroy {
       .getMotion(this.motionId)
       .pipe(untilDestroyed(this), take(1))
       .subscribe((page: Page<MotionGroup>) => {
-        this.motionsGroups$$.next(page.values.map((x) => new ViewMotionGroup(x)));
+        this.motionsGroups$$.next(
+          page.values.map((x) => new ViewMotionGroup(x))
+        );
         this.nrOfPages = page.totalPages;
       });
   }
@@ -90,7 +104,9 @@ export class MotionsComponent implements OnInit, OnDestroy {
     this.loadMotions(page)
       .pipe(untilDestroyed(this))
       .subscribe((page: Page<MotionGroup>) => {
-        this.motionsGroups$$.next(page.values.map((x) => new ViewMotionGroup(x)));
+        this.motionsGroups$$.next(
+          page.values.map((x) => new ViewMotionGroup(x))
+        );
         this.nrOfPages = page.totalPages;
       });
   }
@@ -110,11 +126,10 @@ export class MotionsComponent implements OnInit, OnDestroy {
 }
 
 class ViewMotionGroup {
-
   constructor(m: MotionGroup) {
     this.motionGroup = m;
-    this.isExpanded = false
-    this.viewMotions = m.motions.map((motion) => new ViewMotion(motion))
+    this.isExpanded = false;
+    this.viewMotions = m.motions.map((motion) => new ViewMotion(motion));
   }
 
   get titleNL(): string {
@@ -129,7 +144,6 @@ class ViewMotionGroup {
     return this.motionGroup.id;
   }
 
-
   get titleFR(): string {
     return this.motionGroup.titleFR;
   }
@@ -138,8 +152,8 @@ class ViewMotionGroup {
     return dateConversion(this.motionGroup.votingDate);
   }
 
-  isExpanded: boolean
-  viewMotions: ViewMotion[]
+  isExpanded: boolean;
+  viewMotions: ViewMotion[];
   motionGroup: MotionGroup;
 }
 

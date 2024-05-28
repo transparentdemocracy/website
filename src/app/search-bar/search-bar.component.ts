@@ -5,11 +5,12 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'search-bar',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.sass',
 })

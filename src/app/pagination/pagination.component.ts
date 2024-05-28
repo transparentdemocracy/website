@@ -1,6 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges,} from '@angular/core';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {BehaviorSubject} from 'rxjs';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { BehaviorSubject } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -20,8 +27,7 @@ export class PaginationComponent implements OnInit {
   private readonly maxWindowSize = 10;
   private currentPage$$ = new BehaviorSubject<number>(1);
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     let change = changes['nrOfPages'];
@@ -61,7 +67,6 @@ export class PaginationComponent implements OnInit {
     else return '';
   }
 
-
   setTotalPagesArray(): void {
     let start = 0;
     let maxPageNr = this.nrOfPages;
@@ -70,7 +75,7 @@ export class PaginationComponent implements OnInit {
       let currentPage = this.currentPage$$.getValue();
       let offset = this.maxWindowSize / 2;
       start = Math.max(0, currentPage - offset);
-      maxPageNr = this.maxWindowSize
+      maxPageNr = this.maxWindowSize;
     }
 
     this.fillPageArray(maxPageNr, start);

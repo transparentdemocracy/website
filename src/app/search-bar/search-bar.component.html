@@ -1,6 +1,6 @@
 <div class="searchBox">
   <label
-    >Zoek naar moties op specifieke trefwoorden:
+    >{{ "searchBar.label" | translate }}:
     <input
       #searchBox
       type="search"
@@ -8,31 +8,32 @@
       id="searchInput"
       (keydown.enter)="triggerSearch(searchBox.value)"
     />
-    Probeer
+    {{ "searchBar.try" | translate }}
     <button
       #keyword1
       class="btnLinkStyle"
       (click)="hintSearch(keyword1.innerText)"
     >
-      klimaat</button
+      {{ "searchBar.climate" | translate }}</button
     >,
     <button
       #keyword2
       class="btnLinkStyle"
       (click)="hintSearch(keyword2.innerText)"
     >
-      immigratie</button
+      {{ "searchBar.immigration" | translate }}</button
     >,
     <button
       #keyword3
       class="btnLinkStyle"
       (click)="hintSearch(keyword3.innerText)"
     >
-      belastingen</button
+      {{ "searchBar.taxes" | translate }}</button
     >, ...
   </label>
 
   <button class="searchBtn" (click)="triggerSearch(searchBox.value)">
-    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Zoeken
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    {{ "searchBar.searchBtn" | translate }}
   </button>
 </div>

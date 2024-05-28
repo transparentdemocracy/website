@@ -4,7 +4,7 @@
 ></search-bar>
 
 <div class="plenariesHeader">
-  <h2>Plenaries</h2>
+  <h2>{{ "plenaries.title" | translate }}</h2>
 </div>
 
 @if (plenaries$$ | async; as plenaries) {
@@ -28,10 +28,10 @@
             "
           ></i>
         </div>
-        <div *ngIf="selectedLanguage === 'NL'" class="plenaryTitle">
+        <div *ngIf="selectedLanguage === 'nl'" class="plenaryTitle">
           {{ plenary.titleNL }}
         </div>
-        <div *ngIf="selectedLanguage === 'FR'" class="plenaryTitle">
+        <div *ngIf="selectedLanguage === 'fr'" class="plenaryTitle">
           {{ plenary.titleFR }}
         </div>
       </div>
@@ -42,10 +42,10 @@
       >
         @for (motion of plenary.motions; track $index) {
         <a routerLink="/motions/{{ motion.motionId }}">{{ motion.motionId }}</a>
-        <p *ngIf="selectedLanguage === 'NL'" class="plenaryDescription">
+        <p *ngIf="selectedLanguage === 'nl'" class="plenaryDescription">
           {{ motion.titleNL }}
         </p>
-        <p *ngIf="selectedLanguage === 'FR'" class="plenaryDescription">
+        <p *ngIf="selectedLanguage === 'fr'" class="plenaryDescription">
           {{ motion.titleFR }}
         </p>
         }

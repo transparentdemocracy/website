@@ -1,7 +1,13 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {MotionsComponent} from './motions.component';
-import {Motion, MotionsHttpService, Page, PartyVotes, Votes} from '../services/motions.http-service';
-import {of} from 'rxjs/internal/observable/of';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MotionsComponent } from './motions.component';
+import {
+  Motion,
+  MotionsHttpService,
+  Page,
+  PartyVotes,
+  Votes,
+} from '../services/motions.http-service';
+import { of } from 'rxjs/internal/observable/of';
 
 const FIRST_PROPOSAL: Motion = {
   titleNL: 'FIRST_PROPOSAL',
@@ -10,36 +16,36 @@ const FIRST_PROPOSAL: Motion = {
   votingResult: true,
   descriptionNL: 'First proposal',
   descriptionFR: 'First proposal',
-  noVotes: new class implements Votes {
-    nrOfVotes = 2
+  noVotes: new (class implements Votes {
+    nrOfVotes = 2;
     partyVotes: PartyVotes[] = [
       {
-        partyName: "CD&V",
+        partyName: 'CD&V',
         numberOfVotes: 2,
-        votePercentage: 35
-      }
-    ]
-  },
-  absVotes: new class implements Votes {
-    nrOfVotes = 4
+        votePercentage: 35,
+      },
+    ];
+  })(),
+  absVotes: new (class implements Votes {
+    nrOfVotes = 4;
     partyVotes: PartyVotes[] = [
       {
-        partyName: "CD&V",
+        partyName: 'CD&V',
         numberOfVotes: 4,
-        votePercentage: 35
-      }
-    ]
-  },
-  yesVotes: new class implements Votes {
-    nrOfVotes = 1
+        votePercentage: 35,
+      },
+    ];
+  })(),
+  yesVotes: new (class implements Votes {
+    nrOfVotes = 1;
     partyVotes: PartyVotes[] = [
       {
-        partyName: "CD&V",
+        partyName: 'CD&V',
         numberOfVotes: 1,
-        votePercentage: 35
-      }
-    ]
-  },
+        votePercentage: 35,
+      },
+    ];
+  })(),
 };
 const SECOND_PROPOSAL: Motion = {
   titleNL: 'SECOND_PROPOSAL',
@@ -48,36 +54,36 @@ const SECOND_PROPOSAL: Motion = {
   votingResult: true,
   descriptionNL: 'Second proposal',
   descriptionFR: 'Second proposal',
-  noVotes: new class implements Votes {
-    nrOfVotes = 2
+  noVotes: new (class implements Votes {
+    nrOfVotes = 2;
     partyVotes: PartyVotes[] = [
       {
-        partyName: "CD&V",
+        partyName: 'CD&V',
         numberOfVotes: 2,
-        votePercentage: 35
-      }
-    ]
-  },
-  absVotes: new class implements Votes {
-    nrOfVotes = 4
+        votePercentage: 35,
+      },
+    ];
+  })(),
+  absVotes: new (class implements Votes {
+    nrOfVotes = 4;
     partyVotes: PartyVotes[] = [
       {
-        partyName: "CD&V",
+        partyName: 'CD&V',
         numberOfVotes: 4,
-        votePercentage: 35
-      }
-    ]
-  },
-  yesVotes: new class implements Votes {
-    nrOfVotes = 5
+        votePercentage: 35,
+      },
+    ];
+  })(),
+  yesVotes: new (class implements Votes {
+    nrOfVotes = 5;
     partyVotes: PartyVotes[] = [
       {
-        partyName: "CD&V",
+        partyName: 'CD&V',
         numberOfVotes: 5,
-        votePercentage: 35
-      }
-    ]
-  },
+        votePercentage: 35,
+      },
+    ];
+  })(),
 };
 const PAGED_MOTIONS: Page<Motion> = {
   values: [FIRST_PROPOSAL, SECOND_PROPOSAL],
@@ -90,16 +96,15 @@ describe('MotionsComponent', () => {
   let component: MotionsComponent;
   let fixture: ComponentFixture<MotionsComponent>;
   let motionsHttpServiceMock = jasmine.createSpyObj('MotionsHttpService', [
-    'getMotions'
+    'getMotions',
   ]);
   motionsHttpServiceMock.getMotions.and.returnValue(of(PAGED_MOTIONS));
-
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MotionsComponent],
       providers: [
-        {provide: MotionsHttpService, useValue: motionsHttpServiceMock},
+        { provide: MotionsHttpService, useValue: motionsHttpServiceMock },
       ],
     }).compileComponents();
 
@@ -110,7 +115,6 @@ describe('MotionsComponent', () => {
 
     expect(motionsHttpServiceMock.getMotions).not.toHaveBeenCalled();
   });
-
 
   describe('#getPagedMotions', () => {
     it('gets paged motions', (done) => {
