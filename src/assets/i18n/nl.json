@@ -1,4 +1,24 @@
 {
-  "mainTitle": "Visualisatie van de stemmingen in het Belgische Federale Parlement (kamer)",
-  "mainIntro": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd. Dit project heeft als doel om het stemgedrag van politici in de laatste legislatuur voor het Belgische Federale Parlement (Kamer)"
+  "header": {
+    "title": "Transparent Democracy",
+    "nav": {
+      "motions": "Moties",
+      "plenaries": "Plenaries"
+    }
+  },
+  "main": {
+    "title": "Visualisatie van de stemmingen in het Belgische Federale Parlement (kamer)",
+    "intro": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd. Dit project heeft als doel om het stemgedrag van politici in de laatste legislatuur voor het Belgische Federale Parlement (Kamer)"
+  },
+  "searchBar": {
+    "label": "Zoek naar moties op specifieke trefwoorden",
+    "searchBtn": "Zoeken",
+    "try": "Probeer",
+    "climate": "klimaat",
+    "immigration": "immigratie",
+    "taxes": "belastingen"
+  },
+  "footer":{
+    "license": "De data gebruikt op deze website is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"
+  }
 }
