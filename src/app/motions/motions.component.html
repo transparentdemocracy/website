@@ -34,7 +34,9 @@
         <div class="motionGroupNrMotions">
           {{ motionGroup.motions.length }}
           {{
-            "motions.pluralize" | languagePlural: motionGroup.motions.length | translate
+            "motions.motionPluralize"
+              | languagePlural : motionGroup.motions.length
+              | translate
           }}
         </div>
         <div class="motionGroupDate">{{ motionGroup.votingDate }}</div>
@@ -84,13 +86,22 @@
               {{ motion.descriptionFR }}
             </p>
             <div class="voteOverView">
-              <div class="voteOverViewTitle">Stemresultaten per partij</div>
+              <div class="voteOverViewTitle">
+                {{ "motions.resultsByParty" | translate }}
+              </div>
               <div class="votePerPartyTable">
                 <div class="yesVotesColumn">
                   <div class="votesHeader">
-                    <span class="typeOfVote">Ja</span>
+                    <span class="typeOfVote">{{
+                      "motions.yes" | translate
+                    }}</span>
                     <span class="nrOfVotes"
-                      >{{ motion.yesVotes.nrOfVotes }} stemmen</span
+                      >{{ motion.yesVotes.nrOfVotes }}
+                      {{
+                        "motions.votePluralize"
+                          | languagePlural : motion.yesVotes.nrOfVotes
+                          | translate
+                      }}</span
                     >
                   </div>
                   <div class="votesPartyList">
@@ -119,9 +130,16 @@
                 </div>
                 <div class="noVotesColumn">
                   <div class="votesHeader">
-                    <span class="typeOfVote">Nee</span
+                    <span class="typeOfVote">{{
+                      "motions.no" | translate
+                    }}</span
                     ><span class="nrOfVotes"
-                      >{{ motion.noVotes.nrOfVotes }} stemmen</span
+                      >{{ motion.noVotes.nrOfVotes }}
+                      {{
+                        "motions.votePluralize"
+                          | languagePlural : motion.noVotes.nrOfVotes
+                          | translate
+                      }}</span
                     >
                   </div>
                   <div class="votesPartyList">
@@ -150,9 +168,16 @@
                 </div>
                 <div class="abstVotesColumn">
                   <div class="votesHeader">
-                    <span class="typeOfVote">Onthouding</span>
+                    <span class="typeOfVote">{{
+                      "motions.abstention" | translate
+                    }}</span>
                     <span class="nrOfVotes"
-                      >{{ motion.absVotes.nrOfVotes }} stemmen</span
+                      >{{ motion.absVotes.nrOfVotes }}
+                      {{
+                        "motions.votePluralize"
+                          | languagePlural : motion.absVotes.nrOfVotes
+                          | translate
+                      }}</span
                     >
                   </div>
                   <div class="votesPartyList">
@@ -189,12 +214,12 @@
             @if (motion.votingResult) {
             <div class="accepted">
               <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
-              Aangenomen
+              {{ "motions.accepted" | translate }}
             </div>
             } @else if (!motion.votingResult) {
             <div class="rejected">
               <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
-              Verworpen
+              {{ "motions.rejected" | translate }}
             </div>
             }
           </div>

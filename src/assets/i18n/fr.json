@@ -1,13 +1,9 @@
 {
-  "common": {
-    "motions": "Motions",
-    "plenaries": "Plénières"
-  },
   "header": {
     "title": "Transparent Democracy",
     "nav": {
-      "motions": "{{ 'common.motions' | translate }}",
-      "plenaries": "{{ 'common.plenaries' | translate }}"
+      "motions": "Motions",
+      "plenaries": "Plénières"
     }
   },
   "main": {
@@ -23,15 +19,26 @@
     "taxes": "impôts"
   },
   "motions": {
-    "title": "{{ 'common.motions' | translate }}",
-    "pluralize": {
+    "title": "Motions",
+    "motionPluralize": {
       "none": "",
       "singular": "Motion",
       "plural": "Motions"
-    }
+    },
+    "resultsByParty": "Résultats du vote par parti",
+    "yes": "Oui",
+    "no": "Non",
+    "abstention": "Abstention",
+    "votePluralize": {
+      "none": "vote",
+      "singular": "vote",
+      "plural": "votes"
+    },
+    "accepted": "Adopté",
+    "rejected": "Rejeté"
   },
   "plenaries": {
-    "title": "{{ 'common.plenaries' | translate }}"
+    "title": "Plénières"
   },
   "footer": {
     "license": "Les données utilisées sur ce site sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"

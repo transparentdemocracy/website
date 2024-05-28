@@ -1,13 +1,9 @@
 {
-  "common": {
-    "motions": "Moties",
-    "plenaries": "Plenaries"
-  },
   "header": {
     "title": "Transparent Democracy",
     "nav": {
-      "motions": "{{ 'common.motions' | translate }}",
-      "plenaries": "{{ 'common.plenaries' | translate }}"
+      "motions": "Moties",
+      "plenaries": "Plenaries"
     }
   },
   "main": {
@@ -23,15 +19,26 @@
     "taxes": "belastingen"
   },
   "motions": {
-    "title": "common.motions",
-    "pluralize": {
+    "title": "Moties",
+    "motionPluralize": {
       "none": "",
       "singular": "Motie",
       "plural": "Moties"
-    }
+    },
+    "resultsByParty": "Stemresultaten per partij",
+    "yes": "Ja",
+    "no": "Nee",
+    "abstention": "Onthouding",
+    "votePluralize": {
+      "none": "stemmen",
+      "singular": "stemmen",
+      "plural": "stemmen"
+    },
+    "accepted": "Aangenomen",
+    "rejected": "Verworpen"
   },
   "plenaries": {
-    "title": "common.plenaries"
+    "title": "Plenaries"
   },
   "footer": {
     "license": "De data gebruikt op deze website is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"
