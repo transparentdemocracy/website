@@ -1,0 +1,7 @@
+<p *ngIf="!summary">{{ "document.summary-missing" | translate }}</p>
+<div *ngIf="summary">
+  <p>(i) {{ "document.summary-gpt-disclaimer" | translate}}</p>
+  <p class="documentSummary">
+    {{summary}}
+  </p>
+</div>

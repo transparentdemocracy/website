@@ -42,6 +42,12 @@
     "title": "Vergaderingen",
     "noMotions": "Er waren geen stemmingen en we zijn van plan om binnenkort ook andere inhoud van plenaire vergaderingen te visualiseren, zoals vragen aan ministers of debatten over moties."
   },
+  "document": {
+    "reference": "Document-verwijzing",
+    "summary-missing": "Hier hebben we helaas geen samenvatting van.",
+    "summary-gpt-disclaimer": "Dit is een automatische vertaling, hier kunnen foutjes in zitten. Controleer voor alle zekerheid zelf het bronmateriaal.",
+    "overview-dekamer": "Overzicht dekamer.be"
+  },
   "footer": {
     "license": "De <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">data gebruikt op deze website</a> is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"
   }

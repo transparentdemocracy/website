@@ -6,9 +6,25 @@ export interface Motion {
   descriptionFR: string;
   votingDate: string;
   votingResult: boolean;
+  newDocumentReference?: DocumentReference;
   yesVotes: Votes;
   noVotes: Votes;
   absVotes: Votes;
+}
+
+export interface DocumentReference {
+  spec: string;
+  documentMainUrl?: string;
+  subDocuments: SubDocument[];
+}
+
+export interface SubDocument {
+  documentNr: number;
+  documentSubNr: number;
+  documentPdfUrl: string;
+  summaryNL?: string;
+  summaryFR?: string;
+
 }
 
 export interface MotionGroup {
