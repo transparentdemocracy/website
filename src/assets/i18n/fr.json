@@ -39,7 +39,8 @@
     "rejected": "Rejeté"
   },
   "plenaries": {
-    "title": "Plénières"
+    "title": "Plénières",
+    "noMotions": "Il n'y a pas eu de vote et nous prévoyons de visualiser bientôt d'autres contenus relatifs aux réunions plénières, tels que les questions aux ministres ou les débats sur les motions."
   },
   "footer": {
     "license": "Les <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">données utilisées sur ce site</a> sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"

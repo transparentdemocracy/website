@@ -28,11 +28,16 @@
             "
           ></i>
         </div>
-        <div *ngIf="selectedLanguage === 'nl'" class="plenaryTitle">
-          {{ plenary.titleNL }}
-        </div>
-        <div *ngIf="selectedLanguage === 'fr'" class="plenaryTitle">
-          {{ plenary.titleFR }}
+        <div>
+          <div *ngIf="selectedLanguage === 'nl'" class="plenaryTitle">
+            {{ plenary.titleNL }}
+          </div>
+          <div *ngIf="selectedLanguage === 'fr'" class="plenaryTitle">
+            {{ plenary.titleFR }}
+          </div>
+          <p *ngIf="plenary.nrOfMotions === 0" class="plenaryNoMotions">
+            {{ "plenaries.noMotions" | translate }}
+          </p>
         </div>
       </div>
 

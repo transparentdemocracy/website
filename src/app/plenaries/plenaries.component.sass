@@ -38,7 +38,15 @@
     background-color: colors.$color-secondary-light
 
   &.noMotions
-    opacity: 0.5
+    opacity: 0.75
+    border-color: transparent
+    pointer-events: none
+
+    & .chevronIcon
+      visibility: hidden
+
+    & .plenaryTitle
+      min-height: auto
 
   &.expanded
     background-color: colors.$color-white
@@ -58,7 +66,7 @@
 .plenaryTitleBar
   display: flex
   cursor: pointer
-  margin-right: 10rem
+  margin-right: 12rem
 
 .chevronIcon
   margin: 0.10rem 1rem 0 0.5rem
@@ -73,6 +81,9 @@
   font-size: 1.25rem
   -webkit-user-select: none
   user-select: none
+
+.plenaryNoMotions
+  font-size: 0.75rem
 
 .plenaryDetails
   width: 100%

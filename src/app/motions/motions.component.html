@@ -50,6 +50,7 @@
     >
       @for (motion of motionGroup.motions; track $index) {
       <div
+        id="{{ motion.id }}"
         [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
         class="motionBlock"
       >
@@ -78,7 +79,6 @@
             class="motionDetails"
             [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
           >
-            <p>id: {{ motion.id }}</p>
             <p *ngIf="selectedLanguage === 'nl'" class="motionDescription">
               {{ motion.descriptionNL }}
             </p>
