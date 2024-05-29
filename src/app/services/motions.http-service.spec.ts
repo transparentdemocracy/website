@@ -1,16 +1,9 @@
-import { TestBed } from '@angular/core/testing';
-import {
-  Motion,
-  MotionsHttpService,
-  Page,
-  PartyVotes,
-  Votes,
-} from './motions.http-service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {MotionsHttpService} from './motions.http-service';
+import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
+import {HttpClient} from '@angular/common/http';
+import {Motion, MotionGroup, PartyVotes, Votes} from "./motions";
+import {Page} from "./pages";
 
 const MOTION = {
   titleNL: '1',
@@ -105,7 +98,7 @@ describe('MotionsHttpService', () => {
 
       //THEN
       function validateReturnedMotions() {
-        return (motions: Page<Motion>) => {
+        return (motions: Page<MotionGroup>) => {
           // then
           expect(motions.pageNr).toBe(1);
           expect(motions.values.length).toBe(5);
@@ -127,7 +120,7 @@ describe('MotionsHttpService', () => {
 
       //THEN
       function validateReturnedMotions() {
-        return (motions: Page<Motion>) => {
+        return (motions: Page<MotionGroup>) => {
           // then
           expect(motions.pageNr).toBe(2);
           expect(motions.values.length).toBe(3);
@@ -153,7 +146,7 @@ describe('MotionsHttpService', () => {
       httpMock.verify();
 
       function validateReturnedMotions() {
-        return (page: Page<Motion>) => {
+        return (page: Page<MotionGroup>) => {
           expect(page.values.length).toBe(2);
           expect(page.pageNr).toBe(1);
           let singleMotion = page.values.pop();

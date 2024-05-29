@@ -1,17 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs';
-import { Page } from './pages';
-import { MotionGroup } from './motions';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/internal/Observable';
+import {map} from 'rxjs';
+import {Page} from './pages';
+import {MotionGroup} from './motions';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
 })
 export class MotionsHttpService {
-  private readonly url = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
 
   getMotions(page: number, searchTerm: string): Observable<Page<MotionGroup>> {
     return this.fetchBackendMotions(page, searchTerm);
@@ -39,7 +41,7 @@ export class MotionsHttpService {
   }
 
   private buildUrl(searchTerm: string | null, page: number) {
-    let motionUrl = `${this.url}motions/`;
+    let motionUrl = `${(environment.backendUrl)}motions/`;
     let searchTermPart =
       searchTerm == null || searchTerm == `` ? `` : `search=${searchTerm}&`;
     let pagePart = `page=${page}&size=10`;
@@ -47,7 +49,7 @@ export class MotionsHttpService {
   }
 
   private buildUrlById(motionId: string) {
-    let motionUrl = `${this.url}motions/`;
+    let motionUrl = `${(environment.backendUrl)}motions/`;
     return `${motionUrl}${motionId}`;
   }
 

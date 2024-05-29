@@ -31,5 +31,6 @@ export class AppComponent {
       }
     });
     this.languageConfigurationService.initLanguageSetup();
+
   }
 }

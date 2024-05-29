@@ -18,7 +18,7 @@ Run `npm install` to install all dependencies.
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Running unit tests
-
+git puh
 Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Code scaffolding
@@ -28,6 +28,13 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+to build for production use
+
+```shell
+ng build --configuration=production
+```
+This will set the proper environment file, so that we go to the proper backend.
 
 ## Running end-to-end tests
 

@@ -2,12 +2,12 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {Page} from "./pages";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlenariesHttpService {
-  private readonly url = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) {
   }
@@ -24,10 +24,10 @@ export class PlenariesHttpService {
   }
 
   private buildUrl(searchTerm: string | null, page: number) {
-    let motionUrl = `${this.url}plenaries/`;
+    let plenary = `${(environment.backendUrl)}plenaries/`;
     let searchTermPart = (searchTerm == null || searchTerm == ``) ? `` : `search=${searchTerm}&`;
     let pagePart = `page=${page}&size=10`;
-    return `${motionUrl}?${searchTermPart}${pagePart}`;
+    return `${plenary}?${searchTermPart}${pagePart}`;
   }
 }
 
