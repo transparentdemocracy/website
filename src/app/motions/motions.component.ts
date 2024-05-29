@@ -118,6 +118,11 @@ export class MotionsComponent implements OnInit, OnDestroy {
       .pipe(take(1));
   }
 
+  toggleShowAllVotes(btnElement: HTMLElement, divElement: HTMLElement): void {
+    divElement.classList.toggle('showAllVotes');
+    btnElement.hidden = true;
+  }
+
   ngOnDestroy() {
     if (this.languageSubscription) {
       this.languageSubscription.unsubscribe();

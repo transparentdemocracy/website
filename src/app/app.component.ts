@@ -27,7 +27,7 @@ export class AppComponent {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        console.log('Current route:', this.router.url);
+        // console.log('Current route:', this.router.url);
       }
     });
     this.languageConfigurationService.initLanguageSetup();

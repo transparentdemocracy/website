@@ -69,9 +69,10 @@ $open-vld-color-class: 'Open Vld'
 
 .motionGroupTitle
   min-height: 4rem
-  font-size: 1.25rem
   margin-right: 12rem
-  & > p
+  & > h3
+    font-size: 1rem
+    line-height: 1.5
     margin: 0
 
 .motionList
@@ -87,7 +88,7 @@ $open-vld-color-class: 'Open Vld'
   height: auto
   flex-direction: row
   justify-content: space-between
-  background-color: colors.$color-tertiary-light
+  background-color: colors.$color-quaternary-light
   border-top: 1px solid transparent
   box-shadow: 0 -1px 0 colors.$color-white
   transition: background-color .15s ease-in-out
@@ -127,11 +128,12 @@ $open-vld-color-class: 'Open Vld'
   width: 100%
   min-height: 3rem
   font-size: 1rem
+  margin: 0
   white-space: pre-wrap
 
 .motionDetails
   width: 100%
-  padding: 1rem 2rem 2rem 2.2rem
+  padding: 1rem 3.75rem 2rem 2.25rem
   display: none
 
   &.expanded
@@ -140,6 +142,12 @@ $open-vld-color-class: 'Open Vld'
   & .motionDescription
     font-size: 0.9rem
     margin-bottom: 2rem
+
+.onlyOneMotion .motionDetails
+  display: block
+
+  & .motionDescription
+    margin-top: 2rem
 
 .motionResultBox
   position: absolute
@@ -166,8 +174,13 @@ $open-vld-color-class: 'Open Vld'
       color: colors.$color-red
 
 .voteOverViewTitle
-  font-size: 1.25rem
-  margin-bottom: 1rem
+  display: flex
+
+  & h4
+    font-size: 1.25rem
+    margin-bottom: 1rem
+  & .btnShowAllVotes
+    margin: 0 0 0.75rem auto
 
 .votePerPartyTable
   display: flex
@@ -195,6 +208,7 @@ $open-vld-color-class: 'Open Vld'
 
 .votesPartyList
   display: flex
+  flex: 1
   flex-direction: column
   padding: 1rem 1rem
   background-color: colors.$color-tertiary-light
@@ -216,8 +230,12 @@ $open-vld-color-class: 'Open Vld'
     padding-bottom: 0
 
   &.noVotes
+    display: none
     .voteResultsPartyName, .partyVotePercentage
-      opacity: 0.25
+      opacity: 0.4
+
+.votePerPartyTable.showAllVotes .partyVoteResult.noVotes
+  display: flex
 
 .voteResultsPartyName
   text-align: left

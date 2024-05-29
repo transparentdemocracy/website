@@ -10,7 +10,10 @@
 @if (motionsGroups$$ | async; as motionGroups) {
 <ul class="motionGroupList">
   @for (motionGroup of motionGroups; track $index) {
-  <li class="motionGroup">
+  <li
+    class="motionGroup"
+    [class.onlyOneMotion]="motionGroup.motions.length === 1"
+  >
     <!-- Motion group -->
     <div
       class="motionGroupTitleBar"
@@ -24,11 +27,14 @@
           "
         ></i>
       </div>
-      <div *ngIf="selectedLanguage === 'nl'" class="motionGroupTitle">
-        <p>{{ motionGroup.titleNL }}</p>
-      </div>
-      <div *ngIf="selectedLanguage === 'fr'" class="motionGroupTitle">
-        <p>{{ motionGroup.titleFR }}</p>
+      <div class="motionGroupTitle">
+        <h3>
+          @switch (selectedLanguage){ @case ('nl') {
+          {{ motionGroup.titleNL }}
+          } @case ('fr'){
+          {{ motionGroup.titleFR }}
+          } }
+        </h3>
       </div>
       <div class="motionGroupDateBox">
         <div class="motionGroupNrMotions">
@@ -52,9 +58,11 @@
       <div
         id="{{ motion.id }}"
         [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
+        [class.expanded]="motionGroup.motions.length === 1"
         class="motionBlock"
       >
         <div class="motionContent">
+          @if(motionGroup.motions.length !== 1){
           <div
             class="motionTitleBar"
             (click)="motion.isExpanded = !motion.isExpanded"
@@ -67,29 +75,43 @@
                 "
               ></i>
             </div>
-            <div *ngIf="selectedLanguage === 'nl'" class="motionTitle">
+            <p class="motionTitle">
+              @switch (selectedLanguage){ @case ('nl') {
               {{ motion.titleNL }}
-            </div>
-            <div *ngIf="selectedLanguage === 'fr'" class="motionTitle">
+              } @case ('fr'){
               {{ motion.titleFR }}
-            </div>
+              } }
+            </p>
           </div>
+          }
 
           <div
             class="motionDetails"
             [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
           >
-            <p *ngIf="selectedLanguage === 'nl'" class="motionDescription">
+            <p class="motionDescription">
+              @switch (selectedLanguage){ @case ('nl') {
               {{ motion.descriptionNL }}
-            </p>
-            <p *ngIf="selectedLanguage === 'fr'" class="motionDescription">
+              } @case ('fr'){
               {{ motion.descriptionFR }}
+              } }
             </p>
             <div class="voteOverView">
               <div class="voteOverViewTitle">
-                {{ "motions.resultsByParty" | translate }}
+                <h4>
+                  {{ "motions.resultsByParty" | translate }}
+                </h4>
+                <button
+                  #btnShowAllVotes
+                  (click)="
+                    toggleShowAllVotes(btnShowAllVotes, votesPerPartyTable)
+                  "
+                  class="btnLinkStyle btnShowAllVotes"
+                >
+                  Show all parties
+                </button>
               </div>
-              <div class="votePerPartyTable">
+              <div #votesPerPartyTable class="votePerPartyTable">
                 <div class="yesVotesColumn">
                   <div class="votesHeader">
                     <span class="typeOfVote">{{
