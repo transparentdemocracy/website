@@ -27,6 +27,7 @@
       "plural": "Motions"
     },
     "resultsByParty": "Résultats du vote par parti",
+    "showAllParties": "Afficher tous les partis",
     "yes": "Oui",
     "no": "Non",
     "abstention": "Abstention",
