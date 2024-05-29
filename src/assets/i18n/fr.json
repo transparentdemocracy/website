@@ -45,7 +45,7 @@
   "document": {
     "reference": "Référence de document",
     "summary-missing": "Malheureusement, nous n'en avons pas de résumé.",
-    "summary-gpt-disclaimer": "Ceci est une traduction automatique et peut contenir des erreurs. Pour être sûr, vérifiez vous-même le matériel source.",
+    "summary-gpt-disclaimer": "Ceci est un résumeé automatique et peut contenir des erreurs. Pour être sûr, vérifiez vous-même le matériel source.",
     "overview-dekamer": "Vue d'ensemble lachambre.be"
   },
   "footer": {
