@@ -7,7 +7,7 @@
     }
   },
   "main": {
-    "title": "Visualisatie van de stemmingen in het Belgische federale parlement (kamer)",
+    "title": "Visualisatie van de stemmingen in het Belgische federale parlement (Kamer)",
     "intro01": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd.",
     "intro02": "Dit project heeft als doel om het stemgedrag van politici in de laatste legilatuur van het Belgische federaal parlement te visualiseren. We focussen op de Kamer."
   },
@@ -17,16 +17,17 @@
     "try": "Probeer",
     "climate": "klimaat",
     "immigration": "immigratie",
-    "job": "baan"
+    "job": "jobs"
   },
   "motions": {
     "title": "Stemmingen",
     "motionPluralize": {
       "none": "",
-      "singular": "Stemmingen",
+      "singular": "Stemming",
       "plural": "Stemmingen"
     },
     "resultsByParty": "Stemresultaten per partij",
+    "showAllParties": "",
     "yes": "Ja",
     "no": "Nee",
     "abstention": "Onthouding",
@@ -40,7 +41,7 @@
   },
   "plenaries": {
     "title": "Vergaderingen",
-    "noMotions": "Er waren geen stemmingen en we zijn van plan om binnenkort ook andere inhoud van plenaire vergaderingen te visualiseren, zoals vragen aan ministers of debatten over moties."
+    "noMotions": "Er waren geen stemmingen.\n We zijn van plan om binnenkort ook andere inhoud van plenaire vergaderingen te visualiseren, zoals vragen aan ministers of debatten over moties."
   },
   "footer": {
     "license": "De <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">data gebruikt op deze website</a> is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"

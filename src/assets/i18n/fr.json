@@ -7,7 +7,7 @@
     }
   },
   "main": {
-    "title": "Visualisation des votes du Parlement fédéral belge (chambre)",
+    "title": "Visualisation des votes du Parlement fédéral belge (Chambre)",
     "intro01": "Nous souhaitons que, dans une démocratie, il soit transparent et facile de comprendre ce que les politiciens, qui représentent le peuple, ont voté.",
     "intro02": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature ddu Parlement fédéral belge. Nous nous concentrons sur la Chambre."
   },
@@ -40,7 +40,7 @@
   },
   "plenaries": {
     "title": "Plénières",
-    "noMotions": "Il n'y a pas eu de vote et nous prévoyons de visualiser bientôt d'autres contenus relatifs aux réunions plénières, tels que les questions aux ministres ou les débats sur les motions."
+    "noMotions": "Il n'y a pas eu de vote.\nNous prévoyons de visualiser bientôt d'autres contenus relatifs aux réunions plénières, tels que les questions aux ministres ou les débats sur les motions."
   },
   "footer": {
     "license": "Les <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">données utilisées sur ce site</a> sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"
