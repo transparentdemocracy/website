@@ -89,6 +89,24 @@
                   class="motionDetails"
                   [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
                 >
+                  <div *ngIf="motion.documentReference as ref">
+                    {{ "document.reference" | translate }}: {{ ref.spec }}
+                    <ul>
+                      <li>
+                        <span *ngIf="ref.documentMainUrl"><a href="{{ref.documentMainUrl}}" target="blank">{{"document.overview-dekamer" | translate}}</a></span>
+                      </li>
+                      <li *ngFor="let subDoc of ref.subDocuments">
+                        <a href="{{subDoc.documentPdfUrl}}">{{ subDoc.documentPdfUrl }}</a>
+                        <p *ngIf="selectedLanguage === 'nl'">
+                          <document-summary summary="{{subDoc.summaryNL}}"></document-summary>
+                        </p>
+                        <p *ngIf="selectedLanguage === 'fr'">
+                          <document-summary summary="{{subDoc.summaryFR}}"></document-summary>
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+
                   <p class="motionDescription">
                     @switch (selectedLanguage){ @case ('nl') {
                       {{ motion.descriptionNL }}
