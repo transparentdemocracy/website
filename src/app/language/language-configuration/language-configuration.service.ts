@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageConfigurationService {
@@ -8,7 +9,10 @@ export class LanguageConfigurationService {
   private rtlLanguages: string[] = ['ar', 'he'];
   private localStorageLangKey: string = 'lang';
 
-  constructor(private readonly translate: TranslateService) {}
+  constructor(
+    private readonly translate: TranslateService,
+    private titleService: Title
+  ) {}
 
   public initLanguageSetup(): void {
     const localStorageLanguage = localStorage.getItem(this.localStorageLangKey);
@@ -35,6 +39,7 @@ export class LanguageConfigurationService {
     this.translate.use(selectedLanguage);
     this.setHTMLlanguage(selectedLanguage);
     this.setTextDirectionByLanguageKey(selectedLanguage);
+    this.setPageTitle();
     localStorage.setItem(this.localStorageLangKey, selectedLanguage);
   }
 
@@ -49,5 +54,11 @@ export class LanguageConfigurationService {
       'dir',
       this.rtlLanguages.indexOf(languageKey) !== -1 ? 'rtl' : 'ltr'
     );
+  }
+
+  public setPageTitle(): void {
+    this.translate.get('header.title').subscribe((title: string) => {
+      this.titleService.setTitle(title);
+    });
   }
 }
