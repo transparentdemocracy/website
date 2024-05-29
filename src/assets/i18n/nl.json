@@ -2,13 +2,14 @@
   "header": {
     "title": "Wat doet de politiek",
     "nav": {
-      "motions": "Moties",
-      "plenaries": "Plenaries"
+      "motions": "Stemmingen",
+      "plenaries": "Vergaderingen"
     }
   },
   "main": {
-    "title": "Visualisatie van de stemmingen in het Belgische Federale Parlement (kamer)",
-    "intro": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd. Dit project heeft als doel om het stemgedrag van politici in de laatste legislatuur voor het Belgische Federale Parlement (Kamer)"
+    "title": "Visualisatie van de stemmingen in het Belgische federale parlement (kamer)",
+    "intro01": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd.",
+    "intro02": "Dit project heeft als doel om het stemgedrag van politici in de laatste legilatuur van het Belgische federaal parlement te visualiseren. We focussen op de Kamer."
   },
   "searchBar": {
     "label": "Zoek naar moties op specifieke trefwoorden",
@@ -19,11 +20,11 @@
     "taxes": "belastingen"
   },
   "motions": {
-    "title": "Moties",
+    "title": "Stemmingen",
     "motionPluralize": {
       "none": "",
-      "singular": "Motie",
-      "plural": "Moties"
+      "singular": "Stemmingen",
+      "plural": "Stemmingen"
     },
     "resultsByParty": "Stemresultaten per partij",
     "yes": "Ja",
@@ -38,9 +39,9 @@
     "rejected": "Verworpen"
   },
   "plenaries": {
-    "title": "Plenaries"
+    "title": "Vergaderingen"
   },
   "footer": {
-    "license": "De data gebruikt op deze website is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"
+    "license": "De <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">data gebruikt op deze website</a> is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"
   }
 }

@@ -7,8 +7,9 @@
     }
   },
   "main": {
-    "title": "Visualisation des votes du Parlement Fédéral Belge (chambre)",
-    "intro": "Nous souhaitons que, dans une démocratie, il soit transparent et facile de comprendre ce que les politiciens, qui représentent le peuple, ont voté. Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature du Parlement fédéral belge (Chambre)"
+    "title": "Visualisation des votes du Parlement fédéral belge (chambre)",
+    "intro01": "Nous souhaitons que, dans une démocratie, il soit transparent et facile de comprendre ce que les politiciens, qui représentent le peuple, ont voté.",
+    "intro02": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature ddu Parlement fédéral belge. Nous nous concentrons sur la Chambre."
   },
   "searchBar": {
     "label": "Rechercher des motions par mots-clés spécifiques",
@@ -41,6 +42,6 @@
     "title": "Plénières"
   },
   "footer": {
-    "license": "Les données utilisées sur ce site sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"
+    "license": "Les <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">données utilisées sur ce site</a> sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"
   }
 }
