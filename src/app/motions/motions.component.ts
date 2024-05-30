@@ -15,6 +15,7 @@ import { dateConversion } from '../services/date-service';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
 import {DocumentSummaryComponent} from "../document-summary/document-summary.component";
+import {DocumentReferencesComponent} from "../document-references/document-references.component";
 
 @UntilDestroy()
 @Component({
@@ -24,7 +25,7 @@ import {DocumentSummaryComponent} from "../document-summary/document-summary.com
     CommonModule,
     SearchBarComponent,
     PaginationComponent,
-    DocumentSummaryComponent,
+    DocumentReferencesComponent,
     SortPipe,
     TranslateModule,
     LanguagePluralPipe,
