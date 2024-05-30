@@ -26,6 +26,7 @@ $open-vld-color-class: 'Open Vld'
   align-items: center
   gap: 1rem
   margin-bottom: 2rem
+  padding: 0
 
   & .motionGroup
     height: auto
@@ -189,12 +190,15 @@ $open-vld-color-class: 'Open Vld'
 
 .votesHeader
   display: flex
-  height: 3rem
+  min-height: 3rem
   justify-content: space-between
   align-items: center
   background-color: colors.$color-secondary-light
   border-radius: 8px 8px 0 0
   padding: 1rem
+
+  @media (max-width: breakpoints.$screen-md)
+    flex-direction: column
 
   & .typeOfVote
     font-weight: 700
@@ -221,6 +225,9 @@ $open-vld-color-class: 'Open Vld'
   padding: 0.5rem 0
   border-bottom: 1px solid colors.$color-secondary-light
   min-width: 100%
+
+  @media (max-width: breakpoints.$screen-md)
+    flex-direction: column
 
   &:first-child
     padding-top: 0
@@ -300,3 +307,6 @@ $open-vld-color-class: 'Open Vld'
 
 .motionsPagination
   display: flex
+  width: 90vw
+  overflow-x: auto
+  margin: 0 auto

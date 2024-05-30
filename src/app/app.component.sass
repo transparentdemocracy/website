@@ -1,3 +1,5 @@
+@use '../styles/breakpoints'
+
 main
   margin-bottom: 4rem
   max-width: 72rem
@@ -7,6 +9,9 @@ main
     margin: 0 auto 4rem auto
     padding: 0 4rem
     text-align: center
+
+    @media (max-width: breakpoints.$screen-md)
+      padding: 0
 
     & h1
       font-size: 1.5rem

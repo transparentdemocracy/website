@@ -1,4 +1,6 @@
 @use '../../styles/colors'
+@use '../../styles/breakpoints'
+
 p
   text-align: center
 
@@ -10,6 +12,11 @@ p
   width: 100%
   max-width: 50rem
   margin: 0 auto 4rem auto
+
+  @media (max-width: breakpoints.$screen-md)
+    flex-direction: column
+    gap: 2rem
+    padding: 0 1rem
 
 .searchInput
   border: 2px solid colors.$color-primary-light
