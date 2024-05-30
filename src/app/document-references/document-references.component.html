@@ -1,0 +1,17 @@
+<div *ngIf="documentReference as ref">
+  {{ "document.reference" | translate }}: {{ ref.spec }}
+  <ul>
+    <li>
+      <span *ngIf="ref.documentMainUrl"><a href="{{ref.documentMainUrl}}" target="_blank">{{"document.overview-dekamer" | translate}}</a></span>
+    </li>
+    <li *ngFor="let subDoc of ref.subDocuments">
+      <a href="{{subDoc.documentPdfUrl}}" target="_blank">{{ subDoc.documentPdfUrl }}</a>
+      <p *ngIf="selectedLanguage === 'nl'">
+        <document-summary summary="{{subDoc.summaryNL}}"></document-summary>
+      </p>
+      <p *ngIf="selectedLanguage === 'fr'">
+        <document-summary summary="{{subDoc.summaryFR}}"></document-summary>
+      </p>
+    </li>
+  </ul>
+</div>
