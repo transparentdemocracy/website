@@ -1,11 +1,5 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  EventEmitter,
-  Output,
-} from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild,} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'search-bar',
@@ -15,11 +9,14 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './search-bar.component.sass',
 })
 export class SearchBarComponent {
-  @ViewChild('searchBox', { static: true }) searchBox!: ElementRef;
+  @ViewChild('searchBox', {static: true}) searchBox!: ElementRef;
   @Output() searchTriggered$ = new EventEmitter<string>();
 
+  private previousSearchTerm: string = '';
+
   protected triggerSearch(searchTerm: string) {
-    if (this.isValidSearch(searchTerm)) {
+    if (this.isTriggerSearchRequired(searchTerm)) {
+      this.previousSearchTerm = searchTerm;
       this.searchTriggered$.emit(searchTerm);
     }
   }
@@ -29,11 +26,17 @@ export class SearchBarComponent {
     this.triggerSearch(keyword);
   }
 
-  isValidSearch(keyword: string): boolean {
-    return (
-      keyword.length > 0 &&
+  private isTriggerSearchRequired(keyword: string): boolean {
+    //When the searchTerm was cleared, this also warrants a new search
+    if (this.previousSearchTerm.length > 0 && keyword.length == 0) {
+      return true;
+    } else
+      return this.isValidSearchTerm(keyword);
+  }
+
+  private isValidSearchTerm(keyword: string) {
+    return keyword.length > 0 &&
       keyword.length <= 100 &&
-      /^[a-zA-Z0-9\s]+$/.test(keyword)
-    );
+      /^[a-zA-Z0-9\s]+$/.test(keyword);
   }
 }
