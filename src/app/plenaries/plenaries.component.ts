@@ -93,7 +93,7 @@ class ViewPlenary {
   }
 
   get titleFR(): string {
-    return 'Réunion plénière ' + this.plenary.id;
+    return 'Séance plénière ' + this.plenary.id;
   }
 
   get date(): string {
@@ -105,6 +105,7 @@ class ViewPlenary {
   }
 
   get nrOfMotions(): number {
+    console.log('this.plenary.motions: ', this.plenary.motions);
     return this.plenary.motions.length;
   }
 
