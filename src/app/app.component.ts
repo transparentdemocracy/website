@@ -25,12 +25,6 @@ export class AppComponent {
     private translate: TranslateService,
     private languageConfigurationService: LanguageConfigurationService
   ) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // console.log('Current route:', this.router.url);
-      }
-    });
     this.languageConfigurationService.initLanguageSetup();
-
   }
 }

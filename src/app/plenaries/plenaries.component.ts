@@ -105,7 +105,6 @@ class ViewPlenary {
   }
 
   get nrOfMotions(): number {
-    console.log('this.plenary.motions: ', this.plenary.motions);
     return this.plenary.motions.length;
   }
 
