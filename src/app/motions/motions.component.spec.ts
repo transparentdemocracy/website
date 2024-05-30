@@ -1,15 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MotionsComponent } from './motions.component';
-import {
-  Motion,
-  MotionsHttpService,
-  Page,
-  PartyVotes,
-  Votes,
-} from '../services/motions.http-service';
-import { of } from 'rxjs/internal/observable/of';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {MotionsComponent} from './motions.component';
+import {MotionsHttpService} from '../services/motions.http-service';
+import {of} from 'rxjs/internal/observable/of';
+import {Motion, PartyVotes, Votes} from "../services/motions";
+import {Page} from "../services/pages";
 
 const FIRST_PROPOSAL: Motion = {
+  id: 'first',
   titleNL: 'FIRST_PROPOSAL',
   titleFR: 'FIRST_PROPOSAL',
   votingDate: '14/02/2024',
@@ -48,6 +45,7 @@ const FIRST_PROPOSAL: Motion = {
   })(),
 };
 const SECOND_PROPOSAL: Motion = {
+  id: 'second',
   titleNL: 'SECOND_PROPOSAL',
   titleFR: 'SECOND',
   votingDate: '14/02/2024',
@@ -104,7 +102,7 @@ describe('MotionsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MotionsComponent],
       providers: [
-        { provide: MotionsHttpService, useValue: motionsHttpServiceMock },
+        {provide: MotionsHttpService, useValue: motionsHttpServiceMock},
       ],
     }).compileComponents();
 
