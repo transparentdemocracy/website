@@ -8,250 +8,268 @@
 </div>
 
 @if (motionsGroups$$ | async; as motionGroups) {
-<ul class="motionGroupList">
-  @for (motionGroup of motionGroups; track $index) {
-  <li
-    class="motionGroup"
-    [class.onlyOneMotion]="motionGroup.motions.length === 1"
-  >
-    <!-- Motion group -->
-    <div
-      class="motionGroupTitleBar"
-      (click)="motionGroup.isExpanded = !motionGroup.isExpanded"
-    >
-      <div class="chevronIcon">
-        <i
-          class="fa-solid fa-chevron-right"
-          [style.transform]="
+  <ul class="motionGroupList">
+    @for (motionGroup of motionGroups; track $index) {
+      <li
+        class="motionGroup"
+        [class.onlyOneMotion]="motionGroup.motions.length === 1"
+      >
+        <!-- Motion group -->
+        <div
+          class="motionGroupTitleBar"
+          (click)="motionGroup.isExpanded = !motionGroup.isExpanded"
+        >
+          <div class="chevronIcon">
+            <i
+              class="fa-solid fa-chevron-right"
+              [style.transform]="
             motionGroup.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
           "
-        ></i>
-      </div>
-      <div class="motionGroupTitle">
-        <h3>
-          @switch (selectedLanguage){ @case ('nl') {
-          {{ motionGroup.titleNL }}
-          } @case ('fr'){
-          {{ motionGroup.titleFR }}
-          } }
-        </h3>
-      </div>
-      <div class="motionGroupDateBox">
-        <div class="motionGroupNrMotions">
-          {{ motionGroup.motions.length }}
-          {{
-            "motions.motionPluralize"
-              | languagePlural : motionGroup.motions.length
-              | translate
-          }}
+            ></i>
+          </div>
+          <div class="motionGroupTitle">
+            <h3>
+              @switch (selectedLanguage){ @case ('nl') {
+                {{ motionGroup.titleNL }}
+              } @case ('fr'){
+                {{ motionGroup.titleFR }}
+              } }
+            </h3>
+          </div>
+          <div class="motionGroupDateBox">
+            <div class="motionGroupNrMotions">
+              {{ motionGroup.motions.length }}
+              {{
+                "motions.motionPluralize"
+                  | languagePlural : motionGroup.motions.length
+                  | translate
+              }}
+            </div>
+            <div class="motionGroupDate">{{ motionGroup.votingDate }}</div>
+          </div>
         </div>
-        <div class="motionGroupDate">{{ motionGroup.votingDate }}</div>
-      </div>
-    </div>
 
-    <!-- Motions -->
-    <div
-      class="motionList"
-      [ngClass]="[motionGroup.isExpanded ? 'expanded' : 'closed']"
-    >
-      @for (motion of motionGroup.motions; track $index) {
-      <div
-        id="{{ motion.id }}"
-        [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
-        [class.expanded]="motionGroup.motions.length === 1"
-        class="motionBlock"
-      >
-        <div class="motionContent">
-          @if(motionGroup.motions.length !== 1){
-          <div
-            class="motionTitleBar"
-            (click)="motion.isExpanded = !motion.isExpanded"
-          >
-            <div class="chevronIcon">
-              <i
-                class="fa-solid fa-caret-right"
-                [style.transform]="
+        <!-- Motions -->
+        <div
+          class="motionList"
+          [ngClass]="[motionGroup.isExpanded ? 'expanded' : 'closed']"
+        >
+          @for (motion of motionGroup.motions; track $index) {
+            <div
+              id="{{ motion.id }}"
+              [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
+              [class.expanded]="motionGroup.motions.length === 1"
+              class="motionBlock"
+            >
+              <div class="motionContent">
+                @if(motionGroup.motions.length !== 1){
+                  <div
+                    class="motionTitleBar"
+                    (click)="motion.isExpanded = !motion.isExpanded"
+                  >
+                    <div class="chevronIcon">
+                      <i
+                        class="fa-solid fa-caret-right"
+                        [style.transform]="
                   motion.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
                 "
-              ></i>
-            </div>
-            <p class="motionTitle">
-              @switch (selectedLanguage){ @case ('nl') {
-              {{ motion.titleNL }}
-              } @case ('fr'){
-              {{ motion.titleFR }}
-              } }
-            </p>
-          </div>
-          }
+                      ></i>
+                    </div>
+                    <p class="motionTitle">
+                      @switch (selectedLanguage){ @case ('nl') {
+                        {{ motion.titleNL }}
+                      } @case ('fr'){
+                        {{ motion.titleFR }}
+                      } }
+                    </p>
+                  </div>
+                }
 
-          <div
-            class="motionDetails"
-            [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
-          >
-            <p class="motionDescription">
-              @switch (selectedLanguage){ @case ('nl') {
-              {{ motion.descriptionNL }}
-              } @case ('fr'){
-              {{ motion.descriptionFR }}
-              } }
-            </p>
-            <div class="voteOverView">
-              <div class="voteOverViewTitle">
-                <h4>
-                  {{ "motions.resultsByParty" | translate }}
-                </h4>
-                <button
-                  #btnShowAllVotes
-                  (click)="
+                <div
+                  class="motionDetails"
+                  [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
+                >
+                  <div *ngIf="motion.documentReference as ref">
+                    {{ "document.reference" | translate }}: {{ ref.spec }}
+                    <ul>
+                      <li>
+                        <span *ngIf="ref.documentMainUrl"><a href="{{ref.documentMainUrl}}" target="blank">{{"document.overview-dekamer" | translate}}</a></span>
+                      </li>
+                      <li *ngFor="let subDoc of ref.subDocuments">
+                        <a href="{{subDoc.documentPdfUrl}}">{{ subDoc.documentPdfUrl }}</a>
+                        <p *ngIf="selectedLanguage === 'nl'">
+                          <document-summary summary="{{subDoc.summaryNL}}"></document-summary>
+                        </p>
+                        <p *ngIf="selectedLanguage === 'fr'">
+                          <document-summary summary="{{subDoc.summaryFR}}"></document-summary>
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p class="motionDescription">
+                    @switch (selectedLanguage){ @case ('nl') {
+                      {{ motion.descriptionNL }}
+                    } @case ('fr'){
+                      {{ motion.descriptionFR }}
+                    } }
+                  </p>
+                  <div class="voteOverView">
+                    <div class="voteOverViewTitle">
+                      <h4>
+                        {{ "motions.resultsByParty" | translate }}
+                      </h4>
+                      <button
+                        #btnShowAllVotes
+                        (click)="
                     toggleShowAllVotes(btnShowAllVotes, votesPerPartyTable)
                   "
-                  class="btnLinkStyle btnShowAllVotes"
-                >
-                  {{ "motions.showAllParties" | translate }}
-                </button>
-              </div>
-              <div #votesPerPartyTable class="votePerPartyTable">
-                <div class="yesVotesColumn">
-                  <div class="votesHeader">
+                        class="btnLinkStyle btnShowAllVotes"
+                      >
+                        {{ "motions.showAllParties" | translate }}
+                      </button>
+                    </div>
+                    <div #votesPerPartyTable class="votePerPartyTable">
+                      <div class="yesVotesColumn">
+                        <div class="votesHeader">
                     <span class="typeOfVote">{{
-                      "motions.yes" | translate
-                    }}</span>
-                    <span class="nrOfVotes"
-                      >{{ motion.yesVotes.nrOfVotes }}
-                      {{
-                        "motions.votePluralize"
-                          | languagePlural : motion.yesVotes.nrOfVotes
-                          | translate
-                      }}</span
-                    >
-                  </div>
-                  <div class="votesPartyList">
-                    @for (partyYesVotes of motion.yesVotes.partyVotes |
-                    sort:'numberOfVotes': 'desc'; track $index) {
-                    <div
-                      class="partyVoteResult"
-                      [class.noVotes]="partyYesVotes.numberOfVotes === 0"
-                    >
-                      <div class="voteResultsPartyName">
+                        "motions.yes" | translate
+                      }}</span>
+                          <span class="nrOfVotes"
+                          >{{ motion.yesVotes.nrOfVotes }}
+                            {{
+                              "motions.votePluralize"
+                                | languagePlural : motion.yesVotes.nrOfVotes
+                                | translate
+                            }}</span
+                          >
+                        </div>
+                        <div class="votesPartyList">
+                          @for (partyYesVotes of motion.yesVotes.partyVotes |
+                            sort:'numberOfVotes': 'desc'; track $index) {
+                            <div
+                              class="partyVoteResult"
+                              [class.noVotes]="partyYesVotes.numberOfVotes === 0"
+                            >
+                              <div class="voteResultsPartyName">
                         <span
                           class="partyNameTag"
                           [ngClass]="
                             removeSpaces(partyYesVotes.partyName) + '-color'
                           "
-                          >{{ partyYesVotes.partyName }}</span
+                        >{{ partyYesVotes.partyName }}</span
                         >
+                              </div>
+                              <span class="partyVotePercentage"
+                              >{{ partyYesVotes.numberOfVotes }} &nbsp;·&nbsp;
+                                {{ partyYesVotes.votePercentage }}%</span
+                              >
+                            </div>
+                          }
+                        </div>
                       </div>
-                      <span class="partyVotePercentage"
-                        >{{ partyYesVotes.numberOfVotes }} &nbsp;·&nbsp;
-                        {{ partyYesVotes.votePercentage }}%</span
-                      >
-                    </div>
-                    }
-                  </div>
-                </div>
-                <div class="noVotesColumn">
-                  <div class="votesHeader">
+                      <div class="noVotesColumn">
+                        <div class="votesHeader">
                     <span class="typeOfVote">{{
-                      "motions.no" | translate
-                    }}</span
-                    ><span class="nrOfVotes"
-                      >{{ motion.noVotes.nrOfVotes }}
-                      {{
-                        "motions.votePluralize"
-                          | languagePlural : motion.noVotes.nrOfVotes
-                          | translate
+                        "motions.no" | translate
                       }}</span
-                    >
-                  </div>
-                  <div class="votesPartyList">
-                    @for (partyNoVotes of motion.noVotes.partyVotes | sort:
-                    'numberOfVotes': 'desc'; track $index) {
-                    <div
-                      class="partyVoteResult"
-                      [class.noVotes]="partyNoVotes.numberOfVotes === 0"
-                    >
-                      <div class="voteResultsPartyName">
+                    ><span class="nrOfVotes"
+                        >{{ motion.noVotes.nrOfVotes }}
+                          {{
+                            "motions.votePluralize"
+                              | languagePlural : motion.noVotes.nrOfVotes
+                              | translate
+                          }}</span
+                        >
+                        </div>
+                        <div class="votesPartyList">
+                          @for (partyNoVotes of motion.noVotes.partyVotes | sort:
+                            'numberOfVotes': 'desc'; track $index) {
+                            <div
+                              class="partyVoteResult"
+                              [class.noVotes]="partyNoVotes.numberOfVotes === 0"
+                            >
+                              <div class="voteResultsPartyName">
                         <span
                           class="partyNameTag"
                           [ngClass]="
                             removeSpaces(partyNoVotes.partyName) + '-color'
                           "
-                          >{{ partyNoVotes.partyName }}</span
+                        >{{ partyNoVotes.partyName }}</span
                         >
+                              </div>
+                              <span class="partyVotePercentage"
+                              >{{ partyNoVotes.numberOfVotes }} &nbsp;·&nbsp;
+                                {{ partyNoVotes.votePercentage }}%</span
+                              >
+                            </div>
+                          }
+                        </div>
                       </div>
-                      <span class="partyVotePercentage"
-                        >{{ partyNoVotes.numberOfVotes }} &nbsp;·&nbsp;
-                        {{ partyNoVotes.votePercentage }}%</span
-                      >
-                    </div>
-                    }
-                  </div>
-                </div>
-                <div class="abstVotesColumn">
-                  <div class="votesHeader">
+                      <div class="abstVotesColumn">
+                        <div class="votesHeader">
                     <span class="typeOfVote">{{
-                      "motions.abstention" | translate
-                    }}</span>
-                    <span class="nrOfVotes"
-                      >{{ motion.absVotes.nrOfVotes }}
-                      {{
-                        "motions.votePluralize"
-                          | languagePlural : motion.absVotes.nrOfVotes
-                          | translate
-                      }}</span
-                    >
-                  </div>
-                  <div class="votesPartyList">
-                    @for (partyAbsVotes of motion.absVotes.partyVotes | sort:
-                    'numberOfVotes': 'desc'; track $index) {
-                    <div
-                      class="partyVoteResult"
-                      [class.noVotes]="partyAbsVotes.numberOfVotes === 0"
-                    >
-                      <div class="voteResultsPartyName">
+                        "motions.abstention" | translate
+                      }}</span>
+                          <span class="nrOfVotes"
+                          >{{ motion.absVotes.nrOfVotes }}
+                            {{
+                              "motions.votePluralize"
+                                | languagePlural : motion.absVotes.nrOfVotes
+                                | translate
+                            }}</span
+                          >
+                        </div>
+                        <div class="votesPartyList">
+                          @for (partyAbsVotes of motion.absVotes.partyVotes | sort:
+                            'numberOfVotes': 'desc'; track $index) {
+                            <div
+                              class="partyVoteResult"
+                              [class.noVotes]="partyAbsVotes.numberOfVotes === 0"
+                            >
+                              <div class="voteResultsPartyName">
                         <span
                           class="partyNameTag"
                           [ngClass]="
                             removeSpaces(partyAbsVotes.partyName) + '-color'
                           "
-                          >{{ partyAbsVotes.partyName }}</span
+                        >{{ partyAbsVotes.partyName }}</span
                         >
+                              </div>
+                              <span class="partyVotePercentage"
+                              >{{ partyAbsVotes.numberOfVotes }} &nbsp;·&nbsp;
+                                {{ partyAbsVotes.votePercentage }}%</span
+                              >
+                            </div>
+                          }
+                        </div>
                       </div>
-                      <span class="partyVotePercentage"
-                        >{{ partyAbsVotes.numberOfVotes }} &nbsp;·&nbsp;
-                        {{ partyAbsVotes.votePercentage }}%</span
-                      >
                     </div>
-                    }
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="motionResultBox">
-          <div class="motionResult">
-            @if (motion.votingResult) {
-            <div class="accepted">
-              <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
-              {{ "motions.accepted" | translate }}
+              <div class="motionResultBox">
+                <div class="motionResult">
+                  @if (motion.votingResult) {
+                    <div class="accepted">
+                      <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
+                      {{ "motions.accepted" | translate }}
+                    </div>
+                  } @else if (!motion.votingResult) {
+                    <div class="rejected">
+                      <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
+                      {{ "motions.rejected" | translate }}
+                    </div>
+                  }
+                </div>
+              </div>
             </div>
-            } @else if (!motion.votingResult) {
-            <div class="rejected">
-              <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
-              {{ "motions.rejected" | translate }}
-            </div>
-            }
-          </div>
+          }
         </div>
-      </div>
-      }
-    </div>
-  </li>
-  }
-</ul>
+      </li>
+    }
+  </ul>
 }
 <pagination
   class="motionsPagination"

@@ -10,10 +10,11 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { LanguageService } from '../services/language.service';
 import { Page } from '../services/pages';
 import { ActivatedRoute } from '@angular/router';
-import { Motion, MotionGroup, Votes } from '../services/motions';
+import {DocumentReference, Motion, MotionGroup, Votes} from '../services/motions';
 import { dateConversion } from '../services/date-service';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
+import {DocumentSummaryComponent} from "../document-summary/document-summary.component";
 
 @UntilDestroy()
 @Component({
@@ -23,6 +24,7 @@ import { LanguagePluralPipe } from '../language/pluralization/language-plural.pi
     CommonModule,
     SearchBarComponent,
     PaginationComponent,
+    DocumentSummaryComponent,
     SortPipe,
     TranslateModule,
     LanguagePluralPipe,
@@ -173,6 +175,10 @@ class ViewMotion {
 
   get id(): string {
     return this.motion.id;
+  }
+
+  get documentReference(): DocumentReference | undefined {
+    return this.motion.newDocumentReference;
   }
 
   get descriptionNL(): string {

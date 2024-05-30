@@ -43,6 +43,12 @@
     "title": "Plénières",
     "noMotions": "Il n'y a pas eu de vote.\nNous prévoyons de visualiser bientôt d'autres contenus relatifs aux réunions plénières, tels que les questions aux ministres ou les débats sur les motions."
   },
+  "document": {
+    "reference": "Référence de document",
+    "summary-missing": "Malheureusement, nous n'en avons pas de résumé.",
+    "summary-gpt-disclaimer": "Ceci est un résumeé automatique et peut contenir des erreurs. Pour être sûr, vérifiez vous-même le matériel source.",
+    "overview-dekamer": "Vue d'ensemble lachambre.be"
+  },
   "footer": {
     "license": "Les <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">données utilisées sur ce site</a> sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"
   }
