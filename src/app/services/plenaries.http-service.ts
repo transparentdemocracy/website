@@ -42,6 +42,8 @@ export interface Plenary {
 
 export interface MotionLink {
   motionId: string,
+  agendaSeqNr: string,
+  voteSeqNr: string,
   titleNL: String,
   titleFR: String
 }
