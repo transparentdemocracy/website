@@ -1,4 +1,11 @@
+@use '../styles/colors'
 @use '../styles/breakpoints'
+
+header
+  border-bottom: 1px solid transparent
+
+  &:has(.headerWrapper.scrolledToBottom)
+    border-color: colors.$color-white
 
 main
   margin-bottom: 4rem
@@ -14,7 +21,7 @@ main
       padding: 0
 
     & h1
-      font-size: 1.5rem
+      font-size: 1.75rem
       margin-bottom: 1rem
 
     & p

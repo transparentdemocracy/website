@@ -1,3 +1,4 @@
+@use '../../styles/colors'
 @use '../../styles/breakpoints'
 
 .headerWrapper
@@ -5,11 +6,14 @@
   width: 100%
   max-width: 72rem
   gap: 1rem
-  margin: 1rem auto
+  margin: 0.5rem auto
   padding: 0 2rem
   align-items: center
   justify-content: center
   position: relative
+
+  @media (max-width: breakpoints.$screen-md)
+    padding: 0 1rem
 
   & .headerLogo
     display: flex
@@ -19,7 +23,7 @@
       height: 4rem
 
     & .logoText
-      font-size: 2.5rem
+      font-size: 2rem
       line-height: 1
       font-weight: 700
       margin: 0 0.75rem
@@ -27,7 +31,80 @@
       @media (max-width: breakpoints.$screen-md)
         font-size: 2rem
 
+.headerMenuMobile
+  margin-left: auto
+
+  .menuMainBtn
+    width: 2.75rem
+    height: 2.75rem
+    display: flex
+    padding: 0
+    margin-left: auto
+    position: relative
+    z-index: 1
+    min-width: auto
+
+    @media (min-width: breakpoints.$screen-md)
+      display: none
+
+  .menuMainBtn.btnActive
+    transform: rotate(180deg)
+
+  .menuMainHamburger
+    fill: none
+    stroke-width: 6
+    stroke: colors.$color-white
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)
+
+  .menu-line1
+    stroke-dasharray: 60 207
+    stroke-width: 6
+
+  .menu-line2
+    stroke-dasharray: 60 60
+    stroke-width: 6
+
+  .menu-line3
+    stroke-dasharray: 60 207
+    stroke-width: 6
+
+  .btnActive .menu-line1
+    stroke-dasharray: 90 207
+    stroke-dashoffset: -134
+    stroke-width: 6
+
+  .btnActive .menu-line2
+    stroke-dasharray: 1 60
+    stroke-dashoffset: -30
+    stroke-width: 6
+
+  .btnActive .menu-line3
+    stroke-dasharray: 90 207
+    stroke-dashoffset: -134
+    stroke-width: 6
+
 .headerMenu
   display: flex
   gap: 1.5rem
   margin: 0.75rem 0 0 auto
+
+  @media (max-width: breakpoints.$screen-md)
+    display: none
+
+    &.menuMobileOpen
+      display: flex
+      flex-direction: column-reverse
+      width: 80vw
+      max-width: 20rem
+      height: 100%
+      position: fixed
+      top: 0
+      right: 0
+      margin: 0
+      padding: 2rem 1rem 2rem 2rem
+      justify-content: flex-end
+      background-color: colors.$color-secondary-light
+      border-left: 1px solid colors.$color-white
+
+      & .headerLanguage
+        display: flex

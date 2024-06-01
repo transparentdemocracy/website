@@ -1,11 +1,23 @@
 @use '../../styles/colors'
+@use '../../styles/breakpoints'
 
 .mainMenu
   display: flex
-  a
+
+  & a
     border-right: 2px solid colors.$color-primary-light
     padding: 0 1.5rem
     font-weight: 600
+
     &.active
       text-decoration: none
       color: colors.$color-secondary
+
+  @media (max-width: breakpoints.$screen-md)
+    flex-direction: column
+    gap: 1.5rem
+    margin-top: 0.5rem
+
+    & a
+      padding: 0
+      border: none
