@@ -1,7 +1,14 @@
-<p *ngIf="!summary" class="disclaimer">{{ "document.summary-missing" | translate }}</p>
+<p *ngIf="!summary" class="summaryMissing">
+  <i class="fa-solid fa-circle-info"></i>
+  {{ "document.summary-missing" | translate }}
+</p>
+
 <div *ngIf="summary">
   <p class="documentSummary">
-    {{summary}}
+    {{ summary }}
   </p>
-  <p class="disclaimer"><i class="fa-solid fa-circle-info"></i> {{ "document.summary-gpt-disclaimer" | translate}}</p>
+  <p class="disclaimer">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    {{ "document.summary-gpt-disclaimer" | translate }}
+  </p>
 </div>

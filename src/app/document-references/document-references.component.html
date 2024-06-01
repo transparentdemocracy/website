@@ -1,17 +1,27 @@
-<div *ngIf="documentReference as ref">
-  {{ "document.reference" | translate }}: {{ ref.spec }}
+<div class="documentReferenceWrapper" *ngIf="documentReference as ref">
+  <h4>{{ "document.reference" | translate }}: {{ ref.spec }}</h4>
   <ul>
     <ng-container *ngFor="let subDoc of ref.subDocuments">
       <li *ngIf="selectedLanguage === 'nl'">
-        <document-summary summary="{{subDoc.summaryNL}}"></document-summary>
+        <document-summary summary="{{ subDoc.summaryNL }}"></document-summary>
       </li>
       <li *ngIf="selectedLanguage === 'fr'">
-        <document-summary summary="{{subDoc.summaryFR}}"></document-summary>
+        <document-summary summary="{{ subDoc.summaryFR }}"></document-summary>
       </li>
-      <li><a href="{{subDoc.documentPdfUrl}}" target="_blank">{{ subDoc.documentPdfUrl }}</a></li>
+      <li>
+        <a href="{{ subDoc.documentPdfUrl }}" target="_blank"
+          ><i class="fa-solid fa-file-pdf"></i>
+          {{ "document.overview-pdf" | translate }}</a
+        >
+      </li>
     </ng-container>
     <li>
-      <span *ngIf="ref.documentMainUrl"><a href="{{ref.documentMainUrl}}" target="_blank">{{ "document.overview-dekamer" | translate }}</a></span>
+      <span *ngIf="ref.documentMainUrl"
+        ><a href="{{ ref.documentMainUrl }}" target="_blank">
+          <i class="fa-solid fa-up-right-from-square"></i>
+          {{ "document.overview-dekamer" | translate }}</a
+        ></span
+      >
     </li>
   </ul>
 </div>

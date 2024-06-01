@@ -34,7 +34,7 @@ $open-vld-color-class: 'Open Vld'
     flex-direction: row
     justify-content: space-between
     border: 2px solid colors.$color-secondary-light
-    border-radius: 8px
+    border-radius: 6px
     background-color: colors.$color-white
     transition: background-color .15s ease-in-out
     overflow: hidden
@@ -74,7 +74,6 @@ $open-vld-color-class: 'Open Vld'
   padding-right: 0.5rem
 
   & > h3
-    font-size: 1rem
     line-height: 1.5
     margin: 0
     overflow-wrap: break-word
@@ -108,7 +107,7 @@ $open-vld-color-class: 'Open Vld'
 
     & .motionResultBox
       height: auto
-      border-radius: 0 0 0 8px
+      border-radius: 0 0 0 6px
 
 .motionContent
   display: flex
@@ -123,7 +122,7 @@ $open-vld-color-class: 'Open Vld'
   margin-right: 12rem
 
 .chevronIcon
-  margin: 0.10rem 1rem 0 0.5rem
+  margin: 0 1rem 0 0.5rem
 
 .fa-chevron-right, .fa-plus-circle, .fa-minus-circle
   transition: 0.2s ease-in-out
@@ -133,7 +132,6 @@ $open-vld-color-class: 'Open Vld'
   min-height: 3rem
   font-size: 1rem
   margin: 0
-  white-space: pre-wrap
 
 .motionDetails
   width: 100%
@@ -150,8 +148,9 @@ $open-vld-color-class: 'Open Vld'
 .onlyOneMotion .motionDetails
   display: block
 
-  & .motionDescription
-    margin-top: 2rem
+.documentReferences
+  display: flex
+  margin-bottom: 2rem
 
 .motionResultBox
   position: absolute
@@ -181,7 +180,6 @@ $open-vld-color-class: 'Open Vld'
   display: flex
 
   & h4
-    font-size: 1.25rem
     margin-bottom: 1rem
   & .btnShowAllVotes
     margin: 0 0 0.75rem auto
@@ -197,7 +195,7 @@ $open-vld-color-class: 'Open Vld'
   justify-content: space-between
   align-items: center
   background-color: colors.$color-secondary-light
-  border-radius: 8px 8px 0 0
+  border-radius: 6px 6px 0 0
   padding: 1rem
 
   @media (max-width: breakpoints.$screen-md)
@@ -219,7 +217,7 @@ $open-vld-color-class: 'Open Vld'
   flex-direction: column
   padding: 1rem 1rem
   background-color: colors.$color-tertiary-light
-  border-radius: 0 0 8px 8px
+  border-radius: 0 0 6px 6px
 
 .partyVoteResult
   display: flex
