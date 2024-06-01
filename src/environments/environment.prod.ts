@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://load-balancer-trans-demo-1768238618.eu-west-1.elb.amazonaws.com/'
+  backendUrl: 'http://wddp-load-balancer-761216200.eu-west-3.elb.amazonaws.com/'
 };
