@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   MotionsComponent,
   MotionsComponentMock,
@@ -7,7 +8,9 @@ import {
 
 describe('AppComponent', () => {
   beforeEach(async () => {
-    await TestBed.configureTestingModule({})
+    await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
+    })
       .overrideComponent(AppComponent, {
         remove: { imports: [MotionsComponent] },
         add: { imports: [MotionsComponentMock] },
