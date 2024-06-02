@@ -42,6 +42,7 @@ export class SearchBarComponent implements OnInit {
       this.previousSearchTerm = searchTerm;
       this.searchTriggered$.emit(searchTerm);
     }
+    this.searchBox.nativeElement.blur();
   }
 
   private isSpecificIDSet() {

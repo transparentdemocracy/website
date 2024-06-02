@@ -1,5 +1,5 @@
 <div class="documentReferenceWrapper" *ngIf="documentReference as ref">
-  <h4>{{ "document.reference" | translate }}: {{ ref.spec }}</h4>
+  <h4>{{ "document.reference" | translate }} {{ ref.spec }}</h4>
   <ul>
     <ng-container *ngFor="let subDoc of ref.subDocuments">
       <li *ngIf="selectedLanguage === 'nl'">
