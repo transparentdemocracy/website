@@ -3,13 +3,13 @@
     "title": "Wat doet de politiek",
     "nav": {
       "motions": "Stemmingen",
-      "plenaries": "Vergaderingen"
+      "plenaries": "Vergaderingen",
+      "help": "Help"
     }
   },
   "main": {
     "title": "Visualisatie van de stemmingen in het Belgische federale parlement (Kamer)",
-    "intro01": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd.",
-    "intro02": "Dit project heeft als doel om het stemgedrag van politici in de laatste legilatuur van het Belgische federaal parlement te visualiseren. We focussen op de Kamer."
+    "intro": "Dit project heeft als doel om het stemgedrag van politici in de laatste legislatuur (5 jaar) van het Belgische federaal parlement te visualiseren. We focussen op de Kamer."
   },
   "searchBar": {
     "label": "Zoek naar moties op specifieke trefwoorden",
@@ -49,6 +49,32 @@
     "summary-gpt-disclaimer": "Dit is een automatische samenvatting. Hier kunnen fouten in zitten. Controleer voor alle zekerheid zelf het bronmateriaal.",
     "overview-pdf": "Bekijk het document in PDF",
     "overview-dekamer": "Overzicht dekamer.be"
+  },
+  "help": {
+    "title": "Help",
+    "motions":{
+      "title":"Stemmingen",
+      "description": "Je kan deze pagina gebruiken om:",
+      "element01": "Door alle stemmingen te bladeren die zijn gehouden in het federaal parlement.",
+      "element02": "Stemmingen op te zoeken over een bepaald onderwerp (tik het onderwerp in in de zoekbalk).",
+      "element03": "een specifieke stemming op te zoeken (tik het nummer of de datum van de stemming in in de zoekbalk)."
+    },
+    "plenaries":{
+      "title":"Vergaderingen",
+      "description": "Je kan deze pagina gebruiken om:",
+      "element01": "Te bladeren door de plenaire vergaderingen die zijn gehouden.",
+      "element02": "Vergaderingen op te zoeken waarin over een bepaald onderwerp is gestemd (tik het onderwerp in in de zoekbalk).",
+      "element03": "Een specifieke vergadering op te zoeken (tik het nummer of de datum van de plenaire vergadering in in de zoekbalk)."
+    },
+    "moreInfoTitle": "Meer info",
+    "moreInfoTxt01": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd.",
+    "moreInfoTxt02": "We doen dit door gestructureerde gegevens te extraheren uit de verslagen die medewerkers van het parlement schreven over de plenaire vergaderingen, en door een website te bouwen die de geëxtraheerde gegevens visualiseert en doorzoekbaar maakt.\nOp deze manier kunnen mensen interactief bladeren door het stemgedrag van de federale politici terwijl ze beslissen op wie ze stemmen. Vervolgens kunnen ze na de verkiezingen blijven controleren of de mensen op wie ze hebben gestemd hun beloften nakomen.",
+    "improveTitle": "Verbeteringen",
+    "improveTxt01": "We hebben plannen om dit project uit te breiden met nieuwe functies. Bijvoorbeeld: automatisch publiceren op sociale media wat er de afgelopen week is gebeurd in het parlement, of de gegevens uitbreiden naar stemgedrag ook in de andere Belgische regeringen.",
+    "improveTxt02": "Je kunt onze ideeën voor nieuwe functies zien op onze <a href=\"https://github.com/orgs/transparentdemocracy/projects/1/views/1\" target=\"_blank\">Github-pagina</a>.",
+    "improveTxt03": "Als je suggesties hebt voor verbetering van deze website, kun je die hier indienen:",
+    "improveTxt04": "Als u suggesties hebt voor verbetering met betrekking tot de onderliggende stemgegevens, kunt u die hier indienen:",
+    "improveTxt05": "Als je gemotiveerd bent om bij te dragen aan dit project, vertel ons dan hier wat je in gedachten hebt:"
   },
   "footer": {
     "license": "De <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">data gebruikt op deze website</a> is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"

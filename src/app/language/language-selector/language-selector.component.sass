@@ -10,13 +10,15 @@
 
   &::after
     content: ''
-    width: calc(100% - 1rem)
+    width: 100%
     position: absolute
     left: 0
-    bottom: 1px
+    bottom: 0.25rem
     border-bottom: 1px solid colors.$color-tertiary
 
   & .languageSelector
+    -webkit-appearance: none
+    appearance: none
     font-weight: 600
     border: none
     background-color: transparent

@@ -3,13 +3,13 @@
     "title": "Que fait la politique",
     "nav": {
       "motions": "Motions",
-      "plenaries": "Plénières"
+      "plenaries": "Plénières",
+      "help": "Aide"
     }
   },
   "main": {
     "title": "Visualisation des votes du Parlement fédéral belge (Chambre)",
-    "intro01": "Nous souhaitons que, dans une démocratie, il soit transparent et facile de comprendre ce que les politiciens, qui représentent le peuple, ont voté.",
-    "intro02": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature ddu Parlement fédéral belge. Nous nous concentrons sur la Chambre."
+    "intro": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature (5 ans) du Parlement fédéral belge. Nous nous concentrons sur la Chambre."
   },
   "searchBar": {
     "label": "Rechercher des motions par mots-clés spécifiques",
@@ -49,6 +49,32 @@
     "summary-gpt-disclaimer": "Ceci est un résumé automatique. Cela peut contenir des erreurs. Pour être sûr, vérifiez vous-même le matériel source.",
     "overview-pdf": "Voir le document en PDF",
     "overview-dekamer": "Vue d'ensemble lachambre.be"
+  },
+  "help": {
+    "title": "Aide",
+    "motions":{
+      "title":"Motions",
+      "description": "Vous pouvez utiliser cette page pour :",
+      "element01": "Parcourir tous les motions de vote du parlement fédéral.",
+      "element02": "Stemmingen op te zoeken over een bepaald onderwerp (tik het onderwerp in in de zoekbalk).",
+      "element03": "Rechercher des motions sur un sujet particulier (tapez le sujet dans la barre de recherche)."
+    },
+    "plenaries":{
+      "title":"Plénières",
+      "description": "Vous pouvez utiliser cette page pour :",
+      "element01": "Pour parcourir les sessions plénières qui ont eu lieu.",
+      "element02": "Pour rechercher les plénières au cours desquelles un sujet spécifique a été voté (tapez le sujet dans la barre de recherche).",
+      "element03": "Pour rechercher une plénière spécifique (tapez le numéro ou la date de la plénière dans la barre de recherche)."
+    },
+    "moreInfoTitle": "Plus d'info",
+    "moreInfoTxt01": "Nous souhaitons que, dans une démocratie, il soit transparent et facile de comprendre ce que les politiciens, qui représentent le peuple, ont voté.",
+    "moreInfoTxt02": "Pour cela, nous exploitons les données structurées des rapports rédigés par le personnel du Parlement sur les réunions plénières, et nous créons un site web qui visualise les données extraites et les rend consultables.\nDe cette manière, les gens peuvent consulter de manière interactive le comportement de vote des politiciens fédéraux tout en décidant pour qui voter. Ensuite, ils peuvent continuer à surveiller après les élections si les personnes pour lesquelles ils ont voté tiennent leurs promesses.",
+    "improveTitle": "Améliorations",
+    "improveTxt01": "Nous prévoyons d'étendre ce projet avec de nouvelles fonctionnalités. Par exemple : publier automatiquement sur les médias sociaux les progrès réalisés au Parlement au cours de la semaine écoulée, ou étendre les données au comportement de vote dans les autres gouvernements belges.",
+    "improveTxt02": "Vous pouvez consulter nos idées de nouvelles fonctionnalités dans notre <a href=\"https://github.com/orgs/transparentdemocracy/projects/1/views/1\" target=\"_blank\">page Github</a>.",
+    "improveTxt03": "Si vous avez des suggestions d'amélioration pour ce site web, vous pouvez les soumettre ici :",
+    "improveTxt04": "Si vous avez des suggestions d'amélioration concernant les données de vote utilisées, vous pouvez les soumettre ici :",
+    "improveTxt05": "Si vous vous sentez motivé pour contribuer à ce projet, dites-nous ce que vous avez en tête ici :"
   },
   "footer": {
     "license": "Les <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">données utilisées sur ce site</a> sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"

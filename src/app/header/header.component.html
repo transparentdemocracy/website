@@ -31,7 +31,10 @@
   </div>
 
   <div class="headerMenu" [class.menuMobileOpen]="isMenuMobileOpen">
-    <navigation class="navigationBar"></navigation>
+    <navigation
+      (click)="isMenuMobileOpen ? toogleMenuMobile() : null"
+      class="navigationBar"
+    ></navigation>
     <language-selector class="headerLanguage"></language-selector>
   </div>
 </div>

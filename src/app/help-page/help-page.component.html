@@ -1,0 +1,67 @@
+<div>
+  <h2>{{ "help.title" | translate }}</h2>
+  <div class="helpContent">
+    <h3>{{ "help.motions.title" | translate }}</h3>
+    <p>
+      {{ "help.motions.description" | translate }}
+    </p>
+    <ul class="mb-5">
+      <li>{{ "help.motions.element01" | translate }}</li>
+      <li>{{ "help.motions.element02" | translate }}</li>
+      <li>{{ "help.motions.element03" | translate }}</li>
+    </ul>
+
+    <h3>{{ "help.plenaries.title" | translate }}</h3>
+    <p>
+      {{ "help.plenaries.description" | translate }}
+    </p>
+    <ul>
+      <li>{{ "help.plenaries.element01" | translate }}</li>
+      <li>{{ "help.plenaries.element02" | translate }}</li>
+      <li>{{ "help.plenaries.element03" | translate }}</li>
+    </ul>
+  </div>
+
+  <h2>{{ "help.moreInfoTitle" | translate }}</h2>
+  <div class="helpMoreInfo">
+    <p>
+      {{ "help.moreInfoTxt01" | translate }}
+    </p>
+    <p>
+      {{ "help.moreInfoTxt02" | translate }}
+    </p>
+  </div>
+
+  <h2>{{ "help.improveTitle" | translate }}</h2>
+  <div class="helpImprovements">
+    <p>{{ "help.improveTxt01" | translate }}</p>
+    <p [innerHTML]="'help.improveTxt02' | translate"></p>
+    <p>
+      {{ "help.improveTxt03" | translate }}
+      <br />
+      <a
+        href="https://github.com/transparentdemocracy/website/issues"
+        target="_blank"
+        >https://github.com/transparentdemocracy/website/issues</a
+      >
+    </p>
+    <p>
+      {{ "help.improveTxt04" | translate }}
+      <br />
+      <a
+        href="https://github.com/transparentdemocracy/voting-data"
+        target="_blank"
+        >https://github.com/transparentdemocracy/voting-data</a
+      >
+    </p>
+    <p>
+      {{ "help.improveTxt05" | translate }}
+      <br />
+      <a
+        href="https://github.com/orgs/transparentdemocracy/discussions/1"
+        target="_blank"
+        >https://github.com/orgs/transparentdemocracy/discussions/1</a
+      >
+    </p>
+  </div>
+</div>
