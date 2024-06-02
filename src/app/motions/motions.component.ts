@@ -10,12 +10,17 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { LanguageService } from '../services/language.service';
 import { Page } from '../services/pages';
 import { ActivatedRoute } from '@angular/router';
-import {DocumentReference, Motion, MotionGroup, Votes} from '../services/motions';
+import {
+  DocumentReference,
+  Motion,
+  MotionGroup,
+  Votes,
+} from '../services/motions';
 import { dateConversion } from '../services/date-service';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
-import {DocumentSummaryComponent} from "../document-summary/document-summary.component";
-import {DocumentReferencesComponent} from "../document-references/document-references.component";
+import { DocumentSummaryComponent } from '../document-summary/document-summary.component';
+import { DocumentReferencesComponent } from '../document-references/document-references.component';
 
 @UntilDestroy()
 @Component({

@@ -8,79 +8,84 @@
 </div>
 
 @if (plenaries$$ | async; as plenaries) {
-  <ul class="plenariesList">
-    @for (plenary of plenaries; track $index) {
-      <li
-        [ngClass]="[plenary.isExpanded ? 'expanded' : 'closed']"
-        [class.noMotions]="plenary.nrOfMotions === 0"
-        class="plenariesBlock"
+<ul class="plenariesList">
+  @for (plenary of plenaries; track $index) {
+  <li
+    [ngClass]="[plenary.isExpanded ? 'expanded' : 'closed']"
+    [class.noMotions]="plenary.nrOfMotions === 0"
+    class="plenariesBlock"
+  >
+    <div class="plenaryContent">
+      <div
+        class="plenaryTitleBar"
+        (click)="plenary.isExpanded = !plenary.isExpanded"
       >
-        <div class="plenaryContent">
-          <div
-            class="plenaryTitleBar"
-            (click)="plenary.isExpanded = !plenary.isExpanded"
-          >
-            <div class="chevronIcon">
-              <i
-                class="fa-solid fa-caret-right"
-                [style.transform]="
+        <div class="chevronIcon">
+          <i
+            class="fa-solid fa-caret-right"
+            [style.transform]="
               plenary.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
             "
-              ></i>
-            </div>
-            <div>
-              <p class="plenaryTitle">
-                @switch (selectedLanguage) {
-                  @case ('nl') {
-                    {{ plenary.titleNL }}
-                  }
-                  @case ('fr') {
-                    {{ plenary.titleFR }}
-                  }
-                }
-              </p>
-              @if (plenary.nrOfMotions === 0) {
-                <p class="plenaryNoMotions">
-                  {{ "plenaries.noMotions" | translate }}
-                </p>
-              }
-            </div>
-          </div>
-
-          <div
-            class="plenaryDetails"
-            [ngClass]="[plenary.isExpanded ? 'expanded' : 'closed']"
-          >
-            @for (motion of plenary.motions; track $index) {
-              @switch (selectedLanguage) {
-                @case ('nl') {
-                  <a routerLink="/motions/{{ motion.motionId }}">Agenda item {{ motion.agendaSeqNr }} motie  {{ motion.voteSeqNr }}</a>
-                }
-                @case ('fr') {
-                  <a routerLink="/motions/{{ motion.motionId }}">Point de l'ordre du jour {{ motion.agendaSeqNr }} motion  {{ motion.voteSeqNr }}</a>
-                }
-              }
-              <p class="plenaryDescription">
-                @switch (selectedLanguage) {
-                  @case ('nl') {
-                    {{ motion.titleNL }}
-                  }
-                  @case ('fr') {
-                    {{ motion.titleFR }}
-                  }
-                }
-              </p>
-            }
-          </div>
+          ></i>
         </div>
-
-        <div class="plenaryMotionsDateBox">
-          <div class="plenaryNbMotions">{{ plenary.nrOfMotions }} motions</div>
-          <div class="plenaryDate">{{ plenary.date }}</div>
+        <div>
+          <p class="plenaryTitle">
+            @switch (selectedLanguage) { @case ('nl') {
+            {{ plenary.titleNL }}
+            } @case ('fr') {
+            {{ plenary.titleFR }}
+            } }
+          </p>
+          @if (plenary.nrOfMotions === 0) {
+          <p class="plenaryNoMotions">
+            {{ "plenaries.noMotions" | translate }}
+          </p>
+          }
         </div>
-      </li>
-    }
-  </ul>
+      </div>
+
+      <div
+        class="plenaryDetails"
+        [ngClass]="[plenary.isExpanded ? 'expanded' : 'closed']"
+      >
+        @for (motion of plenary.motions; track $index) { @switch
+        (selectedLanguage) { @case ('nl') {
+        <a routerLink="/motions/{{ motion.motionId }}"
+          >Agenda item {{ motion.agendaSeqNr }} motie {{ motion.voteSeqNr }}</a
+        >
+        } @case ('fr') {
+        <a routerLink="/motions/{{ motion.motionId }}"
+          >Point de l'ordre du jour {{ motion.agendaSeqNr }} motion
+          {{ motion.voteSeqNr }}</a
+        >
+        } }
+        <p class="plenaryDescription">
+          @switch (selectedLanguage) { @case ('nl') {
+          {{ motion.titleNL }}
+          } @case ('fr') {
+          {{ motion.titleFR }}
+          } }
+        </p>
+        }
+      </div>
+    </div>
+
+    <div class="plenaryMotionsDateBox">
+      @if(plenary.nrOfMotions > 0){
+      <div class="plenaryNbMotions">
+        {{ plenary.nrOfMotions }}
+        {{
+          "motions.motionPluralize"
+            | languagePlural : plenary.nrOfMotions
+            | translate
+        }}
+      </div>
+      }
+      <div class="plenaryDate">{{ plenary.date }}</div>
+    </div>
+  </li>
+  }
+</ul>
 }
 
 <pagination

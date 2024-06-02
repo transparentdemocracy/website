@@ -6,6 +6,7 @@ import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { LanguageService } from '../services/language.service';
+import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
 import {
   MotionLink,
   PlenariesHttpService,
@@ -26,6 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
     PaginationComponent,
     RouterLink,
     TranslateModule,
+    LanguagePluralPipe,
   ],
   templateUrl: './plenaries.component.html',
   styleUrl: './plenaries.component.sass',
