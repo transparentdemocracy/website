@@ -95,7 +95,7 @@ class ViewPlenary {
   }
 
   get titleFR(): string {
-    return 'Séance plénière ' + this.plenary.id;
+    return 'Réunion plénière ' + this.plenary.id;
   }
 
   get date(): string {

@@ -12,7 +12,7 @@
     "intro": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature (5 ans) du Parlement fédéral belge. Nous nous concentrons sur la Chambre."
   },
   "searchBar": {
-    "label": "Rechercher des motions par mots-clés spécifiques",
+    "label": "Rechercher des votes par mots-clés spécifiques",
     "searchBtn": "Rechercher",
     "try": "Essayez",
     "climate": "climat",
@@ -23,8 +23,8 @@
     "title": "Motions",
     "motionPluralize": {
       "none": "",
-      "singular": "Motion",
-      "plural": "Motions"
+      "singular": "Vote",
+      "plural": "Votes"
     },
     "resultsByParty": "Résultats du vote par parti",
     "showAllParties": "Afficher tous les partis",
@@ -40,15 +40,17 @@
     "rejected": "Rejeté"
   },
   "plenaries": {
-    "title": "Plénières",
-    "noMotions": "Il n'y a pas eu de vote.\nNous prévoyons de visualiser bientôt d'autres contenus relatifs aux réunions plénières, tels que les questions aux ministres ou les débats sur les motions."
+    "title": "Réunions plénières",
+    "noMotions": "Il n'y a pas eu de vote.\nNous prévoyons de visualiser bientôt d'autres contenus relatifs aux réunions plénières, tels que les questions aux ministres ou les débats sur les motions.",
+    "agendaItem": "Point de l'ordre du jour",
+    "motion": "vote"
   },
   "document": {
-    "reference": "Référence de document",
+    "reference": "Proposition : document",
     "summary-missing": "Malheureusement, nous n'en avons pas de résumé.",
     "summary-gpt-disclaimer": "Ceci est un résumé automatique. Cela peut contenir des erreurs. Pour être sûr, vérifiez vous-même le matériel source.",
     "overview-pdf": "Voir le document en PDF",
-    "overview-dekamer": "Vue d'ensemble lachambre.be"
+    "overview-dekamer": "Propositions liées (sur lachambre.be)"
   },
   "help": {
     "title": "Aide",

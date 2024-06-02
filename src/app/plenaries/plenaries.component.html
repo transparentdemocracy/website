@@ -48,17 +48,12 @@
         class="plenaryDetails"
         [ngClass]="[plenary.isExpanded ? 'expanded' : 'closed']"
       >
-        @for (motion of plenary.motions; track $index) { @switch
-        (selectedLanguage) { @case ('nl') {
-        <a routerLink="/motions/{{ motion.motionId }}"
-          >Agenda item {{ motion.agendaSeqNr }} motie {{ motion.voteSeqNr }}</a
-        >
-        } @case ('fr') {
-        <a routerLink="/motions/{{ motion.motionId }}"
-          >Point de l'ordre du jour {{ motion.agendaSeqNr }} motion
-          {{ motion.voteSeqNr }}</a
-        >
-        } }
+        @for (motion of plenary.motions; track $index) {
+        <a routerLink="/motions/{{ motion.motionId }}">
+          {{ "plenaries.agendaItem" | translate }} {{ motion.agendaSeqNr }},
+          {{ "plenaries.motion" | translate }} {{ motion.voteSeqNr }}
+        </a>
+
         <p class="plenaryDescription">
           @switch (selectedLanguage) { @case ('nl') {
           {{ motion.titleNL }}

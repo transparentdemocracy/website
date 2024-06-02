@@ -178,12 +178,16 @@ $open-vld-color-class: 'Open Vld'
   & h4
     margin-bottom: 1rem
   & .btnShowAllVotes
+    text-align: right
     margin: 0 0 0.75rem auto
 
 .votePerPartyTable
   display: flex
   justify-content: space-between
   gap: 1rem
+
+  @media (max-width: breakpoints.$screen-md)
+    flex-direction: column
 
 .votesHeader
   display: flex
@@ -193,9 +197,6 @@ $open-vld-color-class: 'Open Vld'
   background-color: colors.$color-secondary-light
   border-radius: 6px 6px 0 0
   padding: 1rem
-
-  @media (max-width: breakpoints.$screen-md)
-    flex-direction: column
 
   & .typeOfVote
     font-weight: 700
@@ -222,9 +223,6 @@ $open-vld-color-class: 'Open Vld'
   padding: 0.5rem 0
   border-bottom: 1px solid colors.$color-secondary-light
   min-width: 100%
-
-  @media (max-width: breakpoints.$screen-md)
-    flex-direction: column
 
   &:first-child
     padding-top: 0
