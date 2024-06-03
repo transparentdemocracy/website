@@ -69,6 +69,6 @@ export class SearchBarComponent implements OnInit {
   private isValidSearchTerm(keyword: string) {
     return keyword.length > 3 &&
       keyword.length <= 100 &&
-      /^[a-zA-Z0-9\s]+$/.test(keyword);
+      /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i.test(keyword);
   }
 }
