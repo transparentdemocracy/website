@@ -92,11 +92,11 @@ export class PlenariesComponent implements OnInit, OnDestroy {
 
 class ViewPlenary {
   get titleNL(): string {
-    return 'Plenaire vergadering ' + this.plenary.id;
+    return 'Plenaire vergadering ' + this.plenary.title;
   }
 
   get titleFR(): string {
-    return 'Réunion plénière ' + this.plenary.id;
+    return 'Réunion plénière ' + this.plenary.title;
   }
 
   get date(): string {

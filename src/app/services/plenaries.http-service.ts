@@ -33,6 +33,7 @@ export class PlenariesHttpService {
 
 export interface Plenary {
   id: string
+  title: string
   legislature: string
   date: string
   pdfReportUrl: string
