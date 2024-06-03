@@ -8,6 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { LanguageService } from '../services/language.service';
 import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
 import {
+  MotionGroupLink,
   MotionLink,
   PlenariesHttpService,
   Plenary,
@@ -107,11 +108,11 @@ class ViewPlenary {
   }
 
   get nrOfMotions(): number {
-    return this.plenary.motions.length;
+    return this.plenary.motionGroups.length;
   }
 
-  get motions(): MotionLink[] {
-    return this.plenary.motions;
+  get motionGroups(): MotionGroupLink[] {
+    return this.plenary.motionGroups;
   }
 
   constructor(p: Plenary) {

@@ -37,7 +37,15 @@ export interface Plenary {
   date: string
   pdfReportUrl: string
   htmlReportUrl: string
-  motions: MotionLink[];
+  motionGroups: MotionGroupLink[];
+}
+
+
+export interface MotionGroupLink {
+  motionGroupId: string,
+  titleNL: String,
+  titleFR: String
+  motionLinks: MotionLink[];
 }
 
 export interface MotionLink {
