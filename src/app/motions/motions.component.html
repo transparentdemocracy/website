@@ -92,19 +92,12 @@
             [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
           >
             @if(motion.documentReference){
-            <document-references
-              [documentReference]="motion.documentReference"
-              class="documentReferences"
-            ></document-references>
+              <document-references
+                [documentReference]="motion.documentReference"
+                class="documentReferences"
+              ></document-references>
             }
 
-            <p class="motionDescription">
-              @switch (selectedLanguage){ @case ('nl') {
-              {{ motion.descriptionNL }}
-              } @case ('fr'){
-              {{ motion.descriptionFR }}
-              } }
-            </p>
             <div class="voteOverView">
               <div class="voteOverViewTitle">
                 <h4>
