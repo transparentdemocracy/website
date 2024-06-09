@@ -2,8 +2,6 @@ export interface Motion {
   id: string;
   titleNL: string;
   titleFR: string;
-  descriptionNL: string;
-  descriptionFR: string;
   votingDate: string;
   votingResult: boolean;
   newDocumentReference?: DocumentReference;
@@ -37,6 +35,7 @@ export interface MotionGroup {
 
 export interface Votes {
   nrOfVotes: number;
+  votePercentage: number;
   partyVotes: PartyVotes[]
 }
 

@@ -120,7 +120,8 @@
                       "motions.yes" | translate
                     }}</span>
                     <span class="nrOfVotes"
-                      >{{ motion.yesVotes.nrOfVotes }}
+                      >{{ motion.yesVotes.nrOfVotes }}·&nbsp;
+                      {{ motion.yesVotes.votePercentage }}%
                       {{
                         "motions.votePluralize"
                           | languagePlural : motion.yesVotes.nrOfVotes
@@ -158,7 +159,8 @@
                       "motions.no" | translate
                     }}</span
                     ><span class="nrOfVotes"
-                      >{{ motion.noVotes.nrOfVotes }}
+                      >{{ motion.noVotes.nrOfVotes }}·&nbsp;
+                    {{ motion.noVotes.votePercentage }}%
                       {{
                         "motions.votePluralize"
                           | languagePlural : motion.noVotes.nrOfVotes
@@ -196,7 +198,8 @@
                       "motions.abstention" | translate
                     }}</span>
                     <span class="nrOfVotes"
-                      >{{ motion.absVotes.nrOfVotes }}
+                      >{{ motion.absVotes.nrOfVotes }}·&nbsp;
+                      {{ motion.absVotes.votePercentage }}%
                       {{
                         "motions.votePluralize"
                           | languagePlural : motion.absVotes.nrOfVotes

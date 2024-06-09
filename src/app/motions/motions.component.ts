@@ -187,16 +187,9 @@ class ViewMotion {
     return this.motion.newDocumentReference;
   }
 
-  get descriptionNL(): string {
-    return this.motion.descriptionNL;
-  }
 
   get titleFR(): string {
     return this.motion.titleFR;
-  }
-
-  get descriptionFR(): string {
-    return this.motion.descriptionFR;
   }
 
   get yesVotes(): Votes {
