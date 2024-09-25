@@ -13,10 +13,10 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4 # https://github.com/actions/setup-node?tab=readme-ov-file
         with:
           node-version: 22
 
@@ -30,12 +30,12 @@ jobs:
         run: npm run build:prod
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4 # https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#getting-started
         # If you're changing the branch from main,
         # also change the `main` in `refs/heads/main`
         # below accordingly.
         if: github.ref == 'refs/heads/main' && success()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/angular-github-actions
+          publish_dir: dist/website/browser
           enable_jekyll: true

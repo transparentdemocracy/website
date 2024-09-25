@@ -49,6 +49,16 @@ For other domain name troubleshooting, for example if we would need to transfer 
 
 ## Deploy
 
+### To Github Pages (current deployment workflow)
+
+Just commit and push your work on git.
+As soon as your work reaches the main branch, the updated version of the website will get deployed automatically to https://transparentdemocracy.github.io/website/.
+We've configured a Github action for that, which deploys to Github Pages.
+It is based on https://github.com/rodrigokamada/angular-github-actions?tab=readme-ov-file, with some updates of the dependencies in the gh-pages.yml, and tweaks to make it work for our Angular application.
+A pre-requisite that was needed for the Github action to work, was that we created a new gh-pages branch from main.
+
+### To AWS (old deployment workflow):
+
 1. Install the Angular CLI: 
 
 ```shell
@@ -72,4 +82,3 @@ When uploading the contents of the dist folder to the S3 bucket, **[make sure yo
   * watdoetdepolitiek.be / www.watdoetdepolitiek.be
   * quefaitlapolitique.be / www.quefaitlapolitique.be
   * wasmachtdiepolitik.be / www.wasmachtdiepolitik.be
-  
