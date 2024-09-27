@@ -51,11 +51,20 @@ For other domain name troubleshooting, for example if we would need to transfer 
 
 ### To Github Pages (current deployment workflow)
 
-Just commit and push your work on git.
-As soon as your work reaches the main branch, the updated version of the website will get deployed automatically to https://transparentdemocracy.github.io/website/.
-We've configured a Github action for that, which deploys to Github Pages.
-It is based on https://github.com/rodrigokamada/angular-github-actions?tab=readme-ov-file, with some updates of the dependencies in the gh-pages.yml, and tweaks to make it work for our Angular application.
-A pre-requisite that was needed for the Github action to work, was that we created a new gh-pages branch from main.
+We are currently hosting our website on https://watdoetdepolitiek.be using the static web hosting of [Github Pages](https://docs.github.com/en/pages/quickstart).
+
+**Just commit and push your work on git. As soon as your work reaches the main branch, the updated version of the website will get deployed automatically.**
+Your latest changes will then be visible https://watdoetdepolitiek.be (and actually also https://transparentdemocracy.github.io/website/, the corresponding domain name served by Github Pages).
+
+We've configured a Github action for this, which deploys to Github Pages. See [website/.github/workflows/gh-pages.yml](https://github.com/transparentdemocracy/website/blob/main/.github/workflows/gh-pages.yml).
+The `npm run build:prod` and `npm run test:headless` commands triggered in it are defined in [package.json](https://github.com/transparentdemocracy/website/blob/main/package.json).
+
+This approach is based on https://github.com/rodrigokamada/angular-github-actions?tab=readme-ov-file, with some updates of the dependencies in the `gh-pages.yml`, and tweaks to make it work for our Angular application.
+A pre-requisite that was needed for the Github action to work, was that we created a new `gh-pages` branch from `main`.
+The Github action now automatically commits and pushes the latest production build of the website to that `gh-pages` branch.
+
+The linking of the watdoetdepolitiek.be domain and the Github Pages was done according to the instructions at https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages.
+Our DNS records configuration is done in [Cloudflare](https://dash.cloudflare.com).
 
 ### To AWS (old deployment workflow):
 
