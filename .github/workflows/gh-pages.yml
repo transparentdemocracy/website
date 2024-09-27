@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: npm run build:prod
 
-      - name: Deploy
+      - name: Deploy # deployment to https://transparentdemocracy.github.io/website/ Github pages, in the gh-pages branch.
         uses: peaceiris/actions-gh-pages@v4 # https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#getting-started
         # If you're changing the branch from main,
         # also change the `main` in `refs/heads/main`
@@ -39,3 +39,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/website/browser
           enable_jekyll: true
+          cname: watdoetdepolitiek.be # https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
