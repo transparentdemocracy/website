@@ -11,6 +11,10 @@
     "title": "Visualisation des votes du Parlement fédéral belge (Chambre)",
     "intro": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature (5 ans) du Parlement fédéral belge. Nous nous concentrons sur la Chambre."
   },
+  "maintenance": {
+    "announcement": "Nous travaillons actuellement sur le site Web.",
+    "impact": "Les votes et les réunions ne sont pas consultables. Le site Web sera de nouveau disponible au plus tard fin octobre."
+  },
   "searchBar": {
     "label": "Rechercher des votes par mots-clés spécifiques",
     "searchBtn": "Rechercher",
