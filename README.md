@@ -44,9 +44,11 @@ Your latest changes will then be visible at https://watdoetdepolitiek.be (and ac
 
 #### Showing a banner to warn users about website maintenance
 
-If you need to warn users about back-end maintenance, which breaks the website's functionality in some way, you can do so by overwriting the index.html on the gh-pages branch, similarly to https://github.com/transparentdemocracy/website/commit/eb42fe9b5848452d08b38e5d975ff01e8b85e8a4.
-For now, that's essentially an overwriting of the Angular app with a static copy of how our landing page looks.
-The main.js loading at the bottom of the HTML is also overwritten. Otherwise, during loading of the page, when main.js is loaded, the static landing page copy gets overwritten by the Angular application, making the website maintenance banner disappear again.
+If you need to warn users about back-end maintenance, which breaks the website's functionality in some way, you can do so by setting the maintenanceModeEnabled flag to true in environment.prod.ts.
+
+If you want to edit the text for the maintenance announcement or the explanation of the impact, you can do so in the JSON files in the `assets/i18n` folder. Look for the maintenance.announcement and maintenance.impact keys.
+
+The maintenance messages are displayed on the `app.component`.
 
 #### Explanation of the deployment workflow set-up
 
