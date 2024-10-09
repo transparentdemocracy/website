@@ -11,6 +11,10 @@
     "title": "Visualisatie van de stemmingen in het Belgische federale parlement (Kamer)",
     "intro": "Dit project heeft als doel om het stemgedrag van politici in de laatste legislatuur (5 jaar) van het Belgische federaal parlement te visualiseren. We focussen op de Kamer."
   },
+  "maintenance": {
+    "announcement": "We werken momenteel aan de website.",
+    "impact": "Stemmingen en vergaderingen zijn niet doorzoekbaar. We zijn terug ten laatste eind oktober."
+  },
   "searchBar": {
     "label": "Zoek naar moties op specifieke trefwoorden",
     "searchBtn": "Zoeken",
