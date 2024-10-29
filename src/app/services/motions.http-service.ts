@@ -5,19 +5,7 @@ import {map} from 'rxjs';
 import {Page} from './pages';
 import {MotionGroup} from './motions';
 import {environment} from "../../environments/environment";
-
-interface ElasticSearch<T> {
-  hits: {
-    total: {
-      value: number
-    },
-    hits: SearchHit<T>[]
-  }
-}
-
-interface SearchHit<T> {
-  _source: T
-}
+import {ElasticSearch, SearchHit} from "./elastic";
 
 @Injectable({
   providedIn: 'root',
@@ -35,27 +23,21 @@ export class MotionsHttpService {
   getMotion(motionId: string): Observable<Page<MotionGroup>> {
     let completeUrl = this.buildUrlById(motionId);
     return this.fetchById(completeUrl).pipe(
-      map((backendPage: MotionGroup | null) => {
-        return this.mapSingleBackendMotion(backendPage);
+      map((backendPage: SearchHit<MotionGroup>) => {
+        return this.mapSingleBackendMotion(backendPage._source)
       })
     );
   }
 
-  private fetchById(completeUrl: string): Observable<MotionGroup | null> {
-    return this.http.get<MotionGroup>(completeUrl);
+  private fetchById(completeUrl: string): Observable<SearchHit<MotionGroup>> {
+    return this.http.get<SearchHit<MotionGroup>>(completeUrl);
   }
 
   private fetchMotions(
     page: number,
     searchTerm: string | null
   ): Observable<Page<MotionGroup>> {
-    // return this.fetchMotionsBackend(searchTerm, page);
     return this.fetchMotionsElastic(searchTerm, page);
-  }
-
-  private fetchMotionsBackend(searchTerm: string | null, page: number) {
-    let completeUrl = this.buildUrl(searchTerm, page);
-    return this.http.get<Page<MotionGroup>>(completeUrl);
   }
 
   private fetchMotionsElastic(
@@ -99,18 +81,15 @@ export class MotionsHttpService {
   }
 
   private buildUrlById(motionId: string) {
-    let motionUrl = `${(environment.backendUrl)}motions/`;
-    return `${motionUrl}${motionId}`;
+    return `${(environment.elasticUrl)}motions/_doc/${motionId}`;
   }
 
-  private mapSingleBackendMotion(bm: MotionGroup | null): Page<MotionGroup> {
-    let values: MotionGroup[] = [];
-    if (bm !== null) values = [bm];
+  private mapSingleBackendMotion(motionGroup: MotionGroup | null): Page<MotionGroup> {
     return {
       pageNr: 1,
       pageSize: 1,
       totalPages: 1,
-      values: values,
+      values: motionGroup ? [motionGroup] : [],
     };
   }
 }

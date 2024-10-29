@@ -1,26 +1,20 @@
 /*motions.component.ts*/
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MotionsHttpService } from '../services/motions.http-service';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
-import {Observable, ReplaySubject, Subscription, take, tap} from 'rxjs';
-import { PaginationComponent } from '../pagination/pagination.component';
-import { SortPipe } from '../sort-votes/sort-votes.pipe';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { LanguageService } from '../services/language.service';
-import { Page } from '../services/pages';
-import { ActivatedRoute } from '@angular/router';
-import {
-  DocumentReference,
-  Motion,
-  MotionGroup,
-  Votes,
-} from '../services/motions';
-import { dateConversion } from '../services/date-service';
-import { TranslateModule } from '@ngx-translate/core';
-import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
-import { DocumentSummaryComponent } from '../document-summary/document-summary.component';
-import { DocumentReferencesComponent } from '../document-references/document-references.component';
+import {CommonModule} from '@angular/common';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MotionsHttpService} from '../services/motions.http-service';
+import {SearchBarComponent} from '../search-bar/search-bar.component';
+import {Observable, ReplaySubject, Subscription, take} from 'rxjs';
+import {PaginationComponent} from '../pagination/pagination.component';
+import {SortPipe} from '../sort-votes/sort-votes.pipe';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {LanguageService} from '../services/language.service';
+import {Page} from '../services/pages';
+import {ActivatedRoute} from '@angular/router';
+import {DocumentReference, Motion, MotionGroup, Votes,} from '../services/motions';
+import {dateConversion} from '../services/date-service';
+import {TranslateModule} from '@ngx-translate/core';
+import {LanguagePluralPipe} from '../language/pluralization/language-plural.pipe';
+import {DocumentReferencesComponent} from '../document-references/document-references.component';
 
 @UntilDestroy()
 @Component({
@@ -50,7 +44,8 @@ export class MotionsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private motionsHttpService: MotionsHttpService,
     private languageService: LanguageService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.languageSubscription = this.languageService.language$.subscribe(
@@ -60,9 +55,10 @@ export class MotionsComponent implements OnInit, OnDestroy {
     );
     this.route.params.subscribe((params) => {
       this.motionId = params['id'];
-      if (this.motionId === undefined)
+      if (this.motionId === undefined) {
         // Access the 'id' parameter from the URL
         this.motionId = '';
+      }
       if (this.motionId && '' != this.motionId) {
         this.searchTerm = '';
         this.getById();
@@ -221,4 +217,5 @@ class ViewMotion {
   standalone: true,
   template: '<ng-content></ng-content>',
 })
-export class MotionsComponentMock {}
+export class MotionsComponentMock {
+}
