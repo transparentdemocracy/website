@@ -5,71 +5,6 @@ import {HttpClient} from '@angular/common/http';
 import {Motion, MotionGroup, PartyVotes, Votes} from "./motions";
 import {Page} from "./pages";
 
-const MOTION = {
-  titleNL: '1',
-  titleFR: '1',
-  descriptionNL: 'first proposal',
-  descriptionFR: 'first proposal',
-  votingDate: '2024-05-07',
-  votingResult: true,
-  yesVotes: new (class implements Votes {
-    nrOfVotes = 2;
-    partyVotes: PartyVotes[] = [
-      {
-        partyName: 'CD&V',
-        numberOfVotes: 2,
-        votePercentage: 35,
-      },
-    ];
-  })(),
-  noVotes: new (class implements Votes {
-    nrOfVotes = 3;
-    partyVotes: PartyVotes[] = [
-      {
-        partyName: 'CD&V',
-        numberOfVotes: 3,
-        votePercentage: 35,
-      },
-    ];
-  })(),
-  absVotes: new (class implements Votes {
-    nrOfVotes = 4;
-    partyVotes: PartyVotes[] = [
-      {
-        partyName: 'CD&V',
-        numberOfVotes: 4,
-        votePercentage: 35,
-      },
-    ];
-  })(),
-};
-
-const FIRST_PAGE_MOTIONS = {
-  pageNr: 1,
-  pageSize: 5,
-  totalPages: 2,
-  values: [MOTION, MOTION, MOTION, MOTION, MOTION],
-};
-const SECOND_PAGE_MOTIONS = {
-  pageNr: 2,
-  pageSize: 5,
-  totalPages: 2,
-  values: [MOTION, MOTION, MOTION],
-};
-const FIRST_PAGE_SEARCH_RESULT_MOTIONS = {
-  pageNr: 1,
-  pageSize: 5,
-  totalPages: 1,
-  values: [MOTION, MOTION],
-};
-
-const EMPTY_PAGE_SEARCH_RESULT_MOTIONS = {
-  pageNr: 1,
-  pageSize: 5,
-  totalPages: 1,
-  values: [],
-};
-
 describe('MotionsHttpService', () => {
   let service: MotionsHttpService;
   let httpClient: HttpClient;
@@ -89,7 +24,7 @@ describe('MotionsHttpService', () => {
       // given
       service.getMotions(1, ``).subscribe(validateReturnedMotions());
       const req = httpMock.expectOne(
-        'http://localhost:8080/motions/?page=1&size=5'
+        'http://localhost:9200/motions/_search'
       );
 
       // when
@@ -111,7 +46,7 @@ describe('MotionsHttpService', () => {
       // given
       service.getMotions(2, '').subscribe(validateReturnedMotions());
       const req = httpMock.expectOne(
-        'http://localhost:8080/motions/?page=2&size=5'
+        'http://localhost:9200/motions/_search'
       );
 
       // when
@@ -136,7 +71,7 @@ describe('MotionsHttpService', () => {
       service.getMotions(1, 'CoViD').subscribe(validateReturnedMotions());
 
       const req = httpMock.expectOne(
-        'http://localhost:8080/motions/?search=CoViD&page=1&size=5'
+        'http://localhost:9200/motions/_search'
       );
 
       // when
@@ -164,7 +99,7 @@ describe('MotionsHttpService', () => {
       });
 
       const req = httpMock.expectOne(
-        'http://localhost:8080/motions/?search=none&page=1&size=5'
+        'http://localhost:9200/motions/_search'
       );
 
       // when
@@ -175,3 +110,85 @@ describe('MotionsHttpService', () => {
     });
   });
 });
+
+const MOTION = {
+  titleNL: '1',
+  titleFR: '1',
+  descriptionNL: 'first proposal',
+  descriptionFR: 'first proposal',
+  votingDate: '2024-05-07',
+  votingResult: true,
+  yesVotes: {
+    nrOfVotes: 2,
+    votePercentage: 30,
+    partyVotes: [
+      {
+        partyName: 'CD&V',
+        numberOfVotes: 2,
+        votePercentage: 35,
+      },
+    ],
+  },
+  noVotes: {
+    nrOfVotes: 3,
+    votePercentage: 30,
+    partyVotes: [
+      {
+        partyName: 'CD&V',
+        numberOfVotes: 3,
+        votePercentage: 35,
+      },
+    ],
+  },
+  absVotes: {
+    nrOfVotes: 4,
+    votePercentage: 30,
+    partyVotes: [
+      {
+        partyName: 'CD&V',
+        numberOfVotes: 4,
+        votePercentage: 35,
+      },
+    ],
+  },
+} as unknown as Motion; // TODO: check with Motion type
+
+const FIRST_PAGE_MOTIONS = {
+  hits: {
+    total: {
+      value: 10
+    },
+    hits: [hit(MOTION), hit(MOTION), hit(MOTION), hit(MOTION), hit(MOTION)]
+  }
+};
+const SECOND_PAGE_MOTIONS = {
+  hits: {
+    total: {
+      value: 13
+    },
+    hits: [hit(MOTION), hit(MOTION), hit(MOTION)]
+  }
+};
+const FIRST_PAGE_SEARCH_RESULT_MOTIONS = {
+  hits: {
+    total: {
+      value: 0
+    },
+    hits: [hit(MOTION), hit(MOTION)]
+  }
+};
+
+const EMPTY_PAGE_SEARCH_RESULT_MOTIONS = {
+  hits: {
+    total: {
+      value: 0
+    },
+    hits: []
+  }
+};
+
+function hit(motion: Motion) {
+  return {
+    _source: motion
+  };
+}

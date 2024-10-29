@@ -5,11 +5,12 @@ import {
   MotionsComponent,
   MotionsComponentMock,
 } from './motions/motions.component';
+import {RouterModule} from "@angular/router";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
+      imports: [TranslateModule.forRoot(), RouterModule.forRoot([])],
     })
       .overrideComponent(AppComponent, {
         remove: { imports: [MotionsComponent] },

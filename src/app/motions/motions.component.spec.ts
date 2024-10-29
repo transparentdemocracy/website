@@ -2,8 +2,11 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {MotionsComponent} from './motions.component';
 import {MotionsHttpService} from '../services/motions.http-service';
 import {of} from 'rxjs/internal/observable/of';
-import {Motion, PartyVotes, Votes} from "../services/motions";
+import {Motion} from "../services/motions";
 import {Page} from "../services/pages";
+import {RouterModule} from "@angular/router";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+
 
 const FIRST_PROPOSAL: Motion = {
   id: 'first',
@@ -11,38 +14,39 @@ const FIRST_PROPOSAL: Motion = {
   titleFR: 'FIRST_PROPOSAL',
   votingDate: '14/02/2024',
   votingResult: true,
-  descriptionNL: 'First proposal',
-  descriptionFR: 'First proposal',
-  noVotes: new (class implements Votes {
-    nrOfVotes = 2;
-    partyVotes: PartyVotes[] = [
+  noVotes: {
+    nrOfVotes: 2,
+    votePercentage: 30,
+    partyVotes: [
       {
         partyName: 'CD&V',
         numberOfVotes: 2,
         votePercentage: 35,
       },
-    ];
-  })(),
-  absVotes: new (class implements Votes {
-    nrOfVotes = 4;
-    partyVotes: PartyVotes[] = [
+    ],
+  },
+  absVotes: {
+    nrOfVotes: 4,
+    votePercentage: 30,
+    partyVotes: [
       {
         partyName: 'CD&V',
         numberOfVotes: 4,
         votePercentage: 35,
       },
-    ];
-  })(),
-  yesVotes: new (class implements Votes {
-    nrOfVotes = 1;
-    partyVotes: PartyVotes[] = [
+    ],
+  },
+  yesVotes: {
+    nrOfVotes: 1,
+    votePercentage: 30,
+    partyVotes: [
       {
         partyName: 'CD&V',
         numberOfVotes: 1,
         votePercentage: 35,
       },
-    ];
-  })(),
+    ],
+  },
 };
 const SECOND_PROPOSAL: Motion = {
   id: 'second',
@@ -50,38 +54,39 @@ const SECOND_PROPOSAL: Motion = {
   titleFR: 'SECOND',
   votingDate: '14/02/2024',
   votingResult: true,
-  descriptionNL: 'Second proposal',
-  descriptionFR: 'Second proposal',
-  noVotes: new (class implements Votes {
-    nrOfVotes = 2;
-    partyVotes: PartyVotes[] = [
+  noVotes: {
+    nrOfVotes: 2,
+    votePercentage: 30,
+    partyVotes: [
       {
         partyName: 'CD&V',
         numberOfVotes: 2,
         votePercentage: 35,
       },
-    ];
-  })(),
-  absVotes: new (class implements Votes {
-    nrOfVotes = 4;
-    partyVotes: PartyVotes[] = [
+    ]
+  },
+  absVotes: {
+    nrOfVotes: 4,
+    votePercentage: 30,
+    partyVotes: [
       {
         partyName: 'CD&V',
         numberOfVotes: 4,
         votePercentage: 35,
       },
-    ];
-  })(),
-  yesVotes: new (class implements Votes {
-    nrOfVotes = 5;
-    partyVotes: PartyVotes[] = [
+    ]
+  },
+  yesVotes: {
+    nrOfVotes: 5,
+    votePercentage: 30,
+    partyVotes: [
       {
         partyName: 'CD&V',
         numberOfVotes: 5,
         votePercentage: 35,
       },
-    ];
-  })(),
+    ]
+  },
 };
 const PAGED_MOTIONS: Page<Motion> = {
   values: [FIRST_PROPOSAL, SECOND_PROPOSAL],
@@ -100,9 +105,10 @@ describe('MotionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MotionsComponent],
+      imports: [MotionsComponent, RouterModule.forRoot([]), TranslateModule.forRoot()],
       providers: [
         {provide: MotionsHttpService, useValue: motionsHttpServiceMock},
+        TranslateService
       ],
     }).compileComponents();
 
@@ -147,3 +153,4 @@ describe('MotionsComponent', () => {
     });
   });
 });
+

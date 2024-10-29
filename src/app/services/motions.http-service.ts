@@ -6,6 +6,19 @@ import {Page} from './pages';
 import {MotionGroup} from './motions';
 import {environment} from "../../environments/environment";
 
+interface ElasticSearch<T> {
+  hits: {
+    total: {
+      value: number
+    },
+    hits: SearchHit<T>[]
+  }
+}
+
+interface SearchHit<T> {
+  _source: T
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +29,7 @@ export class MotionsHttpService {
   }
 
   getMotions(page: number, searchTerm: string): Observable<Page<MotionGroup>> {
-    return this.fetchBackendMotions(page, searchTerm);
+    return this.fetchMotions(page, searchTerm);
   }
 
   getMotion(motionId: string): Observable<Page<MotionGroup>> {
@@ -32,12 +45,52 @@ export class MotionsHttpService {
     return this.http.get<MotionGroup>(completeUrl);
   }
 
-  private fetchBackendMotions(
+  private fetchMotions(
     page: number,
     searchTerm: string | null
   ): Observable<Page<MotionGroup>> {
+    // return this.fetchMotionsBackend(searchTerm, page);
+    return this.fetchMotionsElastic(searchTerm, page);
+  }
+
+  private fetchMotionsBackend(searchTerm: string | null, page: number) {
     let completeUrl = this.buildUrl(searchTerm, page);
     return this.http.get<Page<MotionGroup>>(completeUrl);
+  }
+
+  private fetchMotionsElastic(
+    searchTerm: string | null,
+    page: number,
+  ): Observable<Page<MotionGroup>> {
+    const PAGE_SIZE = 10;
+    // TODO: add _source to only fetch the fields we need for search
+    return this.http.post<ElasticSearch<MotionGroup>>(`${environment.elasticUrl}motions/_search`, this.createSearchQuery(PAGE_SIZE, searchTerm))
+      .pipe(map(v => {
+        console.log('ttt', v);
+            return ({
+              pageNr: page,
+              pageSize: PAGE_SIZE,
+              totalPages: Math.ceil(v.hits.total.value / PAGE_SIZE),
+              values: v.hits.hits.map(it => it._source)
+            })
+          }
+        )
+      )
+  }
+
+
+  private createSearchQuery(PAGE_SIZE: number, searchTerm: string | null) {
+    let query: any = {
+      size: PAGE_SIZE,
+    };
+    if (searchTerm && searchTerm !== '') {
+      query.query = {
+        query_string: {
+          query: `${searchTerm}`
+        }
+      }
+    }
+    return query;
   }
 
   private buildUrl(searchTerm: string | null, page: number) {

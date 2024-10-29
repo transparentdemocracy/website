@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent } from './header.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HeaderComponent} from './header.component';
+import {RouterModule} from "@angular/router";
+import {TranslateTestingModule} from "ngx-translate-testing";
+import * as nl from '../../assets/i18n/nl.json';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +10,9 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderComponent, TranslateModule.forRoot()],
+      imports: [HeaderComponent, TranslateTestingModule
+        .withTranslations("nl", nl)
+        , RouterModule.forRoot([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -25,7 +29,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.logoText')?.textContent).toEqual(
-      'Transparent Democracy'
+      'Wat doet de politiek?'
     );
   });
 });

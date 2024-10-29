@@ -121,7 +121,7 @@
                     }}</span>
                     <span class="nrOfVotes"
                       >{{ motion.yesVotes.nrOfVotes }}·&nbsp;
-                      {{ motion.yesVotes.votePercentage }}%
+                      {{ motion.yesVotes.votePercentage | number:'1.0-2' }}%
                       {{
                         "motions.votePluralize"
                           | languagePlural : motion.yesVotes.nrOfVotes
@@ -147,7 +147,7 @@
                       </div>
                       <span class="partyVotePercentage"
                         >{{ partyYesVotes.numberOfVotes }} &nbsp;·&nbsp;
-                        {{ partyYesVotes.votePercentage }}%</span
+                        {{ partyYesVotes.votePercentage | number:'1.0-2' }}%</span
                       >
                     </div>
                     }
@@ -160,7 +160,7 @@
                     }}</span
                     ><span class="nrOfVotes"
                       >{{ motion.noVotes.nrOfVotes }}·&nbsp;
-                    {{ motion.noVotes.votePercentage }}%
+                    {{ motion.noVotes.votePercentage | number:'1.0-2' }}%
                       {{
                         "motions.votePluralize"
                           | languagePlural : motion.noVotes.nrOfVotes
@@ -186,7 +186,7 @@
                       </div>
                       <span class="partyVotePercentage"
                         >{{ partyNoVotes.numberOfVotes }} &nbsp;·&nbsp;
-                        {{ partyNoVotes.votePercentage }}%</span
+                        {{ partyNoVotes.votePercentage | number:'1.0-2' }}%</span
                       >
                     </div>
                     }
@@ -199,7 +199,7 @@
                     }}</span>
                     <span class="nrOfVotes"
                       >{{ motion.absVotes.nrOfVotes }}·&nbsp;
-                      {{ motion.absVotes.votePercentage }}%
+                      {{ motion.absVotes.votePercentage | number:'1.0-2' }}%
                       {{
                         "motions.votePluralize"
                           | languagePlural : motion.absVotes.nrOfVotes
@@ -225,7 +225,7 @@
                       </div>
                       <span class="partyVotePercentage"
                         >{{ partyAbsVotes.numberOfVotes }} &nbsp;·&nbsp;
-                        {{ partyAbsVotes.votePercentage }}%</span
+                        {{ partyAbsVotes.votePercentage | number:'1.0-2' }}%</span
                       >
                     </div>
                     }
