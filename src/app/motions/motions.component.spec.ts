@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {MotionsComponent} from './motions.component';
 import {MotionsHttpService} from '../services/motions.http-service';
 import {of} from 'rxjs/internal/observable/of';
-import {Motion} from "../services/motions";
+import {Motion, MotionGroup} from "../services/motions";
 import {Page} from "../services/pages";
 import {RouterModule} from "@angular/router";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -88,8 +88,17 @@ const SECOND_PROPOSAL: Motion = {
     ]
   },
 };
-const PAGED_MOTIONS: Page<Motion> = {
-  values: [FIRST_PROPOSAL, SECOND_PROPOSAL],
+
+const MOTION_GROUP: MotionGroup = {
+  id: 'test',
+  titleNL: 'First motion group nl',
+  titleFR: 'First motion group fr',
+  votingDate: '2024-10-13',
+  motions: [FIRST_PROPOSAL, SECOND_PROPOSAL],
+};
+
+const PAGED_MOTIONS: Page<MotionGroup> = {
+  values: [MOTION_GROUP],
   totalPages: 1,
   pageNr: 1,
   pageSize: 5,
@@ -101,7 +110,7 @@ describe('MotionsComponent', () => {
   let motionsHttpServiceMock = jasmine.createSpyObj('MotionsHttpService', [
     'getMotions',
   ]);
-  motionsHttpServiceMock.getMotions.and.returnValue(of(PAGED_MOTIONS));
+  motionsHttpServiceMock.getMotions.and.callFake(() => of(PAGED_MOTIONS));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -122,16 +131,14 @@ describe('MotionsComponent', () => {
 
   describe('#getPagedMotions', () => {
     it('gets paged motions', (done) => {
-      // given
-
       // when
       component.getPagedMotions(1);
 
       // then
+      expect(motionsHttpServiceMock.getMotions).toHaveBeenCalled();
+
       component.motionsGroups$$.subscribe((motions) => {
-        expect(motionsHttpServiceMock.getMotions).toHaveBeenCalled();
-        expect(motions[0].titleNL).toEqual(FIRST_PROPOSAL.titleNL);
-        expect(motions[1].titleNL).toEqual(SECOND_PROPOSAL.titleNL);
+        expect(motions[0].titleNL).toEqual(MOTION_GROUP.titleNL);
         done();
       });
     });
@@ -142,12 +149,12 @@ describe('MotionsComponent', () => {
       // given
 
       // when
-      component.searchMotions('1');
+      component.searchMotions('blah');
 
       // then
       component.motionsGroups$$.subscribe((motion) => {
         expect(motionsHttpServiceMock.getMotions).toHaveBeenCalled();
-        expect(motion[0].titleNL).toEqual(FIRST_PROPOSAL.titleNL);
+        expect(motion[0].titleNL).toEqual(MOTION_GROUP.titleNL);
         done();
       });
     });

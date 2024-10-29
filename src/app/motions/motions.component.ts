@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MotionsHttpService } from '../services/motions.http-service';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
+import {Observable, ReplaySubject, Subscription, take, tap} from 'rxjs';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { SortPipe } from '../sort-votes/sort-votes.pipe';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -39,7 +39,6 @@ import { DocumentReferencesComponent } from '../document-references/document-ref
   styleUrl: './motions.component.sass',
 })
 export class MotionsComponent implements OnInit, OnDestroy {
-  paco = 5;
   motionsGroups$$ = new ReplaySubject<ViewMotionGroup[]>(1);
   nrOfPages: number = 1;
   searchTerm: string = '';

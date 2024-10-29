@@ -63,17 +63,14 @@ export class MotionsHttpService {
     page: number,
   ): Observable<Page<MotionGroup>> {
     const PAGE_SIZE = 10;
-    // TODO: add _source to only fetch the fields we need for search
+    // TODO: only fetch the fields we need for the search results page
     return this.http.post<ElasticSearch<MotionGroup>>(`${environment.elasticUrl}motions/_search`, this.createSearchQuery(PAGE_SIZE, searchTerm))
-      .pipe(map(v => {
-        console.log('ttt', v);
-            return ({
-              pageNr: page,
-              pageSize: PAGE_SIZE,
-              totalPages: Math.ceil(v.hits.total.value / PAGE_SIZE),
-              values: v.hits.hits.map(it => it._source)
-            })
-          }
+      .pipe(map(v => ({
+            pageNr: page,
+            pageSize: PAGE_SIZE,
+            totalPages: Math.ceil(v.hits.total.value / PAGE_SIZE),
+            values: v.hits.hits.map(it => it._source)
+          })
         )
       )
   }

@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LanguageSelector } from './language-selector.component';
+import {testTranslateModule} from "../../services/test-translation-module";
 
-describe('SearchBarComponent', () => {
+describe('LanguageSelectorComponent', () => {
   let component: LanguageSelector;
   let fixture: ComponentFixture<LanguageSelector>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LanguageSelector],
+      imports: [testTranslateModule, LanguageSelector],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LanguageSelector);
