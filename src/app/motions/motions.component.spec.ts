@@ -91,10 +91,12 @@ const SECOND_PROPOSAL: Motion = {
 
 const MOTION_GROUP: MotionGroup = {
   id: 'test',
+  legislature: 55,
+  plenaryNr: 123,
   titleNL: 'First motion group nl',
   titleFR: 'First motion group fr',
   votingDate: '2024-10-13',
-  motions: [FIRST_PROPOSAL, SECOND_PROPOSAL],
+  motions: [FIRST_PROPOSAL, SECOND_PROPOSAL]
 };
 
 const PAGED_MOTIONS: Page<MotionGroup> = {

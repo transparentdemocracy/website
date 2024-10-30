@@ -114,6 +114,8 @@ describe('MotionsHttpService', () => {
 
 const MOTION_GROUP: MotionGroup = {
   id: '123',
+  legislature: 55,
+  plenaryNr: 123,
   titleNL: '1',
   titleFR: '1',
   votingDate: '2024-05-07',
