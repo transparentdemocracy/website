@@ -74,14 +74,6 @@ export class MotionsHttpService {
     return query;
   }
 
-  private buildUrl(searchTerm: string | null, page: number) {
-    let motionUrl = `${(environment.backendUrl)}motions/`;
-    let searchTermPart =
-      searchTerm == null || searchTerm == `` ? `` : `search=${searchTerm}&`;
-    let pagePart = `page=${page}&size=10`;
-    return `${motionUrl}?${searchTermPart}${pagePart}`;
-  }
-
   private buildUrlById(motionId: string) {
     return `${(environment.elasticUrl)}motions/_doc/${motionId}`;
   }

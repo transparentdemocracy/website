@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {Page} from "./pages";
 import {environment} from "../../environments/environment";
+import {ElasticSearch} from "./elastic";
+import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +15,40 @@ export class PlenariesHttpService {
   }
 
   getPlenaries(page: number, searchTerm: string): Observable<Page<Plenary>> {
-    return this.fetchPlenaries(page, searchTerm);
+    return this.fetchPlenariesFromElastic(page, searchTerm);
   }
 
-  private fetchPlenaries(
-    page: number, searchTerm: string | null
+  private fetchPlenariesFromElastic(
+    page: number, searchText: string | null
   ): Observable<Page<Plenary>> {
-    let completeUrl = this.buildUrl(searchTerm, page);
-    return this.http.get<Page<Plenary>>(completeUrl);
+    const PAGE_SIZE = 10;
+    var query = this.createSearchQuery(PAGE_SIZE, page, searchText)
+    return this.http.post<ElasticSearch<Plenary>>(`${environment.elasticUrl}plenaries/_search`, query)
+      .pipe(
+        map(v => ({
+            pageNr: page,
+            pageSize: PAGE_SIZE,
+            totalPages: Math.ceil(v.hits.total.value / PAGE_SIZE),
+            values: v.hits.hits.map(it => it._source),
+          })
+        )
+      )
   }
 
-  private buildUrl(searchTerm: string | null, page: number) {
-    let plenary = `${(environment.backendUrl)}plenaries/`;
-    let searchTermPart = (searchTerm == null || searchTerm == ``) ? `` : `search=${searchTerm}&`;
-    let pagePart = `page=${page}&size=10`;
-    return `${plenary}?${searchTermPart}${pagePart}`;
+  private createSearchQuery(pageSize: number, page: number, searchText: string | null) {
+    let query: any = {
+      size: pageSize,
+      from: page * pageSize,
+      sort: [{date: "desc"}]
+    };
+    if (searchText && searchText !== '') {
+      query.query = {
+        query_string: {
+          query: `${searchText}`
+        }
+      }
+    }
+    return query;
   }
 }
 

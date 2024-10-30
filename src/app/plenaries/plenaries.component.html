@@ -62,7 +62,7 @@
               </li>
 
               @for (motion of motionGroup.motionLinks; track $index) {
-                <a routerLink="/motions/{{ motion.motionId }}">
+                <a routerLink="/motions/{{ motionGroup.motionGroupId }}">
                   {{ "plenaries.agendaItem" | translate }} {{ motion.agendaSeqNr }},
                   {{ "plenaries.motion" | translate }} {{ motion.voteSeqNr }}
                 </a>

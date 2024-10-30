@@ -8,6 +8,7 @@ on:
 
 jobs:
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -23,17 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #- name: Run tests
-      #  run: npm run test:headless
+      - name: Run tests
+        run: npm run test:headless
 
       - name: Build
         run: npm run build:prod
 
       - name: Deploy # deployment to https://transparentdemocracy.github.io/website/ Github pages, in the gh-pages branch.
         uses: peaceiris/actions-gh-pages@v4 # https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#getting-started
-        # If you're changing the branch from main,
-        # also change the `main` in `refs/heads/main`
-        # below accordingly.
         if: github.ref == 'refs/heads/main' && success()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
