@@ -45,8 +45,10 @@ export class MotionsHttpService {
     page: number,
   ): Observable<Page<MotionGroup>> {
     const PAGE_SIZE = 10;
-    // TODO: only fetch the fields we need for the search results page
-    return this.http.post<ElasticSearch<MotionGroup>>(`${environment.elasticUrl}motions/_search`, this.createSearchQuery(PAGE_SIZE, searchTerm))
+    // TODO How much search fanciness do we need?
+    // TODO If search returns empty, expand search with wildcards?
+    let query = this.createSearchQuery(PAGE_SIZE, searchTerm);
+    return this.http.post<ElasticSearch<MotionGroup>>(`${environment.elasticUrl}motions/_search`, query)
       .pipe(map(v => ({
             pageNr: page,
             pageSize: PAGE_SIZE,
@@ -58,14 +60,14 @@ export class MotionsHttpService {
   }
 
 
-  private createSearchQuery(PAGE_SIZE: number, searchTerm: string | null) {
+  private createSearchQuery(PAGE_SIZE: number, searchText: string | null) {
     let query: any = {
       size: PAGE_SIZE,
     };
-    if (searchTerm && searchTerm !== '') {
+    if (searchText && searchText !== '') {
       query.query = {
         query_string: {
-          query: `${searchTerm}`
+          query: `${searchText}`
         }
       }
     }

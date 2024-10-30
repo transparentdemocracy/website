@@ -55,11 +55,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   private isTriggerSearchRequired(keyword: string): boolean {
-    //When the searchTerm was cleared, this also warrants a new search
-    if (this.previousSearchTerm.length > 0 && keyword.length == 0) {
+    if (keyword.length == 0) {
       return true;
     }
-    //If a specific motion was selected, then the search button performs a search
     if (this.isSpecificIDSet()) {
       return true
     }
@@ -67,8 +65,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   private isValidSearchTerm(keyword: string) {
-    return keyword.length > 3 &&
-      keyword.length <= 100 &&
-      /^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i.test(keyword);
+    return keyword.length > 2;
   }
 }
