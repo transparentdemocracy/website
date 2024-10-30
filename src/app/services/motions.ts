@@ -27,6 +27,8 @@ export interface SubDocument {
 
 export interface MotionGroup {
   id: string;
+  legislature: number;
+  plenaryNr: number;
   titleNL: string;
   titleFR: string;
   motions: Motion[];

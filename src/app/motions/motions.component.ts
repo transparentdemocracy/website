@@ -140,6 +140,16 @@ class ViewMotionGroup {
     this.viewMotions = m.motions.map((motion) => new ViewMotion(motion));
   }
 
+  // TODO review this pattern; using function calls in templates results in a lot of overhead and recalculation
+  // E.g. add a console.log here and see that it's called all the time even when just clicking around
+  get legislature(): number {
+    return this.motionGroup.legislature
+  }
+
+  get plenaryNr(): number {
+    return this.motionGroup.plenaryNr
+  }
+
   get titleNL(): string {
     return this.motionGroup.titleNL;
   }
