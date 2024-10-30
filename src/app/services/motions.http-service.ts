@@ -47,7 +47,7 @@ export class MotionsHttpService {
     const PAGE_SIZE = 10;
     // TODO How much search fanciness do we need?
     // TODO If search returns empty, expand search with wildcards?
-    let query = this.createSearchQuery(PAGE_SIZE, searchTerm);
+    let query = this.createSearchQuery(page, PAGE_SIZE, searchTerm);
     return this.http.post<ElasticSearch<MotionGroup>>(`${environment.elasticUrl}motions/_search`, query)
       .pipe(map(v => ({
             pageNr: page,
@@ -60,9 +60,10 @@ export class MotionsHttpService {
   }
 
 
-  private createSearchQuery(PAGE_SIZE: number, searchText: string | null) {
+  private createSearchQuery(page: number, pageSize: number, searchText: string | null) {
     let query: any = {
-      size: PAGE_SIZE,
+      size: pageSize,
+      from: page * pageSize
     };
     if (searchText && searchText !== '') {
       query.query = {
