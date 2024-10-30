@@ -1,5 +1,5 @@
 <p *ngIf="!summary" class="summaryMissing">
-  <i class="fa-solid fa-circle-info"></i>
+  <fa-icon [icon]="missingIcon"></fa-icon>
   {{ "document.summary-missing" | translate }}
 </p>
 
@@ -8,7 +8,7 @@
     {{ summary }}
   </p>
   <p class="disclaimer">
-    <i class="fa-solid fa-triangle-exclamation"></i>
+    <fa-icon [icon]="warningIcon"></fa-icon>
     {{ "document.summary-gpt-disclaimer" | translate }}
   </p>
 </div>

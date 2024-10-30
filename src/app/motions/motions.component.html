@@ -20,13 +20,10 @@
           (click)="motionGroup.isExpanded = !motionGroup.isExpanded"
         >
           <div class="chevronIcon">
-            <i
-              class="fa-solid fa-caret-right"
-              [style.transform]="
-            motionGroup.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
-          "
-              tabindex="0"
-            ></i>
+            <div [style.transform]="motionGroup.isExpanded ? 'rotate(90deg)' : 'rotate(0)'"
+                 tabindex="0">
+              <fa-icon [icon]="caretRight"></fa-icon>
+            </div>
           </div>
           <div class="motionGroupTitle">
             <h3>
@@ -250,12 +247,12 @@
                 <div class="motionResult">
                   @if (motion.votingResult) {
                     <div class="accepted">
-                      <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
+                      <fa-icon [icon]="acceptedIcon"></fa-icon>
                       {{ "motions.accepted" | translate }}
                     </div>
                   } @else if (!motion.votingResult) {
                     <div class="rejected">
-                      <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
+                      <fa-icon [icon]="rejectedIcon"></fa-icon>
                       {{ "motions.rejected" | translate }}
                     </div>
                   }

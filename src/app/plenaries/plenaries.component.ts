@@ -17,6 +17,8 @@ import { Page } from '../services/pages';
 import { RouterLink } from '@angular/router';
 import { dateConversion } from '../services/date-service';
 import { TranslateModule } from '@ngx-translate/core';
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
 
 @UntilDestroy()
 @Component({
@@ -29,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterLink,
     TranslateModule,
     LanguagePluralPipe,
+    FaIconComponent,
   ],
   templateUrl: './plenaries.component.html',
   styleUrl: './plenaries.component.sass',
@@ -39,6 +42,7 @@ export class PlenariesComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
   selectedLanguage: string = 'nl';
   private languageSubscription: Subscription = new Subscription();
+  caretRight = faCaretRight;
 
   constructor(
     private plenariesHttpService: PlenariesHttpService,

@@ -1,11 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {faCircleInfo, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'document-summary',
   standalone: true,
   imports: [
+    FontAwesomeModule,
     TranslateModule,
     CommonModule
   ],
@@ -15,4 +18,7 @@ import {CommonModule} from "@angular/common";
 export class DocumentSummaryComponent {
   @Input()
   summary?: string;
+
+  missingIcon = faCircleInfo;
+  warningIcon = faTriangleExclamation;
 }

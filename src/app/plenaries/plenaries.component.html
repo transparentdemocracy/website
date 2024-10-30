@@ -21,13 +21,11 @@
             (click)="plenary.isExpanded = !plenary.isExpanded"
           >
             <div class="chevronIcon">
-              <i
-                class="fa-solid fa-caret-right"
-                [style.transform]="
-              plenary.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
-            "
-                tabindex="0"
-              ></i>
+              <div [style.transform]="plenary.isExpanded ? 'rotate(90deg)' : 'rotate(0)'"
+                   tabindex="0"
+              >
+                <fa-icon [icon]="caretRight"></fa-icon>
+              </div>
             </div>
             <div>
               <p class="plenaryTitle">
@@ -54,11 +52,14 @@
           >
             @for (motionGroup of plenary.motionGroups; track $index) {
               <li class="motionTitle">
-                @switch (selectedLanguage){ @case ('nl') {
-                  {{ motionGroup.titleNL }}
-                } @case ('fr'){
-                  {{ motionGroup.titleFR }}
-                } }
+                @switch (selectedLanguage) {
+                  @case ('nl') {
+                    {{ motionGroup.titleNL }}
+                  }
+                  @case ('fr') {
+                    {{ motionGroup.titleFR }}
+                  }
+                }
               </li>
 
               @for (motion of motionGroup.motionLinks; track $index) {

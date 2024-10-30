@@ -5,11 +5,14 @@ import {NgForOf, NgIf} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {LanguageService} from "../services/language.service";
 import {Subscription} from "rxjs";
+import {faFilePdf, faUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'document-references',
   standalone: true,
   imports: [
+    FontAwesomeModule,
     DocumentSummaryComponent,
     NgForOf,
     NgIf,
@@ -23,12 +26,16 @@ export class DocumentReferencesComponent implements OnInit, OnDestroy {
   @Input()
   documentReference!: DocumentReference
 
+  pdfIcon = faFilePdf;
+  linkIcon = faUpRightFromSquare;
+
   selectedLanguage: string = 'nl';
   languageSubscription?: Subscription;
 
   constructor(
     private languageService: LanguageService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.languageSubscription = this.languageService.language$.subscribe(
@@ -44,4 +51,5 @@ export class DocumentReferencesComponent implements OnInit, OnDestroy {
     }
   }
 
+  protected readonly faFilePdf = faFilePdf;
 }

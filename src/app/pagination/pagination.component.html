@@ -2,7 +2,7 @@
   <ul class="pagination">
     <li class="page-item" [class]="disableIfCurrentPage(1)">
       <button class="page-link" (click)="decreasePage($event)">
-        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        <fa-icon [icon]="arrowLeft"></fa-icon>
       </button>
     </li>
 
@@ -16,7 +16,7 @@
 
     <li class="page-item" [class]="disableIfCurrentPage(nrOfPages)">
       <button class="page-link" (click)="increasePage($event)">
-        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        <fa-icon [icon]="arrowRight"></fa-icon>
       </button>
     </li>
   </ul>

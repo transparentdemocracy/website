@@ -10,17 +10,18 @@
       </li>
       <li>
         <a href="{{ subDoc.documentPdfUrl }}" target="_blank"
-          ><i class="fa-solid fa-file-pdf"></i>
+        >
+          <fa-icon [icon]="faFilePdf"></fa-icon>
           {{ "document.overview-pdf" | translate }}</a
         >
       </li>
     </ng-container>
     <li>
       <span *ngIf="ref.documentMainUrl"
-        ><a href="{{ ref.documentMainUrl }}" target="_blank">
-          <i class="fa-solid fa-up-right-from-square"></i>
-          {{ "document.overview-dekamer" | translate }}</a
-        ></span
+      ><a href="{{ ref.documentMainUrl }}" target="_blank">
+        <fa-icon [icon]="linkIcon"></fa-icon>
+        {{ "document.overview-dekamer" | translate }}</a
+      ></span
       >
     </li>
   </ul>

@@ -6,14 +6,19 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BehaviorSubject } from 'rxjs';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {BehaviorSubject} from 'rxjs';
+import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 @UntilDestroy()
 @Component({
   selector: 'pagination',
   standalone: true,
-  imports: [],
+  imports: [
+    FontAwesomeModule,
+    FaIconComponent
+  ],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.sass',
 })
@@ -23,11 +28,14 @@ export class PaginationComponent implements OnInit {
   @Output() pageChanged$$ = new EventEmitter<number>();
 
   totalPagesArray: number[] = [];
+  arrowLeft = faArrowLeft;
+  arrowRight = faArrowRight;
 
   private readonly maxWindowSize = 10;
   private currentPage$$ = new BehaviorSubject<number>(1);
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     let change = changes['nrOfPages'];

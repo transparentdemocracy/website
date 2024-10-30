@@ -3,19 +3,21 @@
     routerLink="/motions"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
-    >{{ "header.nav.motions" | translate }}</a
+  >{{ "header.nav.motions" | translate }}</a
   >
   <a
     routerLink="/plenaries"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
-    >{{ "header.nav.plenaries" | translate }}</a
+  >{{ "header.nav.plenaries" | translate }}</a
   >
   <a
     routerLink="/help"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
-    ><i class="fa-solid fa-circle-question"></i>
+  >
+    <fa-icon [icon]="questionIcon"></fa-icon>
+
     {{ "header.nav.help" | translate }}</a
   >
 </nav>

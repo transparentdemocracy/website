@@ -15,12 +15,15 @@ import {dateConversion} from '../services/date-service';
 import {TranslateModule} from '@ngx-translate/core';
 import {LanguagePluralPipe} from '../language/pluralization/language-plural.pipe';
 import {DocumentReferencesComponent} from '../document-references/document-references.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {faCaretRight, faCheckCircle, faCircleInfo, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 
 @UntilDestroy()
 @Component({
   selector: 'motions',
   standalone: true,
   imports: [
+    FontAwesomeModule,
     CommonModule,
     SearchBarComponent,
     PaginationComponent,
@@ -39,6 +42,9 @@ export class MotionsComponent implements OnInit, OnDestroy {
   motionId: string = '';
   selectedLanguage: string = 'nl';
   private languageSubscription: Subscription = new Subscription();
+  caretRight = faCaretRight;
+  acceptedIcon = faCheckCircle;
+  rejectedIcon = faTimesCircle;
 
   constructor(
     private route: ActivatedRoute,
@@ -131,6 +137,8 @@ export class MotionsComponent implements OnInit, OnDestroy {
       this.languageSubscription.unsubscribe();
     }
   }
+
+  protected readonly missingIcon = faCircleInfo;
 }
 
 class ViewMotionGroup {
