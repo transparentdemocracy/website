@@ -38,7 +38,7 @@ export class PlenariesHttpService {
   private createSearchQuery(pageSize: number, page: number, searchText: string | null) {
     let query: any = {
       size: pageSize,
-      from: page * pageSize,
+      from: (page-1) * pageSize,
       sort: [{date: "desc"}]
     };
     if (searchText && searchText !== '') {
