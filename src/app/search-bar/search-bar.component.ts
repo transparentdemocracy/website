@@ -1,11 +1,13 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild,} from '@angular/core';
 import {TranslateModule} from '@ngx-translate/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'search-bar',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [FontAwesomeModule, TranslateModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.sass',
 })
@@ -17,6 +19,8 @@ export class SearchBarComponent implements OnInit {
   private router: Router
   private activatedRoute: ActivatedRoute
   private idInUrl: string = '';
+
+  faMagnifyingGlass = faMagnifyingGlass;
 
   constructor(router: Router, activatedRoute: ActivatedRoute) {
     this.router = router;
