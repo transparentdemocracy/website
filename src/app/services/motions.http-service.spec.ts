@@ -4,6 +4,7 @@ import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/h
 import {HttpClient} from '@angular/common/http';
 import {Motion, MotionGroup, PartyVotes, Votes} from "./motions";
 import {Page} from "./pages";
+import {ElasticSearch, SearchHit} from "./elastic";
 
 describe('MotionsHttpService', () => {
   let service: MotionsHttpService;
@@ -111,54 +112,60 @@ describe('MotionsHttpService', () => {
   });
 });
 
-const MOTION = {
+const MOTION_GROUP: MotionGroup = {
+  id: '123',
   titleNL: '1',
   titleFR: '1',
-  descriptionNL: 'first proposal',
-  descriptionFR: 'first proposal',
   votingDate: '2024-05-07',
-  votingResult: true,
-  yesVotes: {
-    nrOfVotes: 2,
-    votePercentage: 30,
-    partyVotes: [
-      {
-        partyName: 'CD&V',
-        numberOfVotes: 2,
-        votePercentage: 35,
-      },
-    ],
-  },
-  noVotes: {
-    nrOfVotes: 3,
-    votePercentage: 30,
-    partyVotes: [
-      {
-        partyName: 'CD&V',
-        numberOfVotes: 3,
-        votePercentage: 35,
-      },
-    ],
-  },
-  absVotes: {
-    nrOfVotes: 4,
-    votePercentage: 30,
-    partyVotes: [
-      {
-        partyName: 'CD&V',
-        numberOfVotes: 4,
-        votePercentage: 35,
-      },
-    ],
-  },
-} as unknown as Motion; // TODO: check with Motion type
+  motions: [{
+    id: '123_1',
+    titleNL: 'test motion',
+    titleFR: 'motion de test',
+    votingDate: '2024-05-07',
+    votingResult: false,
+    yesVotes: {
+      nrOfVotes: 2,
+      votePercentage: 30,
+      partyVotes: [
+        {
+          partyName: 'CD&V',
+          numberOfVotes: 2,
+          votePercentage: 35,
+        },
+      ],
+    },
+    noVotes: {
+      nrOfVotes: 3,
+      votePercentage: 30,
+      partyVotes: [
+        {
+          partyName: 'CD&V',
+          numberOfVotes: 3,
+          votePercentage: 35,
+        },
+      ],
+    },
+    absVotes: {
+      nrOfVotes: 4,
+      votePercentage: 30,
+      partyVotes: [
+        {
+          partyName: 'CD&V',
+          numberOfVotes: 4,
+          votePercentage: 35,
+        },
+      ],
+    },
+  }]
 
-const FIRST_PAGE_MOTIONS = {
+}
+
+const FIRST_PAGE_MOTIONS: ElasticSearch<MotionGroup> = {
   hits: {
     total: {
       value: 10
     },
-    hits: [hit(MOTION), hit(MOTION), hit(MOTION), hit(MOTION), hit(MOTION)]
+    hits: [hit(MOTION_GROUP), hit(MOTION_GROUP), hit(MOTION_GROUP), hit(MOTION_GROUP), hit(MOTION_GROUP)]
   }
 };
 const SECOND_PAGE_MOTIONS = {
@@ -166,7 +173,7 @@ const SECOND_PAGE_MOTIONS = {
     total: {
       value: 13
     },
-    hits: [hit(MOTION), hit(MOTION), hit(MOTION)]
+    hits: [hit(MOTION_GROUP), hit(MOTION_GROUP), hit(MOTION_GROUP)]
   }
 };
 const FIRST_PAGE_SEARCH_RESULT_MOTIONS = {
@@ -174,7 +181,7 @@ const FIRST_PAGE_SEARCH_RESULT_MOTIONS = {
     total: {
       value: 0
     },
-    hits: [hit(MOTION), hit(MOTION)]
+    hits: [hit(MOTION_GROUP), hit(MOTION_GROUP)]
   }
 };
 
@@ -187,7 +194,7 @@ const EMPTY_PAGE_SEARCH_RESULT_MOTIONS = {
   }
 };
 
-function hit(motion: Motion) {
+function hit(motion: MotionGroup): SearchHit<MotionGroup> {
   return {
     _source: motion
   };
