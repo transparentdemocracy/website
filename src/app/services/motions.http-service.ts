@@ -61,7 +61,6 @@ export class MotionsHttpService {
 
 
   private createSearchQuery(page: number, pageSize: number, searchText: string | null) {
-    console.log('TTT fetching ', page);
     let query: any = {
       size: pageSize,
       from: (page-1) * pageSize
