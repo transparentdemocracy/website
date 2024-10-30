@@ -27,7 +27,7 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run tests
-        run: npm run test:headless:ci
+        run: npm run test:headless
 
       - name: Build
         run: npm run build:prod
