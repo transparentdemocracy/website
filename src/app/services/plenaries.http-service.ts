@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {Page} from "./pages";
@@ -15,15 +15,10 @@ export class PlenariesHttpService {
   }
 
   getPlenaries(page: number, searchTerm: string): Observable<Page<Plenary>> {
-    return this.fetchPlenariesFromElastic(page, searchTerm);
-  }
-
-  private fetchPlenariesFromElastic(
-    page: number, searchText: string | null
-  ): Observable<Page<Plenary>> {
     const PAGE_SIZE = 10;
-    var query = this.createSearchQuery(PAGE_SIZE, page, searchText)
-    return this.http.post<ElasticSearch<Plenary>>(`${environment.elasticUrl}plenaries/_search`, query)
+    return this.http.get<ElasticSearch<Plenary>>(`${environment.searchPlenariesUrl}`, {
+      params: new HttpParams().set("q", searchTerm || "").set("page", page - 1)
+    })
       .pipe(
         map(v => ({
             pageNr: page,
@@ -33,22 +28,6 @@ export class PlenariesHttpService {
           })
         )
       )
-  }
-
-  private createSearchQuery(pageSize: number, page: number, searchText: string | null) {
-    let query: any = {
-      size: pageSize,
-      from: (page-1) * pageSize,
-      sort: [{date: "desc"}]
-    };
-    if (searchText && searchText !== '') {
-      query.query = {
-        query_string: {
-          query: `${searchText}`
-        }
-      }
-    }
-    return query;
   }
 }
 

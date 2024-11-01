@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  // TODO: we need to get the public credentials in here; Having a public credential in here
-  // is technically not a problem, but I'd still like it not to be in the git repo out of principle
-  elasticUrl: 'https://transparent-democrac-6644447145.eu-west-1.bonsaisearch.net/',
+  searchMotionsUrl: 'https://3qfjsuzusi5gdx3ddo3z6bfz6m0sevhb.lambda-url.eu-west-1.on.aws/',
+  searchPlenariesUrl: 'https://57wkgejqgpfvl76smdy4xoahdm0ncinc.lambda-url.eu-west-1.on.aws/',
+  getMotionUrl: 'https://sl7hjec5i33wxztyzodohkaiiu0ewkna.lambda-url.eu-west-1.on.aws/',
   maintenanceModeEnabled: true
 };

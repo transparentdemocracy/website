@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
 import {map} from 'rxjs';
@@ -37,18 +37,10 @@ export class MotionsHttpService {
     page: number,
     searchTerm: string | null
   ): Observable<Page<MotionGroup>> {
-    return this.fetchMotionsElastic(searchTerm, page);
-  }
-
-  private fetchMotionsElastic(
-    searchTerm: string | null,
-    page: number,
-  ): Observable<Page<MotionGroup>> {
     const PAGE_SIZE = 10;
-    // TODO How much search fanciness do we need?
-    // TODO If search returns empty, expand search with wildcards?
-    let query = this.createSearchQuery(page, PAGE_SIZE, searchTerm);
-    return this.http.post<ElasticSearch<MotionGroup>>(`${environment.elasticUrl}motions/_search`, query)
+    return this.http.get<ElasticSearch<MotionGroup>>(`${environment.searchMotionsUrl}?`, {
+      params: new HttpParams().set("q", searchTerm || "").set("page", page - 1)
+    })
       .pipe(map(v => ({
             pageNr: page,
             pageSize: PAGE_SIZE,
@@ -60,23 +52,8 @@ export class MotionsHttpService {
   }
 
 
-  private createSearchQuery(page: number, pageSize: number, searchText: string | null) {
-    let query: any = {
-      size: pageSize,
-      from: (page-1) * pageSize
-    };
-    if (searchText && searchText !== '') {
-      query.query = {
-        query_string: {
-          query: `${searchText}`
-        }
-      }
-    }
-    return query;
-  }
-
   private buildUrlById(motionId: string) {
-    return `${(environment.elasticUrl)}motions/_doc/${motionId}`;
+    return `${(environment.getMotionUrl)}${motionId}`;
   }
 
   private mapSingleBackendMotion(motionGroup: MotionGroup | null): Page<MotionGroup> {
