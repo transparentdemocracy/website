@@ -25,6 +25,10 @@
   },
   "motions": {
     "title": "Stemmingen",
+    "legislature": "legislatuur",
+    "plenary": {
+      "meeting": "Plenaire vergadering"
+    },
     "motionPluralize": {
       "none": "",
       "singular": "Stemming",
