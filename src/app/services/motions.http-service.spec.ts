@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Motion, MotionGroup, PartyVotes, Votes} from "./motions";
 import {Page} from "./pages";
 import {ElasticSearch, SearchHit} from "./elastic";
+import {environment} from "../../environments/environment";
 
 describe('MotionsHttpService', () => {
   let service: MotionsHttpService;
@@ -24,9 +25,7 @@ describe('MotionsHttpService', () => {
     it('should return first page of motions', (done) => {
       // given
       service.getMotions(1, ``).subscribe(validateReturnedMotions());
-      const req = httpMock.expectOne(
-        'http://localhost:9200/motions/_search'
-      );
+      const req = httpMock.expectOne(`${environment.searchMotionsUrl}?q=&page=0`);
 
       // when
       req.flush(FIRST_PAGE_MOTIONS);
@@ -46,9 +45,7 @@ describe('MotionsHttpService', () => {
     it('should return second page of motions', (done) => {
       // given
       service.getMotions(2, '').subscribe(validateReturnedMotions());
-      const req = httpMock.expectOne(
-        'http://localhost:9200/motions/_search'
-      );
+      const req = httpMock.expectOne(`${environment.searchMotionsUrl}?q=&page=1`);
 
       // when
       req.flush(SECOND_PAGE_MOTIONS);
@@ -71,9 +68,7 @@ describe('MotionsHttpService', () => {
       // given
       service.getMotions(1, 'CoViD').subscribe(validateReturnedMotions());
 
-      const req = httpMock.expectOne(
-        'http://localhost:9200/motions/_search'
-      );
+      const req = httpMock.expectOne(`${environment.searchMotionsUrl}?q=CoViD&page=0`);
 
       // when
       req.flush(FIRST_PAGE_SEARCH_RESULT_MOTIONS);
@@ -99,9 +94,7 @@ describe('MotionsHttpService', () => {
         done();
       });
 
-      const req = httpMock.expectOne(
-        'http://localhost:9200/motions/_search'
-      );
+      const req = httpMock.expectOne(`${environment.searchMotionsUrl}?q=none&page=0`);
 
       // when
       req.flush(EMPTY_PAGE_SEARCH_RESULT_MOTIONS);
