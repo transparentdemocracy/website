@@ -1,3 +1,4 @@
+@if (nrOfPages > 1) {
 <nav class="navBox">
   <ul class="pagination">
     <li class="page-item" [class]="disableIfCurrentPage(1)">
@@ -21,3 +22,5 @@
     </li>
   </ul>
 </nav>
+
+}
