@@ -8,8 +8,9 @@
     }
   },
   "main": {
-    "title": "Visualisation des votes du Parlement fédéral belge (Chambre)",
-    "intro": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature (5 ans) du Parlement fédéral belge. Nous nous concentrons sur la Chambre."
+    "title": "Visualisation des votes du Parlement fédéral belge (à la Chambre)",
+    "intro": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature (5 ans) du Parlement fédéral belge. Nous nous concentrons sur la Chambre.",
+    "searchRange": "<p>Il n'y a pas encore eu de vote sur des projets de loi au cours de la législature actuelle (des élections fédérales de juin 2024 à la session du 6 novembre 2024).</p><p>Des questions se posent déjà sur la position et des actions des ministres sur certains thèmes et des demandes urgentes sont soumises.</p><p>Lorsque les premiers projets de loi seront votés, ils apparaîtront ici.</p>"
   },
   "maintenance": {
     "announcement": "Nous travaillons actuellement sur le site Web.",
@@ -74,7 +75,7 @@
     },
     "moreInfoTitle": "Plus d'info",
     "moreInfoTxt01": "Nous souhaitons que, dans une démocratie, il soit transparent et facile de comprendre ce que les politiciens, qui représentent le peuple, ont voté.",
-    "moreInfoTxt02": "Pour cela, nous exploitons les données structurées des rapports rédigés par le personnel du Parlement sur les réunions plénières, et nous créons un site web qui visualise les données extraites et les rend consultables.\nDe cette manière, les gens peuvent consulter de manière interactive le comportement de vote des politiciens fédéraux tout en décidant pour qui voter. Ensuite, ils peuvent continuer à surveiller après les élections si les personnes pour lesquelles ils ont voté tiennent leurs promesses.",
+    "moreInfoTxt02": "<p>Nous faisons cela en extrayant des données structurées à partir des rapports rédigés par le personnel du Parlement sur les réunions plénières, et en créant un site Web qui visualise les données extraites et les rend consultables.</p><p>De cette manière, les gens peuvent interactivement parcourez le comportement électoral des politiciens fédéraux tout en décidant pour qui voter. Ils peuvent ensuite continuer à vérifier après les élections si les personnes pour lesquelles ils ont voté tiennent leurs promesses.</p><p>Le comportement électoral est actuellement consultable de juin 2019 à aujourd'hui, c'est-à-dire la législature actuelle et précédente.</p>< p >Les votes de la dernière réunion apparaîtront sur ce site dès que le Parlement fédéral aura publié le rapport complet de la session.</p>",
     "improveTitle": "Améliorations",
     "improveTxt01": "Nous prévoyons d'étendre ce projet avec de nouvelles fonctionnalités. Par exemple : publier automatiquement sur les médias sociaux les progrès réalisés au Parlement au cours de la semaine écoulée, ou étendre les données au comportement de vote dans les autres gouvernements belges.",
     "improveTxt02": "Vous pouvez consulter nos idées de nouvelles fonctionnalités dans notre <a href=\"https://github.com/orgs/transparentdemocracy/projects/1/views/1\" target=\"_blank\">page Github</a>.",

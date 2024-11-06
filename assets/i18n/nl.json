@@ -8,8 +8,9 @@
     }
   },
   "main": {
-    "title": "Visualisatie van de stemmingen in het Belgische federale parlement (Kamer)",
-    "intro": "Dit project heeft als doel om het stemgedrag van politici in de laatste legislatuur (5 jaar) van het Belgische federaal parlement te visualiseren. We focussen op de Kamer."
+    "title": "Visualisatie van de stemmingen in het Belgische federale parlement (in de Kamer)",
+    "intro": "Dit project heeft als doel om het stemgedrag van politici in het Belgische federaal parlement te visualiseren. We focussen op de Kamer.",
+    "searchRange": "<p>Er zijn in de huidige legislatuur (van de federale verkiezingen in juni 2024 tot de zitting van 6 november 2024) nog geen stemmingen op wetsvoorstellen geweest.</p><p>Er worden wel al vragen gesteld over de positie en acties van de ministers rond bepaalde thema's en er worden urgentieverzoeken ingediend.</p><p>Wanneer de eerste wetsvoorstellen worden gestemd, zullen ze hier verschijnen.</p>"
   },
   "maintenance": {
     "announcement": "We werken momenteel aan de website.",
@@ -78,7 +79,7 @@
     },
     "moreInfoTitle": "Meer info",
     "moreInfoTxt01": "Wij geloven dat het in een democratie transparant en gemakkelijk te begrijpen moet zijn wat politici, die het volk vertegenwoordigen, hebben gestemd.",
-    "moreInfoTxt02": "We doen dit door gestructureerde gegevens te extraheren uit de verslagen die medewerkers van het parlement schreven over de plenaire vergaderingen, en door een website te bouwen die de geëxtraheerde gegevens visualiseert en doorzoekbaar maakt.\nOp deze manier kunnen mensen interactief bladeren door het stemgedrag van de federale politici terwijl ze beslissen op wie ze stemmen. Vervolgens kunnen ze na de verkiezingen blijven controleren of de mensen op wie ze hebben gestemd hun beloften nakomen.",
+    "moreInfoTxt02": "<p>We doen dit door gestructureerde gegevens te extraheren uit de verslagen die medewerkers van het parlement schreven over de plenaire vergaderingen, en door een website te bouwen die de geëxtraheerde gegevens visualiseert en doorzoekbaar maakt.</p><p>Op deze manier kunnen mensen interactief bladeren door het stemgedrag van de federale politici terwijl ze beslissen op wie ze stemmen. Vervolgens kunnen ze na de verkiezingen blijven controleren of de mensen op wie ze hebben gestemd hun beloften nakomen.</p><p>Het stemgedrag is momenteel doorzoekbaar van juni 2019 tot nu, dus de huidige en vorige legislatuur.</p><p>De stemmingen van de meest recente vergadering verschijnen op deze website van zodra het federale parlement het volledige verslag van de zitting heeft geplubliceerd.</p>",
     "improveTitle": "Verbeteringen",
     "improveTxt01": "We hebben plannen om dit project uit te breiden met nieuwe functies. Bijvoorbeeld: automatisch publiceren op sociale media wat er de afgelopen week is gebeurd in het parlement, of de gegevens uitbreiden naar stemgedrag ook in de andere Belgische regeringen.",
     "improveTxt02": "Je kunt onze ideeën voor nieuwe functies zien op onze <a href=\"https://github.com/orgs/transparentdemocracy/projects/1/views/1\" target=\"_blank\">Github-pagina</a>.",
