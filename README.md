@@ -33,6 +33,25 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+## Translations
+
+Feel free to improve our website's texts and translations.
+They are located in `src/assets/i18n`.
+
+Most of the time, translations are loaded from the code as follows:
+
+```
+<p>
+  {{ "main.intro" | translate }}
+</p>
+```
+
+However, if you want to space a translated text over multiple paragraphs, or include breaklines, then the translation must be loaded differently:
+
+```
+<div class="alert alert-primary" role="alert" [innerHTML]="'main.searchRange' | translate"></div>
+```
+
 ## Deploy
 
 ### Deploy to Github Pages (current deployment workflow)

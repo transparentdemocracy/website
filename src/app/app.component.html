@@ -8,9 +8,12 @@
     <p>
       {{ "main.intro" | translate }}
     </p>
+    <div class="alert alert-primary" role="alert" [innerHTML]="'main.searchRange' | translate"></div>
+    
     @if(maintenanceModeEnabled) {
       <p class="alert alert-danger" role="alert">
-        <strong>{{ "maintenance.announcement" | translate }}</strong><br display="block">
+        <strong>{{ "maintenance.announcement" | translate }}</strong>
+        <br display="block">
         {{ "maintenance.impact" | translate }}
       </p>
     }

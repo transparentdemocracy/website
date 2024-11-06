@@ -27,9 +27,8 @@
     <p>
       {{ "help.moreInfoTxt01" | translate }}
     </p>
-    <p>
-      {{ "help.moreInfoTxt02" | translate }}
-    </p>
+    <div [innerHTML]="'help.moreInfoTxt02' | translate"></div>
+    <!-- As soon as voting happens again on new law proposals, we can change this to the last two paragraphs below "More info" on the help page. -->
   </div>
 
   <h2>{{ "help.improveTitle" | translate }}</h2>
