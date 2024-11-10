@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild,} from '@angular/core';
+import {Component, ElementRef, OnInit, output, ViewChild,} from '@angular/core';
 import {TranslateModule} from '@ngx-translate/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 })
 export class SearchBarComponent implements OnInit {
   @ViewChild('searchBox', {static: true}) searchBox!: ElementRef;
-  @Output() searchTriggered$ = new EventEmitter<string>();
+  searchTriggered = output<string>();
 
   private previousSearchTerm: string = '';
   private router: Router
@@ -44,7 +44,7 @@ export class SearchBarComponent implements OnInit {
         this.router.navigate(['../']);
       }
       this.previousSearchTerm = searchTerm;
-      this.searchTriggered$.emit(searchTerm);
+      this.searchTriggered.emit(searchTerm);
     }
     this.searchBox.nativeElement.blur();
   }

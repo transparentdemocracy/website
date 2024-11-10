@@ -2,7 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
+  OnInit, output,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -25,7 +25,7 @@ import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 export class PaginationComponent implements OnInit {
   @Input() nrOfPages!: number;
 
-  @Output() pageChanged$$ = new EventEmitter<number>();
+  pageChanged = output<number>();
 
   totalPagesArray: number[] = [];
   arrowLeft = faArrowLeft;
@@ -46,7 +46,7 @@ export class PaginationComponent implements OnInit {
   ngOnInit(): void {
     this.currentPage$$
       .pipe(untilDestroyed(this))
-      .subscribe((page: number) => this.pageChanged$$.emit(page));
+      .subscribe((page: number) => this.pageChanged.emit(page));
 
     this.setTotalPagesArray();
   }
@@ -79,7 +79,7 @@ export class PaginationComponent implements OnInit {
     let start = 0;
     let maxPageNr = this.nrOfPages;
 
-    if (this.nrOfPages > this.maxWindowSize) {
+      if (this.nrOfPages > this.maxWindowSize) {
       let currentPage = this.currentPage$$.getValue();
       let offset = this.maxWindowSize / 2;
       start = Math.max(0, currentPage - offset);

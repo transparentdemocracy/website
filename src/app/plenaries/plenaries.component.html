@@ -1,6 +1,6 @@
 <search-bar
   class="searchBar"
-  (searchTriggered$)="searchPlenaries($event)"
+  (searchTriggered)="searchPlenaries($event)"
 ></search-bar>
 
 <div class="plenariesHeader">
@@ -105,5 +105,5 @@
 <pagination
   class="plenariesPagination"
   [nrOfPages]="nrOfPages"
-  (pageChanged$$)="getPagedPlenaries($event)"
+  (pageChanged)="getPagedPlenaries($event)"
 ></pagination>
