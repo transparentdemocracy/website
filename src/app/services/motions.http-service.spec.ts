@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {MotionsHttpService} from './motions.http-service';
-import {HttpClientTestingModule, HttpTestingController,} from '@angular/common/http/testing';
-import {HttpClient} from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {Motion, MotionGroup, PartyVotes, Votes} from "./motions";
 import {Page} from "./pages";
 import {ElasticSearch, SearchHit} from "./elastic";
@@ -14,8 +14,9 @@ describe('MotionsHttpService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(MotionsHttpService);
     httpClient = TestBed.inject(HttpClient);
     httpMock = TestBed.inject(HttpTestingController);
