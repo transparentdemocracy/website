@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewSearchBarComponent } from './new-search-bar.component';
+import {testTranslateModule} from "../services/test-translation-module";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 describe('NewSearchBarComponent', () => {
   let component: NewSearchBarComponent;
@@ -8,7 +10,8 @@ describe('NewSearchBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewSearchBarComponent]
+      imports: [NewSearchBarComponent, TranslateModule.forRoot(), testTranslateModule],
+      providers: [TranslateService]
     })
     .compileComponents();
 
