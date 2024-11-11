@@ -1,8 +1,8 @@
-import {AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {MotionsHttpService} from "../services/motions.http-service";
 import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {Page} from "../services/pages";
-import {distinctUntilChanged, map, Observable, switchMap, tap} from "rxjs";
+import {combineLatest, distinctUntilChanged, map, Observable, switchMap, tap} from "rxjs";
 import {AsyncPipe, JsonPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {PaginationComponent} from "../pagination/pagination.component";
@@ -42,27 +42,39 @@ export class NewMotionsComponent implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.result$ = this.route.queryParams.pipe(
-            map(qp => {
+        this.result$ = combineLatest([
+            this.route.params,
+            this.route.queryParams
+        ]).pipe(
+            map(([params, queryParams]) => ({
+                params,
+                queryParams
+            })),
+            map(({params, queryParams}) => {
                 // TODO: use scroll api?
                 // Elastic doesn't like it if you request beyond item 10000
                 //Result window is too large, from + size must be less than or equal to: [10000] but was [10010]. See the scroll api for a more efficient way to request large data sets. This limit can be set by changing the [index.max_result_window] index level setting.
-                let page = Math.min(1000, Number(qp["page"]) || 1);
-                return ({q: qp["q"] || '', page: page || 1});
+                let page = Math.min(1000, Number(queryParams["page"]) || 1);
+                return ({id: params["id"], q: queryParams["q"] || '', page: page || 1});
             }),
             distinctUntilChanged(),
             tap((it) => {
                 this.searchTerm = it.q;
                 this.isLoading = true
             }),
-            switchMap(search => this.motionsHttpService.getMotions(search.page, search.q)),
+            switchMap(({id, q, page}) => {
+                if (!id) {
+                    return this.motionsHttpService.getMotions(page, q)
+                } else {
+                    return this.motionsHttpService.getMotion(id)
+                }
+            }),
             map(result => ({...result, values: result.values.map(mg => new ViewMotionGroup(mg))})),
             tap(() => this.isLoading = false)
         )
     }
 
     newSearch(searchTerm: string) {
-        console.log('hahaha');
         this.router.navigate(['/motions2'], {
             queryParams: {q: searchTerm}
         })
