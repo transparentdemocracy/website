@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import {MotionsHttpService} from "../services/motions.http-service";
 import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {Page} from "../services/pages";
@@ -9,6 +9,7 @@ import {PaginationComponent} from "../pagination/pagination.component";
 import {MotionGroupsDisplayComponent, ViewMotionGroup} from "../motions/motion-group-display/motion-groups-display.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {NewPaginationComponent} from "../new-pagination/new-pagination.component";
+import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
 
 @Component({
     selector: 'new-motions',
@@ -20,23 +21,27 @@ import {NewPaginationComponent} from "../new-pagination/new-pagination.component
         AsyncPipe,
         JsonPipe,
         PaginationComponent,
+        NewSearchBarComponent,
         MotionGroupsDisplayComponent,
         NewPaginationComponent,
     ],
     templateUrl: './new-motions.component.html',
     styleUrl: './new-motions.component.sass'
 })
-export class NewMotionsComponent {
+export class NewMotionsComponent implements AfterViewInit {
 
     searchTerm = ''
-    result$!: Observable<Page<ViewMotionGroup>>;
-    isLoading = false;
+    result$!: Observable<Page<ViewMotionGroup>>
+    isLoading = false
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private motionsHttpService: MotionsHttpService
     ) {
+    }
+
+    ngAfterViewInit(): void {
         this.result$ = this.route.queryParams.pipe(
             map(qp => {
                 // TODO: use scroll api?
@@ -53,12 +58,13 @@ export class NewMotionsComponent {
             switchMap(search => this.motionsHttpService.getMotions(search.page, search.q)),
             map(result => ({...result, values: result.values.map(mg => new ViewMotionGroup(mg))})),
             tap(() => this.isLoading = false)
-        );
+        )
     }
 
-    newSearch() {
-        this.router.navigate([], {
-            queryParams: {q: this.searchTerm}
+    newSearch(searchTerm: string) {
+        console.log('hahaha');
+        this.router.navigate(['/motions2'], {
+            queryParams: {q: searchTerm}
         })
     }
 

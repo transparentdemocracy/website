@@ -9,7 +9,7 @@
 
       @for (num of totalPagesArray; track num) {
         @if (num == '...1' || num == '...2') {
-          <li class="page-item" class="disabled">
+          <li class="page-item disabled">
             <button class="page-link" (click)="onPageClick(num)">
               ...
             </button>

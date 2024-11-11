@@ -1,7 +1,4 @@
-<div>
-    <input placeholder="keywords" [(ngModel)]="searchTerm" enterkeyhint="search" (keydown.enter)="newSearch()">
-    <button (click)="newSearch()">Search</button>
-</div>
+<new-search-bar [searchTerm]="searchTerm" (newSearch)="newSearch($event)"></new-search-bar>
 
 <div class="motionsHeader">
     <h2>{{ "motions.title" | translate }}</h2>
