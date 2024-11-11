@@ -17,6 +17,7 @@ import {LanguagePluralPipe} from '../language/pluralization/language-plural.pipe
 import {DocumentReferencesComponent} from '../document-references/document-references.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {faCaretRight, faCheckCircle, faCircleInfo, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
+import {MotionGroupsDisplayComponent, ViewMotionGroup} from "./motion-group-display/motion-groups-display.component";
 
 @UntilDestroy()
 @Component({
@@ -25,12 +26,13 @@ import {faCaretRight, faCheckCircle, faCircleInfo, faTimesCircle} from "@fortawe
   imports: [
     FontAwesomeModule,
     CommonModule,
-    SearchBarComponent,
-    PaginationComponent,
     DocumentReferencesComponent,
     SortPipe,
     TranslateModule,
     LanguagePluralPipe,
+    SearchBarComponent,
+    PaginationComponent,
+    MotionGroupsDisplayComponent,
   ],
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass',
@@ -42,6 +44,7 @@ export class MotionsComponent implements OnInit, OnDestroy {
   motionId: string = '';
   selectedLanguage: string = 'nl';
   private languageSubscription: Subscription = new Subscription();
+
   caretRight = faCaretRight;
   acceptedIcon = faCheckCircle;
   rejectedIcon = faTimesCircle;
@@ -70,10 +73,6 @@ export class MotionsComponent implements OnInit, OnDestroy {
         this.getById();
       }
     });
-  }
-
-  removeSpaces(input: string): string {
-    return input.replace(/\s+/g, '');
   }
 
   searchMotions(searchTerm: string): void {
@@ -127,107 +126,11 @@ export class MotionsComponent implements OnInit, OnDestroy {
       .pipe(take(1));
   }
 
-  toggleShowAllVotes(btnElement: HTMLElement, divElement: HTMLElement): void {
-    divElement.classList.toggle('showAllVotes');
-    btnElement.hidden = true;
-  }
-
   ngOnDestroy() {
     if (this.languageSubscription) {
       this.languageSubscription.unsubscribe();
     }
   }
-
-  protected readonly missingIcon = faCircleInfo;
-}
-
-class ViewMotionGroup {
-  constructor(m: MotionGroup) {
-    this.motionGroup = m;
-    this.isExpanded = false;
-    this.viewMotions = m.motions.map((motion) => new ViewMotion(motion));
-  }
-
-  // TODO review this pattern; using function calls in templates results in a lot of overhead and recalculation
-  // E.g. add a console.log here and see that it's called all the time even when just clicking around
-  get legislature(): number {
-    return this.motionGroup.legislature
-  }
-
-  get plenaryNr(): number {
-    return this.motionGroup.plenaryNr
-  }
-
-  get titleNL(): string {
-    return this.motionGroup.titleNL;
-  }
-
-  get motions(): ViewMotion[] {
-    return this.viewMotions;
-  }
-
-  get id(): string {
-    return this.motionGroup.id;
-  }
-
-  get titleFR(): string {
-    return this.motionGroup.titleFR;
-  }
-
-  get votingDate(): string {
-    return dateConversion(this.motionGroup.votingDate);
-  }
-
-  isExpanded: boolean;
-  viewMotions: ViewMotion[];
-  motionGroup: MotionGroup;
-}
-
-class ViewMotion {
-  get votingDate(): string {
-    return dateConversion(this.motion.votingDate);
-  }
-
-  get titleNL(): string {
-    return this.motion.titleNL;
-  }
-
-  get id(): string {
-    return this.motion.id;
-  }
-
-  get documentReference(): DocumentReference | undefined {
-    return this.motion.newDocumentReference;
-  }
-
-
-  get titleFR(): string {
-    return this.motion.titleFR;
-  }
-
-  get yesVotes(): Votes {
-    return this.motion.yesVotes;
-  }
-
-  get noVotes(): Votes {
-    return this.motion.noVotes;
-  }
-
-  get absVotes(): Votes {
-    return this.motion.absVotes;
-  }
-
-  get votingResult(): boolean {
-    return this.motion.votingResult;
-  }
-
-  constructor(m: Motion) {
-    this.motion = m;
-    this.isExpanded = false;
-  }
-
-  motion: Motion;
-  isExpanded: boolean;
 }
 
 @Component({

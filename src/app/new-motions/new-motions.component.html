@@ -1,0 +1,15 @@
+<div>
+    <input placeholder="keywords" [(ngModel)]="searchTerm" enterkeyhint="search" (keydown.enter)="newSearch()">
+    <button (click)="newSearch()">Search</button>
+</div>
+
+<div class="motionsHeader">
+    <h2>{{ "motions.title" | translate }}</h2>
+</div>
+
+@if (result$|async; as result) {
+    <motion-groups-display [motionGroups]="result.values"></motion-groups-display>
+
+    <new-pagination [nrOfPages]="result.totalPages" [currentPage]="result.pageNr" (pageSelected)="goToPage($event)"></new-pagination>
+}
+

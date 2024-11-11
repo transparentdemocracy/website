@@ -1,0 +1,39 @@
+@use '../../styles/colors'
+
+.navBox
+  display: flex
+  width: 100%
+  overflow-x: auto
+  margin: 0 auto
+
+  & .pagination
+    margin: 0 auto
+    position: relative
+
+    & .page-item:first-child .page-link
+      border-radius: 6px 0 0 6px
+
+    & .page-item:last-child .page-link
+      border-radius: 0 6px 6px 0
+
+    & .page-link
+      min-width: 3.5rem
+      text-align: center
+      border-radius: 0
+      padding: 0.25rem 1rem
+      color: colors.$color-tertiary-light
+      background-color: colors.$color-tertiary
+      border-color: colors.$color-tertiary-light
+
+      &:hover, &:active, &:focus
+        background-color: colors.$color-secondary !important
+        box-shadow: none
+        outline: unset
+
+    & .disabled > .page-link
+      color: colors.$color-tertiary-light
+      background-color: colors.$color-primary-light
+      border-color: colors.$color-tertiary-light
+
+.active
+  font-weight: bolder

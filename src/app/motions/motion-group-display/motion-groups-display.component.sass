@@ -1,0 +1,291 @@
+@use '../../../styles/colors'
+@use '../../../styles/breakpoints'
+
+$color-les-engages-class: 'Les Engagés-color'
+$open-vld-color-class: 'Open Vld'
+
+.motionGroupList
+  display: flex
+  width: 100%
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  gap: 1rem
+  margin-bottom: 2rem
+  padding: 0
+
+  & .motionGroup
+    height: auto
+    width: 100%
+    flex-direction: row
+    justify-content: space-between
+    border: 2px solid colors.$color-secondary-light
+    border-radius: 6px
+    background-color: colors.$color-white
+    transition: background-color .15s ease-in-out
+    overflow: hidden
+    position: relative
+
+    & .motionGroupDateBox
+      position: absolute
+      top: 0
+      right: 0
+      display: flex
+      height: 100%
+      min-width: 10rem
+      flex-direction: column
+      align-items: center
+      justify-content: flex-start
+      background-color: colors.$color-secondary-light
+      font-size: 0.75rem
+      padding: 0.5rem
+      gap: 1rem
+
+      & .motionGroupNrMotions
+        font-weight: 600
+        text-transform: uppercase
+
+.motionGroupTitleBar
+  display: flex
+  width: 100%
+  cursor: pointer
+  padding: 0.5rem
+
+  &:hover
+    background-color: colors.$color-secondary-light
+
+.motionGroupTitle
+  width: calc(100% - 12rem)
+  min-height: 4rem
+  padding-right: 0.5rem
+
+  & > h3
+    line-height: 1.5
+    margin: 0
+    overflow-wrap: break-word
+
+.motionList
+  display: flex
+  flex-direction: column
+  display: none
+
+  &.expanded
+    display: block
+
+.motionBlock
+  display: flex
+  height: auto
+  flex-direction: row
+  justify-content: space-between
+  background-color: colors.$color-quaternary-light
+  border-top: 1px solid transparent
+  box-shadow: 0 -1px 0 colors.$color-white
+  transition: background-color .15s ease-in-out
+  overflow: hidden
+  position: relative
+
+  &:hover
+    background-color: colors.$color-secondary-light
+
+  &.expanded
+    border-color: colors.$color-secondary-light
+    background-color: colors.$color-white
+
+    & .motionResultBox
+      height: auto
+      border-radius: 0 0 0 6px
+
+.motionContent
+  display: flex
+  flex-direction: column
+  height: auto
+  width: 100%
+  padding: 0.5rem 0.5rem 0.5rem 2rem
+
+.motionTitleBar
+  display: flex
+  cursor: pointer
+  margin-right: 12rem
+
+.chevronIcon
+  margin: 0 1rem 0 0.5rem
+
+.fa-chevron-right, .fa-plus-circle, .fa-minus-circle
+  transition: 0.2s ease-in-out
+
+.motionTitle
+  width: 100%
+  min-height: 3rem
+  font-size: 1rem
+  margin: 0
+
+.motionDetails
+  width: 100%
+  padding: 1rem 3.75rem 2rem 2.25rem
+  display: none
+
+  &.expanded
+    display: block
+
+  & .motionDescription
+    font-size: 0.9rem
+    margin-bottom: 2rem
+
+.onlyOneMotion .motionDetails
+  display: block
+
+.documentReferences
+  display: flex
+  margin-bottom: 2rem
+
+.motionResultBox
+  position: absolute
+  right: 0
+  display: flex
+  height: 100%
+  min-width: 10rem
+  flex-direction: column
+  align-items: center
+  justify-content: flex-start
+  background-color: colors.$color-secondary-light
+  font-size: 0.75rem
+  padding: 0.5rem
+  gap: 1rem
+
+  & .motionResult
+    font-weight: 700
+    text-transform: uppercase
+
+    & .accepted
+      color: colors.$color-green
+
+    & .rejected
+      color: colors.$color-red
+
+.voteOverViewTitle
+  display: flex
+
+  & h4
+    margin-bottom: 1rem
+  & .btnShowAllVotes
+    text-align: right
+    margin: 0 0 0.75rem auto
+
+.votePerPartyTable
+  display: flex
+  justify-content: space-between
+  gap: 1rem
+
+  @media (max-width: breakpoints.$screen-md)
+    flex-direction: column
+
+.votesHeader
+  display: flex
+  min-height: 3rem
+  justify-content: space-between
+  align-items: center
+  background-color: colors.$color-secondary-light
+  border-radius: 6px 6px 0 0
+  padding: 1rem
+
+  & .typeOfVote
+    font-weight: 700
+
+.abstVotesColumn,
+.noVotesColumn,
+.yesVotesColumn
+  flex: 1
+  display: flex
+  flex-direction: column
+
+.votesPartyList
+  display: flex
+  flex: 1
+  flex-direction: column
+  padding: 1rem 1rem
+  background-color: colors.$color-tertiary-light
+  border-radius: 0 0 6px 6px
+
+.partyVoteResult
+  display: flex
+  justify-content: space-between
+  font-size: 0.8rem
+  padding: 0.5rem 0
+  border-bottom: 1px solid colors.$color-secondary-light
+  min-width: 100%
+
+  &:first-child
+    padding-top: 0
+
+  &:last-child
+    border-bottom: none
+    padding-bottom: 0
+
+  &.noVotes
+    display: none
+    .voteResultsPartyName, .partyVotePercentage
+      opacity: 0.4
+
+.votePerPartyTable.showAllVotes .partyVoteResult.noVotes
+  display: flex
+
+.voteResultsPartyName
+  text-align: left
+  margin-right: 0.1rem
+
+.partyNameTag
+  padding: 0.25rem 0.5rem
+  text-transform: uppercase
+  border-left: 12px solid transparent
+
+.partyVotePercentage
+  text-align: left
+  margin-left: 0.3rem
+
+.MR-color
+  border-color: colors.$color-mr
+
+.PS-color
+  border-color: colors.$color-ps
+
+.INDEP-color
+  border-color: colors.$color-indep
+
+.Ecolo-Groen-color
+  border-color: colors.$color-groen-ecolo
+
+.sp\.a-color
+  border-color: colors.$color-vooruit
+
+.DéFI-color
+  border-color: colors.$color-defi
+
+.VB-color
+  border-color: colors.$color-vb
+
+.N-VA-color
+  border-color: colors.$color-nva
+
+.unknown-color
+  border-color: colors.$color-unknown
+
+.LesEngagés-color
+  border-color: colors.$color-les-engages
+
+.OpenVld-color
+  border-color: colors.$color-openvld
+
+.Vooruit-color
+  border-color: colors.$color-vooruit
+
+.ONAFH-color
+  border-color: colors.$color-onafh
+
+.PVDA-PTB-color
+  border-color: colors.$color-pvda
+
+.cd\&v-color
+  border-color: colors.$color-cdnv
+
+.partyName
+  border-color: colors.$color-cdnv

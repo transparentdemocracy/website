@@ -33,6 +33,7 @@ export class MotionsHttpService {
     return this.http.get<SearchHit<MotionGroup>>(completeUrl);
   }
 
+  /* page is 1-based */
   private fetchMotions(
     page: number,
     searchTerm: string | null
