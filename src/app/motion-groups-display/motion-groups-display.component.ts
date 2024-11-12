@@ -1,8 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {faCaretRight, faCheckCircle, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {DocumentReference, Motion, MotionGroup, Votes} from "../services/motions";
-import {dateConversion} from "../services/date-service";
+import {MotionGroup} from "../services/motions";
 import {LanguageService} from "../services/language.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {LanguagePluralPipe} from "../language/pluralization/language-plural.pipe";
