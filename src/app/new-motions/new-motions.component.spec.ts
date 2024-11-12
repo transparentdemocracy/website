@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NewMotionsComponent} from './new-motions.component';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, provideRouter, Router} from "@angular/router";
 import {Subject} from "rxjs";
 import {MotionsHttpService} from "../services/motions.http-service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
@@ -9,13 +9,14 @@ import {of} from "rxjs/internal/observable/of";
 import {Motion, MotionGroup} from "../services/motions";
 import {Page} from "../services/pages";
 import {By} from "@angular/platform-browser";
+import {provideLocationMocks} from "@angular/common/testing";
+import {Location} from "@angular/common";
 
 describe('NewMotionsComponent', () => {
   let component: NewMotionsComponent;
   let fixture: ComponentFixture<NewMotionsComponent>;
   let paramsSubject: Subject<any>;
   let queryParamsSubject: Subject<any>;
-  let routerMock = jasmine.createSpyObj('MockRouter', ['navigate'])
 
   let motionsHttpServiceMock = jasmine.createSpyObj('MotionsHttpService', [
     'getMotions',
@@ -34,7 +35,8 @@ describe('NewMotionsComponent', () => {
       providers: [
         {provide: MotionsHttpService, useValue: motionsHttpServiceMock},
         TranslateService,
-        {provide: Router, useValue: routerMock},
+        provideRouter([]),
+        provideLocationMocks(),
         {
           provide: ActivatedRoute,
           useValue: {
@@ -106,7 +108,8 @@ describe('NewMotionsComponent', () => {
       fixture.detectChanges();
       await fixture.whenStable();
 
-      expect(routerMock.navigate).toHaveBeenCalledWith([], {'queryParams': {q: 'klimaat', page: 4}})
+      const location = TestBed.inject(Location)
+      expect(location.path()).toEqual('/?q=klimaat&page=4')
     })
   })
 });
