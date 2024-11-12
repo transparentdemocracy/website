@@ -7,10 +7,10 @@
       <!-- Motion group -->
       <div
         class="motionGroupTitleBar"
-        (click)="motionGroup.isExpanded = !motionGroup.isExpanded"
+        (click)="expanded[motionGroup.id] = !expanded[motionGroup.id]"
       >
         <div class="chevronIcon">
-          <div [style.transform]="motionGroup.isExpanded ? 'rotate(90deg)' : 'rotate(0)'"
+          <div [style.transform]="expanded[motionGroup.id] ? 'rotate(90deg)' : 'rotate(0)'"
                tabindex="0">
             <fa-icon [icon]="caretRight"></fa-icon>
           </div>
@@ -43,12 +43,12 @@
       <!-- Motions -->
       <div
         class="motionList"
-        [ngClass]="[motionGroup.isExpanded ? 'expanded' : 'closed']"
+        [ngClass]="[expanded[motionGroup.id] ? 'expanded' : 'closed']"
       >
         @for (motion of motionGroup.motions; track $index) {
           <div
             id="{{ motion.id }}"
-            [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
+            [ngClass]="[expanded[motion.id] ? 'expanded' : 'closed']"
             [class.expanded]="motionGroup.motions.length === 1"
             class="motionBlock"
           >
@@ -56,13 +56,13 @@
               @if (motionGroup.motions.length !== 1) {
                 <div
                   class="motionTitleBar"
-                  (click)="motion.isExpanded = !motion.isExpanded"
+                  (click)="expanded[motion.id] = !expanded[motion.id]"
                 >
                   <div class="chevronIcon">
                     <i
                       class="fa-solid fa-caret-right"
                       [style.transform]="
-                  motion.isExpanded ? 'rotate(90deg)' : 'rotate(0)'
+                  expanded[motion.id] ? 'rotate(90deg)' : 'rotate(0)'
                 "
                       tabindex="0"
                     ></i>
@@ -82,11 +82,11 @@
 
               <div
                 class="motionDetails"
-                [ngClass]="[motion.isExpanded ? 'expanded' : 'closed']"
+                [ngClass]="[expanded[motion.id] ? 'expanded' : 'closed']"
               >
-                @if (motion.documentReference) {
+                @if (motion.newDocumentReference) {
                   <document-references
-                    [documentReference]="motion.documentReference"
+                    [documentReference]="motion.newDocumentReference"
                     class="documentReferences"
                   ></document-references>
                 }

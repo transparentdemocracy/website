@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {faCaretRight, faCheckCircle, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {DocumentReference, Motion, MotionGroup, Votes} from "../../services/motions";
@@ -25,9 +25,10 @@ import {SortPipe} from "../../sort-votes/sort-votes.pipe";
   templateUrl: './motion-groups-display.component.html',
   styleUrl: './motion-groups-display.component.sass'
 })
-export class MotionGroupsDisplayComponent {
+export class MotionGroupsDisplayComponent implements OnChanges {
 
-  @Input() motionGroups!: ViewMotionGroup[];
+  @Input() motionGroups!: MotionGroup[];
+  expanded: { [key: string]: boolean } = {}
 
   selectedLanguage = 'nl';
 
@@ -43,6 +44,10 @@ export class MotionGroupsDisplayComponent {
     })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.expanded = {}
+  }
+
   toggleShowAllVotes(btnElement: HTMLElement, divElement: HTMLElement): void {
     divElement.classList.toggle('showAllVotes');
     btnElement.hidden = true;
@@ -54,92 +59,15 @@ export class MotionGroupsDisplayComponent {
 
 }
 
-
-export class ViewMotionGroup {
-  constructor(m: MotionGroup) {
-    this.motionGroup = m;
-    this.isExpanded = false;
-    this.viewMotions = m.motions.map((motion) => new ViewMotion(motion));
-  }
-
-  // TODO review this pattern; using function calls in templates results in a lot of overhead and recalculation
-  // E.g. add a console.log here and see that it's called all the time even when just clicking around
-  get legislature(): number {
-    return this.motionGroup.legislature
-  }
-
-  get plenaryNr(): number {
-    return this.motionGroup.plenaryNr
-  }
-
-  get titleNL(): string {
-    return this.motionGroup.titleNL;
-  }
-
-  get motions(): ViewMotion[] {
-    return this.viewMotions;
-  }
-
-  get id(): string {
-    return this.motionGroup.id;
-  }
-
-  get titleFR(): string {
-    return this.motionGroup.titleFR;
-  }
-
-  get votingDate(): string {
-    return dateConversion(this.motionGroup.votingDate);
-  }
-
+export interface ViewMotionGroup {
+  id: string;
+  legislature: number;
+  plenaryNr: number;
+  titleNL: string;
+  titleFR: string;
+  motions: Motion[];
+  votingDate: string;
   isExpanded: boolean;
-  viewMotions: ViewMotion[];
+  viewMotions: Motion[];
   motionGroup: MotionGroup;
-}
-
-export class ViewMotion {
-  get votingDate(): string {
-    return dateConversion(this.motion.votingDate);
-  }
-
-  get titleNL(): string {
-    return this.motion.titleNL;
-  }
-
-  get id(): string {
-    return this.motion.id;
-  }
-
-  get documentReference(): DocumentReference | undefined {
-    return this.motion.newDocumentReference;
-  }
-
-
-  get titleFR(): string {
-    return this.motion.titleFR;
-  }
-
-  get yesVotes(): Votes {
-    return this.motion.yesVotes;
-  }
-
-  get noVotes(): Votes {
-    return this.motion.noVotes;
-  }
-
-  get absVotes(): Votes {
-    return this.motion.absVotes;
-  }
-
-  get votingResult(): boolean {
-    return this.motion.votingResult;
-  }
-
-  constructor(m: Motion) {
-    this.motion = m;
-    this.isExpanded = false;
-  }
-
-  motion: Motion;
-  isExpanded: boolean;
 }

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MotionGroupsDisplayComponent } from './motion-groups-display.component';
+import {MotionGroupsDisplayComponent} from './motion-groups-display.component';
 
 describe('MotionGroupDisplayComponent', () => {
   let component: MotionGroupsDisplayComponent;
@@ -10,7 +10,7 @@ describe('MotionGroupDisplayComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MotionGroupsDisplayComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MotionGroupsDisplayComponent);
     component = fixture.componentInstance;

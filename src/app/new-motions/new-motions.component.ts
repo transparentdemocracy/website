@@ -6,10 +6,11 @@ import {combineLatest, distinctUntilChanged, map, Observable, switchMap, tap} fr
 import {AsyncPipe, JsonPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {PaginationComponent} from "../pagination/pagination.component";
-import {MotionGroupsDisplayComponent, ViewMotionGroup} from "../motions/motion-group-display/motion-groups-display.component";
+import {MotionGroupsDisplayComponent} from "../motions/motion-group-display/motion-groups-display.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {NewPaginationComponent} from "../new-pagination/new-pagination.component";
 import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
+import {MotionGroup} from "../services/motions";
 
 @Component({
   selector: 'new-motions',
@@ -31,7 +32,7 @@ import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component"
 export class NewMotionsComponent implements AfterViewInit {
 
   searchTerm = ''
-  result$!: Observable<Page<ViewMotionGroup>>
+  result$!: Observable<Page<MotionGroup>>
   isLoading = false
 
   constructor(
@@ -69,7 +70,6 @@ export class NewMotionsComponent implements AfterViewInit {
           return this.motionsHttpService.getMotion(id)
         }
       }),
-      map(result => ({...result, values: result.values.map(mg => new ViewMotionGroup(mg))})),
       tap(() => this.isLoading = false),
     )
   }

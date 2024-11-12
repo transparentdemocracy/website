@@ -10,14 +10,12 @@ import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {LanguageService} from '../services/language.service';
 import {Page} from '../services/pages';
 import {ActivatedRoute} from '@angular/router';
-import {DocumentReference, Motion, MotionGroup, Votes,} from '../services/motions';
-import {dateConversion} from '../services/date-service';
+import {MotionGroup,} from '../services/motions';
 import {TranslateModule} from '@ngx-translate/core';
 import {LanguagePluralPipe} from '../language/pluralization/language-plural.pipe';
 import {DocumentReferencesComponent} from '../document-references/document-references.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {faCaretRight, faCheckCircle, faCircleInfo, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
-import {MotionGroupsDisplayComponent, ViewMotionGroup} from "./motion-group-display/motion-groups-display.component";
+import {MotionGroupsDisplayComponent} from "./motion-group-display/motion-groups-display.component";
 
 @UntilDestroy()
 @Component({
@@ -38,16 +36,12 @@ import {MotionGroupsDisplayComponent, ViewMotionGroup} from "./motion-group-disp
   styleUrl: './motions.component.sass',
 })
 export class MotionsComponent implements OnInit, OnDestroy {
-  motionsGroups$$ = new ReplaySubject<ViewMotionGroup[]>(1);
+  motionsGroups$$ = new ReplaySubject<MotionGroup[]>(1);
   nrOfPages: number = 1;
   searchTerm: string = '';
   motionId: string = '';
   selectedLanguage: string = 'nl';
   private languageSubscription: Subscription = new Subscription();
-
-  caretRight = faCaretRight;
-  acceptedIcon = faCheckCircle;
-  rejectedIcon = faTimesCircle;
 
   constructor(
     private route: ActivatedRoute,
@@ -86,9 +80,7 @@ export class MotionsComponent implements OnInit, OnDestroy {
       .getMotions(1, this.searchTerm)
       .pipe(untilDestroyed(this), take(1))
       .subscribe((page: Page<MotionGroup>) => {
-        this.motionsGroups$$.next(
-          page.values.map((x) => new ViewMotionGroup(x))
-        );
+        this.motionsGroups$$.next(page.values);
         this.nrOfPages = page.totalPages;
       });
   }
@@ -98,9 +90,7 @@ export class MotionsComponent implements OnInit, OnDestroy {
       .getMotion(this.motionId)
       .pipe(untilDestroyed(this), take(1))
       .subscribe((page: Page<MotionGroup>) => {
-        this.motionsGroups$$.next(
-          page.values.map((x) => new ViewMotionGroup(x))
-        );
+        this.motionsGroups$$.next(page.values);
         this.nrOfPages = page.totalPages;
       });
   }
@@ -112,9 +102,7 @@ export class MotionsComponent implements OnInit, OnDestroy {
     this.loadMotions(page)
       .pipe(untilDestroyed(this))
       .subscribe((page: Page<MotionGroup>) => {
-        this.motionsGroups$$.next(
-          page.values.map((x) => new ViewMotionGroup(x))
-        );
+        this.motionsGroups$$.next(page.values);
         this.nrOfPages = page.totalPages;
       });
   }

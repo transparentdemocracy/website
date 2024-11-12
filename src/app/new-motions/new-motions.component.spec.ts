@@ -31,10 +31,9 @@ describe('NewMotionsComponent', () => {
     queryParamsSubject = new Subject<any>();
 
     await TestBed.configureTestingModule({
-      imports: [NewMotionsComponent, TranslateModule.forRoot()],
+      imports: [TranslateModule.forRoot()],
       providers: [
         {provide: MotionsHttpService, useValue: motionsHttpServiceMock},
-        TranslateService,
         provideRouter([]),
         provideLocationMocks(),
         {
