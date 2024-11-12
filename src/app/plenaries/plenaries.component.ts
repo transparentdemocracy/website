@@ -1,24 +1,22 @@
 /*plenaries.component.ts*/
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { Observable, ReplaySubject, Subscription, take } from 'rxjs';
-import { PaginationComponent } from '../pagination/pagination.component';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { LanguageService } from '../services/language.service';
-import { LanguagePluralPipe } from '../language/pluralization/language-plural.pipe';
-import {
-  MotionGroupLink,
-  MotionLink,
-  PlenariesHttpService,
-  Plenary,
-} from '../services/plenaries.http-service';
-import { Page } from '../services/pages';
-import { RouterLink } from '@angular/router';
-import { dateConversion } from '../services/date-service';
-import { TranslateModule } from '@ngx-translate/core';
+import {CommonModule} from '@angular/common';
+import {AfterViewInit, Component} from '@angular/core';
+import {SearchBarComponent} from '../search-bar/search-bar.component';
+import {distinctUntilChanged, map, Observable, switchMap, tap} from 'rxjs';
+import {PaginationComponent} from '../pagination/pagination.component';
+import {UntilDestroy} from '@ngneat/until-destroy';
+import {LanguagePluralPipe} from '../language/pluralization/language-plural.pipe';
+import {MotionGroupLink, PlenariesHttpService, Plenary,} from '../services/plenaries.http-service';
+import {Page} from '../services/pages';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {MotionGroupsDisplayComponent} from "../motion-groups-display/motion-groups-display.component";
+import {NewPaginationComponent} from "../new-pagination/new-pagination.component";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
+import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
+import {LanguageService} from "../services/language.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @UntilDestroy()
 @Component({
@@ -27,103 +25,98 @@ import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
   imports: [
     CommonModule,
     SearchBarComponent,
+    NewSearchBarComponent,
     PaginationComponent,
     RouterLink,
     TranslateModule,
     LanguagePluralPipe,
     FaIconComponent,
+    MotionGroupsDisplayComponent,
+    NewPaginationComponent,
   ],
   templateUrl: './plenaries.component.html',
   styleUrl: './plenaries.component.sass',
 })
-export class PlenariesComponent implements OnInit, OnDestroy {
-  plenaries$$ = new ReplaySubject<ViewPlenary[]>(1);
-  nrOfPages: number = 1;
-  searchTerm: string = '';
-  selectedLanguage: string = 'nl';
-  private languageSubscription: Subscription = new Subscription();
+export class PlenariesComponent implements AfterViewInit {
+  searchTerm = ''
+  result$!: Observable<Page<ViewPlenary>>
+  isLoading = false
+  selectedLanguage!: string;
+
   caretRight = faCaretRight;
 
   constructor(
-    private plenariesHttpService: PlenariesHttpService,
-    private languageService: LanguageService
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router,
+    private httpService: PlenariesHttpService,
+    private languageService: LanguageService,
+  ) {
+    languageService.language$.pipe(
+      takeUntilDestroyed()
+    ).subscribe(language => this.selectedLanguage = language)
+  }
 
-  ngOnInit() {
-    this.languageSubscription = this.languageService.language$.subscribe(
-      (language) => {
-        this.selectedLanguage = language;
+  ngAfterViewInit(): void {
+    this.result$ = this.route.queryParams
+      .pipe(
+        map(queryParams => {
+          // TODO: use scroll api?
+          // Elastic doesn't like it if you request beyond item 10000
+          //Result window is too large, from + size must be less than or equal to: [10000] but was [10010]. See the scroll api for a more efficient way to request large data sets. This limit can be set by changing the [index.max_result_window] index level setting.
+          let page = Math.min(1000, Number(queryParams["page"]) || 1);
+          return ({q: queryParams["q"] || '', page: page || 1});
+        }),
+        distinctUntilChanged(),
+        tap((it) => {
+          this.searchTerm = it.q;
+          this.isLoading = true
+        }),
+        switchMap(({q, page}) => {
+          return this.httpService.getPlenaries(page, q)
+        }),
+        map(page => ({...page, values: page.values.map(p => this.toViewPlenary(p))})),
+        tap(() => this.isLoading = false),
+      )
+  }
+
+  newSearch(searchTerm: string) {
+    this.router.navigate(['/plenaries'], {
+      queryParams: {q: searchTerm}
+    })
+  }
+
+  goToPage(pageNumber: number) {
+    this.router.navigate([], {
+      queryParams: {
+        q: this.searchTerm,
+        page: pageNumber
       }
-    );
+    })
   }
 
-  ngOnDestroy() {
-    if (this.languageSubscription) {
-      this.languageSubscription.unsubscribe();
+  toViewPlenary(plenary: Plenary): ViewPlenary {
+    return {
+      ...plenary,
+      plenary: plenary,
+      nrOfMotions: plenary.motionGroups.length,
+      isExpanded: false,
+      titleNL: 'Plenaire vergadering ' + plenary.title,
+      titleFR: 'Réunion plénière ' + plenary.title,
     }
-  }
-
-  searchPlenaries(searchTerm: string) {
-    this.searchTerm = searchTerm;
-    this.executeNewSearch();
-  }
-
-  private executeNewSearch() {
-    this.plenariesHttpService
-      .getPlenaries(1, this.searchTerm)
-      .pipe(untilDestroyed(this), take(1))
-      .subscribe((page: Page<Plenary>) => {
-        this.plenaries$$.next(page.values.map((x) => new ViewPlenary(x)));
-        this.nrOfPages = page.totalPages;
-      });
-  }
-
-  getPagedPlenaries(page: number): void {
-    this.loadPlenaries(page)
-      .pipe(untilDestroyed(this))
-      .subscribe((page: Page<Plenary>) => {
-        this.plenaries$$.next(page.values.map((x) => new ViewPlenary(x)));
-        this.nrOfPages = page.totalPages;
-      });
-  }
-
-  private loadPlenaries(page: number): Observable<Page<Plenary>> {
-    return this.plenariesHttpService
-      .getPlenaries(page, this.searchTerm)
-      .pipe(take(1));
   }
 }
 
-class ViewPlenary {
-  get titleNL(): string {
-    return 'Plenaire vergadering ' + this.plenary.title;
-  }
-
-  get titleFR(): string {
-    return 'Réunion plénière ' + this.plenary.title;
-  }
-
-  get date(): string {
-    return dateConversion(this.plenary.date);
-  }
-
-  get legislature(): string {
-    return this.plenary.legislature;
-  }
-
-  get nrOfMotions(): number {
-    return this.plenary.motionGroups.length;
-  }
-
-  get motionGroups(): MotionGroupLink[] {
-    return this.plenary.motionGroups;
-  }
-
-  constructor(p: Plenary) {
-    this.plenary = p;
-    this.isExpanded = false;
-  }
-
+interface ViewPlenary {
+  id: string;
+  title: string;
+  legislature: string;
+  date: string;
+  pdfReportUrl: string;
+  htmlReportUrl: string;
+  motionGroups: MotionGroupLink[];
+  nrOfMotions: number;
+  titleNL: string;
+  titleFR: string;
   plenary: Plenary;
   isExpanded: boolean;
 }

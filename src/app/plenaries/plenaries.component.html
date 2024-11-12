@@ -1,15 +1,16 @@
-<search-bar
+<new-search-bar
   class="searchBar"
-  (searchTriggered)="searchPlenaries($event)"
-></search-bar>
+  [(searchTerm)]="searchTerm"
+  (newSearch)="newSearch($event)"
+></new-search-bar>
 
 <div class="plenariesHeader">
   <h2>{{ "plenaries.title" | translate }}</h2>
 </div>
 
-@if (plenaries$$ | async; as plenaries) {
+@if (result$|async; as result) {
   <ul class="plenariesList">
-    @for (plenary of plenaries; track $index) {
+    @for (plenary of result.values; track $index) {
       <li
         [ngClass]="[plenary.isExpanded ? 'expanded' : 'closed']"
         [class.noMotions]="plenary.nrOfMotions === 0"
@@ -100,10 +101,10 @@
       </li>
     }
   </ul>
+
+  <new-pagination [nrOfPages]="result.totalPages" [currentPage]="result.pageNr" (pageSelected)="goToPage($event)"></new-pagination>
+
 }
 
-<pagination
-  class="plenariesPagination"
-  [nrOfPages]="nrOfPages"
-  (pageChanged)="getPagedPlenaries($event)"
-></pagination>
+
+
