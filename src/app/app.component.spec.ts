@@ -1,6 +1,10 @@
-import {TestBed} from '@angular/core/testing';
-import {AppComponent} from './app.component';
-import {TranslateModule} from '@ngx-translate/core';
+import { TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  MotionsComponent,
+  MotionsComponentMock,
+} from './motions/motions.component';
 import {RouterModule} from "@angular/router";
 
 describe('AppComponent', () => {
@@ -8,6 +12,10 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), RouterModule.forRoot([])],
     })
+      .overrideComponent(AppComponent, {
+        remove: { imports: [MotionsComponent] },
+        add: { imports: [MotionsComponentMock] },
+      })
       .compileComponents();
   });
 

@@ -6,7 +6,7 @@ import {combineLatest, distinctUntilChanged, map, Observable, switchMap, tap} fr
 import {AsyncPipe, JsonPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {PaginationComponent} from "../pagination/pagination.component";
-import {MotionGroupsDisplayComponent} from "../motion-group-display/motion-groups-display.component";
+import {MotionGroupsDisplayComponent} from "../motions/motion-group-display/motion-groups-display.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {NewPaginationComponent} from "../new-pagination/new-pagination.component";
 import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
@@ -75,7 +75,7 @@ export class NewMotionsComponent implements AfterViewInit {
   }
 
   newSearch(searchTerm: string) {
-    this.router.navigate(['/motions'], {
+    this.router.navigate(['/motions2'], {
       queryParams: {q: searchTerm}
     })
   }
