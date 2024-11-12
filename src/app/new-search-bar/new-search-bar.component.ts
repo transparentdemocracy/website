@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, forwardRef, Input, output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges, output, SimpleChanges} from '@angular/core';
 import {FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {TranslateModule} from "@ngx-translate/core";
@@ -24,7 +24,6 @@ export class NewSearchBarComponent {
   newSearch = output<string>();
 
   faMagnifyingGlass = faMagnifyingGlass;
-
 
   triggerNewSearch(searchTerm: string) {
     this.newSearch.emit(searchTerm);

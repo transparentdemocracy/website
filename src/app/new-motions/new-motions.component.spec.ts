@@ -1,37 +1,40 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NewMotionsComponent} from './new-motions.component';
-import {ActivatedRoute, RouterModule} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Subject} from "rxjs";
 import {MotionsHttpService} from "../services/motions.http-service";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {of} from "rxjs/internal/observable/of";
 import {Motion, MotionGroup} from "../services/motions";
 import {Page} from "../services/pages";
-import {testTranslateModule} from "../services/test-translation-module";
+import {By} from "@angular/platform-browser";
 
 describe('NewMotionsComponent', () => {
   let component: NewMotionsComponent;
   let fixture: ComponentFixture<NewMotionsComponent>;
   let paramsSubject: Subject<any>;
   let queryParamsSubject: Subject<any>;
+  let routerMock = jasmine.createSpyObj('MockRouter', ['navigate'])
 
   let motionsHttpServiceMock = jasmine.createSpyObj('MotionsHttpService', [
     'getMotions',
   ]);
 
-  motionsHttpServiceMock.getMotions.and.callFake(() => of(PAGED_MOTIONS));
+  motionsHttpServiceMock.getMotions.and.callFake(() => of(PAGED_MOTIONS))
 
   beforeEach(async () => {
+
     // Create subjects to control params and queryParams
     paramsSubject = new Subject<any>();
     queryParamsSubject = new Subject<any>();
 
     await TestBed.configureTestingModule({
-      imports: [NewMotionsComponent, RouterModule.forRoot([]), TranslateModule.forRoot()],
+      imports: [NewMotionsComponent, TranslateModule.forRoot()],
       providers: [
         {provide: MotionsHttpService, useValue: motionsHttpServiceMock},
         TranslateService,
+        {provide: Router, useValue: routerMock},
         {
           provide: ActivatedRoute,
           useValue: {
@@ -45,11 +48,67 @@ describe('NewMotionsComponent', () => {
     fixture = TestBed.createComponent(NewMotionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    motionsHttpServiceMock.getMotions.calls.reset();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('search scenarios', () => {
+    it('shows value of search string', async () => {
+      paramsSubject.next({})
+      queryParamsSubject.next({q: 'klimaat', page: 5})
+
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(fixture.debugElement.query(By.css('#searchInput')).nativeElement.value).toBe('klimaat')
+    })
+
+    it('loads motions from http service', async () => {
+      paramsSubject.next({})
+      queryParamsSubject.next({q: 'klimaat', page: 5})
+
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(motionsHttpServiceMock.getMotions).toHaveBeenCalledTimes(1)
+      expect(motionsHttpServiceMock.getMotions).toHaveBeenCalledWith(5, 'klimaat')
+    })
+
+    it('pagination shows all 5 pages', async () => {
+      paramsSubject.next({})
+      queryParamsSubject.next({q: 'klimaat', page: 5})
+
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      let pageItems = fixture.debugElement.queryAll(By.css('.page-item'));
+      expect(pageItems.length).toBe(7) // 5 pages + prev/next buttons
+      expect(pageItems[1].nativeElement.textContent).toContain('1')
+      expect(pageItems[2].nativeElement.textContent).toContain('2')
+      expect(pageItems[3].nativeElement.textContent).toContain('3')
+      expect(pageItems[4].nativeElement.textContent).toContain('4')
+      expect(pageItems[5].nativeElement.textContent).toContain('5')
+    })
+
+    it('clicking previous button triggers navigation', async () => {
+      paramsSubject.next({})
+      queryParamsSubject.next({q: 'klimaat', page: 5})
+
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      fixture.debugElement.query(By.css('.page-item button')).nativeElement.click()
+
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(routerMock.navigate).toHaveBeenCalledWith([], {'queryParams': {q: 'klimaat', page: 4}})
+    })
+  })
 });
 
 
@@ -146,7 +205,7 @@ const MOTION_GROUP: MotionGroup = {
 
 const PAGED_MOTIONS: Page<MotionGroup> = {
   values: [MOTION_GROUP],
-  totalPages: 1,
-  pageNr: 1,
+  totalPages: 5,
+  pageNr: 5,
   pageSize: 5,
 };
