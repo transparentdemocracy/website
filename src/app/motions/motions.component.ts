@@ -3,33 +3,29 @@ import {MotionsHttpService} from "../services/motions.http-service";
 import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {Page} from "../services/pages";
 import {combineLatest, distinctUntilChanged, map, Observable, switchMap, tap} from "rxjs";
-import {AsyncPipe, JsonPipe} from "@angular/common";
+import {AsyncPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {PaginationComponent} from "../pagination/pagination.component";
-import {MotionGroupsDisplayComponent} from "../motion-group-display/motion-groups-display.component";
+import {MotionGroupsDisplayComponent} from "../motion-groups-display/motion-groups-display.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {NewPaginationComponent} from "../new-pagination/new-pagination.component";
 import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
 import {MotionGroup} from "../services/motions";
 
 @Component({
-  selector: 'new-motions',
   standalone: true,
   imports: [
     RouterModule,
     FormsModule,
     TranslateModule,
     AsyncPipe,
-    JsonPipe,
-    PaginationComponent,
     NewSearchBarComponent,
     MotionGroupsDisplayComponent,
     NewPaginationComponent,
   ],
-  templateUrl: './new-motions.component.html',
-  styleUrl: './new-motions.component.sass'
+  templateUrl: './motions.component.html',
+  styleUrl: './motions.component.sass'
 })
-export class NewMotionsComponent implements AfterViewInit {
+export class MotionsComponent implements AfterViewInit {
 
   searchTerm = ''
   result$!: Observable<Page<MotionGroup>>

@@ -58,16 +58,3 @@ export class MotionGroupsDisplayComponent implements OnChanges {
   }
 
 }
-
-export interface ViewMotionGroup {
-  id: string;
-  legislature: number;
-  plenaryNr: number;
-  titleNL: string;
-  titleFR: string;
-  motions: Motion[];
-  votingDate: string;
-  isExpanded: boolean;
-  viewMotions: Motion[];
-  motionGroup: MotionGroup;
-}

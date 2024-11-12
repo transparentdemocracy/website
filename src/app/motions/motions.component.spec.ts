@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {NewMotionsComponent} from './new-motions.component';
+import {MotionsComponent} from './motions.component';
 import {ActivatedRoute, provideRouter, Router} from "@angular/router";
 import {Subject} from "rxjs";
 import {MotionsHttpService} from "../services/motions.http-service";
@@ -13,8 +13,8 @@ import {provideLocationMocks} from "@angular/common/testing";
 import {Location} from "@angular/common";
 
 describe('NewMotionsComponent', () => {
-  let component: NewMotionsComponent;
-  let fixture: ComponentFixture<NewMotionsComponent>;
+  let component: MotionsComponent;
+  let fixture: ComponentFixture<MotionsComponent>;
   let paramsSubject: Subject<any>;
   let queryParamsSubject: Subject<any>;
 
@@ -46,7 +46,7 @@ describe('NewMotionsComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NewMotionsComponent);
+    fixture = TestBed.createComponent(MotionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 
