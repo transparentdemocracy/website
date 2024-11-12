@@ -22,9 +22,7 @@
             (click)="plenary.isExpanded = !plenary.isExpanded"
           >
             <div class="chevronIcon">
-              <div [style.transform]="plenary.isExpanded ? 'rotate(90deg)' : 'rotate(0)'"
-                   tabindex="0"
-              >
+              <div tabindex="0" [class.rotated]="plenary.isExpanded" [class.not-rotated]="!plenary.isExpanded">
                 <fa-icon [icon]="caretRight"></fa-icon>
               </div>
             </div>

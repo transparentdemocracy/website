@@ -9,9 +9,8 @@
         class="motionGroupTitleBar"
         (click)="expanded[motionGroup.id] = !expanded[motionGroup.id]"
       >
-        <div class="chevronIcon">
-          <div [style.transform]="expanded[motionGroup.id] ? 'rotate(90deg)' : 'rotate(0)'"
-               tabindex="0">
+        <div class="chevronIcon" >
+          <div [class.rotated]="expanded[motionGroup.id]" [class.not-rotated]="!expanded[motionGroup.id]" tabindex="0">
             <fa-icon [icon]="caretRight"></fa-icon>
           </div>
         </div>
