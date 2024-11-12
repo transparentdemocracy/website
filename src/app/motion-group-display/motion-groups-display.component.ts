@@ -1,15 +1,15 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {faCaretRight, faCheckCircle, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {DocumentReference, Motion, MotionGroup, Votes} from "../../services/motions";
-import {dateConversion} from "../../services/date-service";
-import {LanguageService} from "../../services/language.service";
+import {DocumentReference, Motion, MotionGroup, Votes} from "../services/motions";
+import {dateConversion} from "../services/date-service";
+import {LanguageService} from "../services/language.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {LanguagePluralPipe} from "../../language/pluralization/language-plural.pipe";
+import {LanguagePluralPipe} from "../language/pluralization/language-plural.pipe";
 import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
-import {DocumentReferencesComponent} from "../../document-references/document-references.component";
-import {SortPipe} from "../../sort-votes/sort-votes.pipe";
+import {DocumentReferencesComponent} from "../document-references/document-references.component";
+import {SortPipe} from "../sort-votes/sort-votes.pipe";
 
 @Component({
   selector: 'motion-groups-display',

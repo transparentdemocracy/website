@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { MotionsComponent } from './motions/motions.component';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { LanguageConfigurationService } from './language/language-configuration/language-configuration.service';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { environment } from '../environments/environment';
+import {Component} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
+import {LanguageConfigurationService} from './language/language-configuration/language-configuration.service';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'root',
@@ -13,7 +12,6 @@ import { environment } from '../environments/environment';
   imports: [
     RouterModule,
     HeaderComponent,
-    MotionsComponent,
     FooterComponent,
     TranslateModule,
   ],
@@ -22,7 +20,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   maintenanceModeEnabled: boolean;
-  
+
   constructor(
     private languageConfigurationService: LanguageConfigurationService
   ) {
