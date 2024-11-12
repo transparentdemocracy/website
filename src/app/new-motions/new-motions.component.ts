@@ -75,7 +75,7 @@ export class NewMotionsComponent implements AfterViewInit {
   }
 
   newSearch(searchTerm: string) {
-    this.router.navigate(['/motions2'], {
+    this.router.navigate(['/motions'], {
       queryParams: {q: searchTerm}
     })
   }
