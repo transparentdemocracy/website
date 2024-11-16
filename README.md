@@ -1,5 +1,6 @@
 # Transparent Democracy - Frontend
 
+
 ## Technical requirements
 - NodeJS v22.0.0
 - NPM v10.5.1
