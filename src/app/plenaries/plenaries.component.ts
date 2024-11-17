@@ -11,7 +11,7 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
-import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
+import {SearchBarComponent} from "../search-bar/search-bar.component";
 import {LanguageService} from "../services/language.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
@@ -21,7 +21,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   standalone: true,
   imports: [
     CommonModule,
-    NewSearchBarComponent,
+    SearchBarComponent,
     PaginationComponent,
     RouterLink,
     TranslateModule,

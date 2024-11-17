@@ -8,7 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {MotionGroupsDisplayComponent} from "../motion-groups-display/motion-groups-display.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {PaginationComponent} from "../pagination/pagination.component";
-import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
+import {SearchBarComponent} from "../search-bar/search-bar.component";
 import {MotionGroup} from "../services/motions";
 
 @Component({
@@ -18,7 +18,7 @@ import {MotionGroup} from "../services/motions";
     FormsModule,
     TranslateModule,
     AsyncPipe,
-    NewSearchBarComponent,
+    SearchBarComponent,
     MotionGroupsDisplayComponent,
     PaginationComponent,
   ],
