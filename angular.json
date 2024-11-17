@@ -30,6 +30,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.sass"
             ],

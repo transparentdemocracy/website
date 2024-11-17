@@ -1,23 +1,6 @@
 @use '../../styles/colors'
 @use '../../styles/breakpoints'
 
-p
-  text-align: center
-
-.searchBox
-  display: flex
-  justify-content: center
-  align-items: center
-  gap: 0.5rem
-  width: 100%
-  max-width: 50rem
-  margin: 0 auto 4rem auto
-
-  @media (max-width: breakpoints.$screen-md)
-    flex-direction: column
-    gap: 2rem
-    padding: 0 1rem
-
 .searchInput
   border: 2px solid colors.$color-primary-light
   border-radius: 6px
@@ -27,5 +10,3 @@ p
 .searchBtn
   min-width: 12rem
 
-.fa-magnifying-glass
-  display: inline
