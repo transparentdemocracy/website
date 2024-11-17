@@ -9,7 +9,7 @@
         class="motionGroupTitleBar"
         (click)="expanded[motionGroup.id] = !expanded[motionGroup.id]"
       >
-        <div class="chevronIcon" >
+        <div class="chevronIcon">
           <div [class.rotated]="expanded[motionGroup.id]" [class.not-rotated]="!expanded[motionGroup.id]" tabindex="0">
             <fa-icon [icon]="caretRight"></fa-icon>
           </div>
@@ -92,18 +92,13 @@
 
                 <div class="voteOverView">
                   <div class="voteOverViewTitle">
-                    <h4>
-                      {{ "motions.resultsByParty" | translate }}
-                    </h4>
-                    <button
+                    <h4>{{ "motions.resultsByParty" | translate }}</h4>
+                    <a
                       #btnShowAllVotes
-                      (click)="
-                    toggleShowAllVotes(btnShowAllVotes, votesPerPartyTable)
-                  "
-                      class="btnLinkStyle btnShowAllVotes"
-                    >
-                      {{ "motions.showAllParties" | translate }}
-                    </button>
+                      href=""
+                      (click)="toggleShowAllVotes(btnShowAllVotes, votesPerPartyTable); false"
+                      class="btnShowAllVotes"
+                    >{{ "motions.showAllParties" | translate }}</a>
                   </div>
                   <div #votesPerPartyTable class="votePerPartyTable">
                     <div class="yesVotesColumn">

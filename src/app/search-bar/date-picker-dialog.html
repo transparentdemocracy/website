@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Periode voor zoekopdracht</h2>
+<mat-dialog-content align="center">
+  <mat-form-field>
+    <mat-label>From</mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="start">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>To</mat-label>
+    <input matInput [matDatepicker]="pickerTo" [formControl]="end">
+    <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
+    <mat-datepicker #pickerTo></mat-datepicker>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Clear</button>
+  <button mat-button [mat-dialog-close]="{start: start.value, end: end.value}" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
