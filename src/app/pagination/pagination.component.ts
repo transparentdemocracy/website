@@ -55,7 +55,6 @@ export class PaginationComponent implements OnChanges {
   }
 
   onPageClick(pageNr: number) {
-    console.log('emitting page ', pageNr)
     this.pageSelected.emit(pageNr);
   }
 
