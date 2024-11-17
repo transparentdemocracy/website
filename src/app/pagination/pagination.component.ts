@@ -1,97 +1,69 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit, output,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {BehaviorSubject} from 'rxjs';
-import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {Component, Input, OnChanges, output, SimpleChanges} from '@angular/core';
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
-@UntilDestroy()
 @Component({
   selector: 'pagination',
   standalone: true,
   imports: [
-    FontAwesomeModule,
     FaIconComponent
   ],
   templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.sass',
+  styleUrl: './pagination.component.sass'
 })
-export class PaginationComponent implements OnInit {
-  @Input() nrOfPages!: number;
+export class PaginationComponent implements OnChanges {
 
-  pageChanged = output<number>();
+  @Input() nrOfPages: number = 1;
+  @Input() currentPage: number = 1
+  pageSelected = output<number>();
 
-  totalPagesArray: number[] = [];
+  totalPagesArray: any[] = [1];
+
   arrowLeft = faArrowLeft;
   arrowRight = faArrowRight;
 
-  private readonly maxWindowSize = 10;
-  private currentPage$$ = new BehaviorSubject<number>(1);
-
-  constructor() {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateTotalPagesArray();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    let change = changes['nrOfPages'];
-    this.nrOfPages = change.currentValue;
-    this.setTotalPagesArray();
-  }
+  private updateTotalPagesArray() {
 
-  ngOnInit(): void {
-    this.currentPage$$
-      .pipe(untilDestroyed(this))
-      .subscribe((page: number) => this.pageChanged.emit(page));
-
-    this.setTotalPagesArray();
-  }
-
-  decreasePage($event: any): void {
-    $event.preventDefault();
-    if (this.currentPage$$.getValue() > 1)
-      this.currentPage$$.next(this.currentPage$$.getValue() - 1);
-    this.setTotalPagesArray();
-  }
-
-  setPage($event: any, page: number): void {
-    $event.preventDefault();
-    this.currentPage$$.next(page);
-  }
-
-  increasePage($event: any): void {
-    $event.preventDefault();
-    if (this.currentPage$$.getValue() < this.nrOfPages)
-      this.currentPage$$.next(this.currentPage$$.getValue() + 1);
-    this.setTotalPagesArray();
-  }
-
-  disableIfCurrentPage(page: number): string {
-    if (this.currentPage$$.getValue() == page) return 'disabled';
-    else return '';
-  }
-
-  setTotalPagesArray(): void {
-    let start = 0;
-    let maxPageNr = this.nrOfPages;
-
-      if (this.nrOfPages > this.maxWindowSize) {
-      let currentPage = this.currentPage$$.getValue();
-      let offset = this.maxWindowSize / 2;
-      start = Math.max(0, currentPage - offset);
-      maxPageNr = this.maxWindowSize;
+    if (this.nrOfPages < 10) {
+      this.totalPagesArray = this.range(1, this.nrOfPages);
+      return
     }
 
-    this.fillPageArray(maxPageNr, start);
+    const pagesArray: any[] = [];
+
+    if (this.currentPage < 6) {
+      pagesArray.push(...this.range(1, 7))
+      pagesArray.push('...2', this.nrOfPages)
+    } else if (this.currentPage > this.nrOfPages - 5) {
+      pagesArray.push(1, '...1')
+      pagesArray.push(...this.range(this.nrOfPages - 6, this.nrOfPages))
+    } else {
+      pagesArray.push(1, '...1')
+      pagesArray.push(...this.range(this.currentPage - 2, this.currentPage + 2))
+      pagesArray.push('...2', this.nrOfPages)
+    }
+
+    this.totalPagesArray = pagesArray;
   }
 
-  private fillPageArray(maxPageNr: number, start: number) {
-    this.totalPagesArray = Array(maxPageNr)
-      .fill(start + 1)
-      .map((x, i) => x + i);
+  private range(start: number, end: number) {
+    return Array.from({length: end - start + 1}, (k, v) => start + v);
+  }
+
+  onPageClick(pageNr: number) {
+    console.log('emitting page ', pageNr)
+    this.pageSelected.emit(pageNr);
+  }
+
+  toPreviousPage() {
+    this.onPageClick(Math.max(1, Math.min(this.currentPage - 1, this.nrOfPages)))
+  }
+
+  toNextPage() {
+    this.onPageClick(Math.max(1, Math.min(this.currentPage + 1, this.nrOfPages)))
   }
 }

@@ -7,6 +7,6 @@
 @if (result$|async; as result) {
     <motion-groups-display [motionGroups]="result.values"></motion-groups-display>
 
-    <new-pagination [nrOfPages]="result.totalPages" [currentPage]="result.pageNr" (pageSelected)="goToPage($event)"></new-pagination>
+    <pagination [nrOfPages]="result.totalPages" [currentPage]="result.pageNr" (pageSelected)="goToPage($event)"></pagination>
 }
 

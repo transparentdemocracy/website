@@ -1,7 +1,6 @@
 /*plenaries.component.ts*/
 import {CommonModule} from '@angular/common';
 import {AfterViewInit, Component} from '@angular/core';
-import {SearchBarComponent} from '../search-bar/search-bar.component';
 import {distinctUntilChanged, map, Observable, switchMap, tap} from 'rxjs';
 import {PaginationComponent} from '../pagination/pagination.component';
 import {UntilDestroy} from '@ngneat/until-destroy';
@@ -11,8 +10,6 @@ import {Page} from '../services/pages';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {MotionGroupsDisplayComponent} from "../motion-groups-display/motion-groups-display.component";
-import {NewPaginationComponent} from "../new-pagination/new-pagination.component";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
 import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
 import {LanguageService} from "../services/language.service";
@@ -24,15 +21,13 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   standalone: true,
   imports: [
     CommonModule,
-    SearchBarComponent,
     NewSearchBarComponent,
     PaginationComponent,
     RouterLink,
     TranslateModule,
     LanguagePluralPipe,
     FaIconComponent,
-    MotionGroupsDisplayComponent,
-    NewPaginationComponent,
+    PaginationComponent,
   ],
   templateUrl: './plenaries.component.html',
   styleUrl: './plenaries.component.sass',

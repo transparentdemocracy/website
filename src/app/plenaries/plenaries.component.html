@@ -20,6 +20,7 @@
           <div
             class="plenaryTitleBar"
             (click)="plenary.isExpanded = !plenary.isExpanded"
+            (keydown.enter)="plenary.isExpanded = !plenary.isExpanded"
           >
             <div class="chevronIcon">
               <div tabindex="0" [class.rotated]="plenary.isExpanded" [class.not-rotated]="!plenary.isExpanded">
@@ -100,7 +101,7 @@
     }
   </ul>
 
-  <new-pagination [nrOfPages]="result.totalPages" [currentPage]="result.pageNr" (pageSelected)="goToPage($event)"></new-pagination>
+  <pagination [nrOfPages]="result.totalPages" [currentPage]="result.pageNr" (pageSelected)="goToPage($event)"></pagination>
 
 }
 

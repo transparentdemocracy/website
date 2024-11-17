@@ -7,7 +7,7 @@ import {AsyncPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {MotionGroupsDisplayComponent} from "../motion-groups-display/motion-groups-display.component";
 import {TranslateModule} from "@ngx-translate/core";
-import {NewPaginationComponent} from "../new-pagination/new-pagination.component";
+import {PaginationComponent} from "../pagination/pagination.component";
 import {NewSearchBarComponent} from "../new-search-bar/new-search-bar.component";
 import {MotionGroup} from "../services/motions";
 
@@ -20,7 +20,7 @@ import {MotionGroup} from "../services/motions";
     AsyncPipe,
     NewSearchBarComponent,
     MotionGroupsDisplayComponent,
-    NewPaginationComponent,
+    PaginationComponent,
   ],
   templateUrl: './motions.component.html',
   styleUrl: './motions.component.sass'
