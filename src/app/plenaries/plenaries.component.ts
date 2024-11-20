@@ -11,7 +11,7 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {TranslateModule} from '@ngx-translate/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons";
-import {SearchBarComponent} from "../search-bar/search-bar.component";
+import {SearchBarComponent, SearchQuery} from "../search-bar/search-bar.component";
 import {LanguageService} from "../services/language.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
@@ -74,9 +74,10 @@ export class PlenariesComponent implements AfterViewInit {
       )
   }
 
-  newSearch(searchTerm: string) {
+  newSearch(q: SearchQuery) {
+    // TODO: pass start/end
     this.router.navigate(['/plenaries'], {
-      queryParams: {q: searchTerm}
+      queryParams: {q: q.q}
     })
   }
 

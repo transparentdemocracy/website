@@ -21,6 +21,9 @@
         <a href="" (click)="triggerNewSearch(keyword3.innerText); false" #keyword3>{{ "searchBar.job" | translate }}</a>
         , ...
       </div>
+      <div>
+        Periode: <a href="" (click)="openDateRangeDialog(); false">{{selectedDateRange | dateRangeFormat}}</a>
+      </div>
     </div>
     <button class="simple search-button" (click)="triggerNewSearch(searchBox.value)">
       <fa-icon [icon]="faMagnifyingGlass"></fa-icon>

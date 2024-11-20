@@ -16,8 +16,8 @@ export class MotionsHttpService {
   constructor(private http: HttpClient) {
   }
 
-  getMotions(page: number, searchTerm: string): Observable<Page<MotionGroup>> {
-    return this.fetchMotions(page, searchTerm);
+  getMotions(page: number, searchTerm: string, minDate?: string, maxDate?: string): Observable<Page<MotionGroup>> {
+    return this.fetchMotions(page, searchTerm, minDate, maxDate);
   }
 
   getMotion(motionId: string): Observable<Page<MotionGroup>> {
@@ -36,11 +36,23 @@ export class MotionsHttpService {
   /* page is 1-based */
   private fetchMotions(
     page: number,
-    searchTerm: string | null
+    searchTerm: string | null,
+    minDate?: string,
+    maxDate?: string,
   ): Observable<Page<MotionGroup>> {
     const PAGE_SIZE = 10;
+    let params = new HttpParams()
+      .set("q", searchTerm || "")
+      .set("page", page - 1)
+
+      if (minDate) {
+        params = params.set("minDate", minDate)
+      }
+      if (maxDate) {
+        params = params.set("maxDate", maxDate)
+      }
     return this.http.get<ElasticSearch<MotionGroup>>(`${environment.searchMotionsUrl}?`, {
-      params: new HttpParams().set("q", searchTerm || "").set("page", page - 1)
+      params: params
     })
       .pipe(map(v => ({
             pageNr: page,

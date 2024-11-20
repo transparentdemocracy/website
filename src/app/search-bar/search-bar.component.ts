@@ -8,10 +8,18 @@ import {MatInputModule} from "@angular/material/input";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {DateRangeFormatPipe} from "../date-range-format.pipe";
+import {DateTime} from "luxon";
 
 interface DateRange {
-  start?: string,
-  end?: string
+  start?: DateTime,
+  end?: DateTime
+}
+
+export interface SearchQuery {
+  q: string,
+  minDate?: string,
+  maxDate?: string
 }
 
 @Component({
@@ -20,6 +28,7 @@ interface DateRange {
   imports: [
     FormsModule,
     FaIconComponent,
+    DateRangeFormatPipe,
     TranslateModule,
     MatDatepickerModule,
     MatInputModule
@@ -32,7 +41,7 @@ export class SearchBarComponent {
   searchTermChange = output<string>()
   selectedDateRange: DateRange = {}
   hasDateRange = false
-  newSearch = output<string>()
+  newSearch = output<SearchQuery>()
 
   showAdvanced = true
   faMagnifyingGlass = faMagnifyingGlass;
@@ -41,7 +50,7 @@ export class SearchBarComponent {
   }
 
   triggerNewSearch(searchTerm: string) {
-    this.newSearch.emit(searchTerm);
+    this.newSearch.emit({q: searchTerm, minDate: this.selectedDateRange.start?.toFormat('yyyy-MM-dd'), maxDate: this.selectedDateRange.end?.toFormat('yyyy-MM-dd')});
   }
 
   openDateRangeDialog() {
