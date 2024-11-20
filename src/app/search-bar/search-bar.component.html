@@ -14,32 +14,11 @@
       /></div>
       <div class="search-hints">
         {{ "searchBar.try" | translate }}
-        <button
-          #keyword1
-          class="btnLinkStyle"
-          (click)="triggerNewSearch(keyword1.innerText)"
-        >
-          {{ "searchBar.climate" | translate }}
-        </button
-        >
+        <a href="" (click)="triggerNewSearch(keyword1.innerText); false" #keyword1>{{ "searchBar.climate" | translate }}</a>
         ,
-        <button
-          #keyword2
-          class="btnLinkStyle"
-          (click)="triggerNewSearch(keyword2.innerText)"
-        >
-          {{ "searchBar.immigration" | translate }}
-        </button
-        >
+        <a href="" (click)="triggerNewSearch(keyword2.innerText); false" #keyword2>{{ "searchBar.immigration" | translate }}</a>
         ,
-        <button
-          #keyword3
-          class="btnLinkStyle"
-          (click)="triggerNewSearch(keyword3.innerText)"
-        >
-          {{ "searchBar.job" | translate }}
-        </button
-        >
+        <a href="" (click)="triggerNewSearch(keyword3.innerText); false" #keyword3>{{ "searchBar.job" | translate }}</a>
         , ...
       </div>
     </div>
