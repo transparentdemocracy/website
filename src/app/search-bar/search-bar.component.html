@@ -1,59 +1,40 @@
-<div class="container justify-content-center" [style.width]="'80%'">
-  <div class="row">
-    <div class="col">
-      <label for="searchBtn">{{ "searchBar.label" | translate }}:</label>
-    </div>
-  </div>
+<div class="searchBox">
+  <label
+  >{{ "searchBar.label" | translate }}:
+    <input
+      #searchBox
+      type="search"
+      class="searchInput"
+      id="searchInput"
+      [(ngModel)]="searchTerm"
+      (keydown.enter)="triggerNewSearch(searchBox.value)"
+    />
+    {{ "searchBar.try" | translate }}
+    <button
+      #keyword1
+      class="btnLinkStyle"
+      (click)="triggerNewSearch(keyword1.innerText)"
+    >
+      {{ "searchBar.climate" | translate }}</button
+    >,
+    <button
+      #keyword2
+      class="btnLinkStyle"
+      (click)="triggerNewSearch(keyword2.innerText)"
+    >
+      {{ "searchBar.immigration" | translate }}</button
+    >,
+    <button
+      #keyword3
+      class="btnLinkStyle"
+      (click)="triggerNewSearch(keyword3.innerText)"
+    >
+      {{ "searchBar.job" | translate }}</button
+    >, ...
+  </label>
 
-  <div class="row">
-    <div class="col-md-8 col-12 mb-1">
-      <input
-        #searchBox
-        type="search"
-        class="form-control w-100"
-        id="searchInput"
-        [(ngModel)]="searchTerm"
-        (keydown.enter)="triggerNewSearch(searchBox.value)"
-      />
-      <div>
-        <span>{{ "searchBar.try" | translate }}
-          <a
-            #keyword1
-            href=""
-            (click)="triggerNewSearch(keyword1.innerText); false"
-          >{{ "searchBar.climate" | translate }}</a>,
-      <a
-        #keyword2
-        href=""
-        (click)="triggerNewSearch(keyword2.innerText); false"
-      >{{ "searchBar.immigration" | translate }}</a>,
-      <a
-        #keyword3
-        href=""
-        (click)="triggerNewSearch(keyword3.innerText); false"
-      >{{ "searchBar.job" | translate }}</a>,
-                                                ...</span>
-        @if (!showAdvanced) {
-          <span class="float-end">
-          <a href="#" (click)="toggleAdvanced(); false">Advanced</a>
-        </span>
-        }
-      </div>
-    </div>
-    <div class="col-md-4 col-12">
-      <span class="float-end">
-      <button id="searchBtn" class="btn btn-primary searchBtn" (click)="triggerNewSearch(searchBox.value)">
-        <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
-        {{ "searchBar.searchBtn" | translate }}
-      </button></span>
-    </div>
-    @if (!showAdvanced) {
-      <div class="row">
-        <div class="col-md-8">
-          <a href=""
-             (click)="openDateRangeDialog(); false">{{ selectedDateRange | dateRangeFormat }}</a>
-        </div>
-      </div>
-
-    }
-  </div>
+  <button class="searchBtn" (click)="triggerNewSearch(searchBox.value)">
+    <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+    {{ "searchBar.searchBtn" | translate }}
+  </button>
+</div>

@@ -1,18 +1,18 @@
-import {ChangeDetectionStrategy, Component, inject, Inject, Input, output} from '@angular/core';
+import {Component, inject, Input, output} from '@angular/core';
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {TranslateModule} from "@ngx-translate/core";
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import {DateTime} from "luxon";
-import {JsonPipe} from "@angular/common";
-import {DateRangeFormatPipe} from "../date-range-format.pipe";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
-type DateRange = { start?: DateTime, end?: DateTime };
+interface DateRange {
+  start?: string,
+  end?: string
+}
 
 @Component({
   selector: 'search-bar',
@@ -21,8 +21,8 @@ type DateRange = { start?: DateTime, end?: DateTime };
     FormsModule,
     FaIconComponent,
     TranslateModule,
-    JsonPipe,
-    DateRangeFormatPipe
+    MatDatepickerModule,
+    MatInputModule
   ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.sass',
