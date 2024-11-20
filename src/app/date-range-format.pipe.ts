@@ -9,18 +9,18 @@ export class DateRangeFormatPipe implements PipeTransform {
 
   transform(value: any, ...args: unknown[]): unknown {
     if (!value || (!value.relative && !value.start)) {
-      return 'Kies periode'
+      return '-Kies-'
     }
     if (value.relative) {
       return value.relative.value + ' ' + value.relative.unit
     }
     if (value.start && value.end) {
-      return `Periode vanaf ${this.formatDate(value.start)} tot ${this.formatDate(value.end)}`
+      return `van ${this.formatDate(value.start)} tot ${this.formatDate(value.end)}`
     }
     if (value.start) {
-      return `Periode vanaf ${this.formatDate(value.start)}`
+      return `vanaf ${this.formatDate(value.start)}`
     }
-    return `Periode tot ${this.formatDate(value.end)}`
+    return `tot ${this.formatDate(value.end)}`
   }
 
   private formatDate(date: DateTime) {

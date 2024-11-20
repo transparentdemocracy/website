@@ -8,6 +8,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {DateRangeFormatPipe} from "../date-range-format.pipe";
 
 interface DateRange {
   start?: string,
@@ -21,6 +22,7 @@ interface DateRange {
     FormsModule,
     FaIconComponent,
     TranslateModule,
+    DateRangeFormatPipe,
     MatDatepickerModule,
     MatInputModule
   ],
