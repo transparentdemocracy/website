@@ -10,7 +10,7 @@
   "main": {
     "title": "Visualisatie van de stemmingen in het Belgische federale parlement (in de Kamer)",
     "intro": "Dit project heeft als doel om het stemgedrag van politici in het Belgische federaal parlement te visualiseren. We focussen op de Kamer.",
-    "searchRange": "<p>Er zijn in de huidige legislatuur (van de federale verkiezingen in juni 2024 tot de zitting van 6 november 2024) nog geen stemmingen op wetsvoorstellen geweest.</p><p>Er worden wel al vragen gesteld over de positie en acties van de ministers rond bepaalde thema's en er worden urgentieverzoeken ingediend.</p><p>Wanneer de eerste wetsvoorstellen worden gestemd, zullen ze hier verschijnen.</p>"
+    "searchRange": "U vindt hier het stemgedrag van politici in de Kamer sinds 2019 (vorige en huidige legislatuur)."
   },
   "maintenance": {
     "announcement": "We werken momenteel aan de website.",

@@ -10,7 +10,7 @@
   "main": {
     "title": "Visualisation des votes du Parlement fédéral belge (à la Chambre)",
     "intro": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature (5 ans) du Parlement fédéral belge. Nous nous concentrons sur la Chambre.",
-    "searchRange": "<p>Il n'y a pas encore eu de vote sur des projets de loi au cours de la législature actuelle (des élections fédérales de juin 2024 à la session du 6 novembre 2024).</p><p>Des questions se posent déjà sur la position et des actions des ministres sur certains thèmes et des demandes urgentes sont soumises.</p><p>Lorsque les premiers projets de loi seront votés, ils apparaîtront ici.</p>"
+    "searchRange": "Vous trouverez ici le comportement de vote des politiciens à la Chambre depuis 2019 (législature précédente et actuelle)."
   },
   "maintenance": {
     "announcement": "Nous travaillons actuellement sur le site Web.",
