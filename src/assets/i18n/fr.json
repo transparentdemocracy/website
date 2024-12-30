@@ -10,7 +10,7 @@
   "main": {
     "title": "Visualisation des votes du Parlement fédéral belge (à la Chambre)",
     "intro": "Ce projet vise à montrer le déroulement des votes des politiciens lors de la dernière législature (5 ans) du Parlement fédéral belge. Nous nous concentrons sur la Chambre.",
-    "searchRange": "Vous trouverez ici le comportement de vote des politiciens à la Chambre depuis 2019 (législature précédente et actuelle)."
+    "searchRange": "<p>Vous trouverez ici le comportement de vote des politiciens à la Chambre depuis 2019 (législature précédente et actuelle).</p><p>La dernière séance plénière a eu lieu le 19/12/24 et a été une réunion marathon (de 19h à 00h30), le résultat est à retrouver ci-dessous. La prochaine séance plénière aura lieu le 09/01/25.</p>"
   },
   "maintenance": {
     "announcement": "Nous travaillons actuellement sur le site Web.",
