@@ -10,7 +10,7 @@
   "main": {
     "title": "Visualisatie van de stemmingen in het Belgische federale parlement (in de Kamer)",
     "intro": "Dit project heeft als doel om het stemgedrag van politici in het Belgische federaal parlement te visualiseren. We focussen op de Kamer.",
-    "searchRange": "<p>U vindt hier het stemgedrag van politici in de Kamer sinds 2019 (vorige en huidige legislatuur).</p><p>De laatste plenaire vergadering vond plaats op 19/12/24 en was een marathonvergadering (van 19u tot 0u30), het resultaat daarvan vindt u hieronder.</p><p>De eerstvolgende plenaire zitting vindt plaats op 09/01/25.</p>"
+    "searchRange": ""
   },
   "maintenance": {
     "announcement": "We werken momenteel aan de website.",
