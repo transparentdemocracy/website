@@ -5,15 +5,14 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {faCircleInfo, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'document-summary',
-  standalone: true,
-  imports: [
-    FontAwesomeModule,
-    TranslateModule,
-    CommonModule
-  ],
-  templateUrl: './document-summary.component.html',
-  styleUrl: './document-summary.component.sass'
+    selector: 'document-summary',
+    imports: [
+        FontAwesomeModule,
+        TranslateModule,
+        CommonModule
+    ],
+    templateUrl: './document-summary.component.html',
+    styleUrl: './document-summary.component.sass'
 })
 export class DocumentSummaryComponent {
   @Input()

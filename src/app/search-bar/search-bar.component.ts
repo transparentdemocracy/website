@@ -15,17 +15,16 @@ interface DateRange {
 }
 
 @Component({
-  selector: 'search-bar',
-  standalone: true,
-  imports: [
-    FormsModule,
-    FaIconComponent,
-    TranslateModule,
-    MatDatepickerModule,
-    MatInputModule
-  ],
-  templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.sass',
+    selector: 'search-bar',
+    imports: [
+        FormsModule,
+        FaIconComponent,
+        TranslateModule,
+        MatDatepickerModule,
+        MatInputModule
+    ],
+    templateUrl: './search-bar.component.html',
+    styleUrl: './search-bar.component.sass'
 })
 export class SearchBarComponent {
   @Input() searchTerm!: string
@@ -62,17 +61,16 @@ export class SearchBarComponent {
 }
 
 @Component({
-  selector: 'datepicker-dialog',
-  templateUrl: 'date-picker-dialog.html',
-  standalone: true,
-  imports: [
-    MatDatepickerModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-  ],
+    selector: 'datepicker-dialog',
+    templateUrl: 'date-picker-dialog.html',
+    imports: [
+        MatDatepickerModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+    ]
 })
 class DatePickerDialog {
   range: DateRange = inject(MAT_DIALOG_DATA);

@@ -8,7 +8,6 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 @Component({
     selector: 'language-selector',
     templateUrl: './language-selector.component.html',
-    standalone: true,
     styleUrl: './language-selector.component.sass',
     imports: [
         FaIconComponent

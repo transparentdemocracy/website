@@ -11,18 +11,17 @@ import {DocumentReferencesComponent} from "../document-references/document-refer
 import {SortPipe} from "../sort-votes/sort-votes.pipe";
 
 @Component({
-  selector: 'motion-groups-display',
-  standalone: true,
-  imports: [
-    FontAwesomeModule,
-    LanguagePluralPipe,
-    TranslateModule,
-    CommonModule,
-    DocumentReferencesComponent,
-    SortPipe
-  ],
-  templateUrl: './motion-groups-display.component.html',
-  styleUrl: './motion-groups-display.component.sass'
+    selector: 'motion-groups-display',
+    imports: [
+        FontAwesomeModule,
+        LanguagePluralPipe,
+        TranslateModule,
+        CommonModule,
+        DocumentReferencesComponent,
+        SortPipe
+    ],
+    templateUrl: './motion-groups-display.component.html',
+    styleUrl: './motion-groups-display.component.sass'
 })
 export class MotionGroupsDisplayComponent implements OnChanges {
 

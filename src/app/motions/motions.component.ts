@@ -12,18 +12,17 @@ import {SearchBarComponent} from "../search-bar/search-bar.component";
 import {MotionGroup} from "../services/motions";
 
 @Component({
-  standalone: true,
-  imports: [
-    RouterModule,
-    FormsModule,
-    TranslateModule,
-    AsyncPipe,
-    SearchBarComponent,
-    MotionGroupsDisplayComponent,
-    PaginationComponent,
-  ],
-  templateUrl: './motions.component.html',
-  styleUrl: './motions.component.sass'
+    imports: [
+        RouterModule,
+        FormsModule,
+        TranslateModule,
+        AsyncPipe,
+        SearchBarComponent,
+        MotionGroupsDisplayComponent,
+        PaginationComponent,
+    ],
+    templateUrl: './motions.component.html',
+    styleUrl: './motions.component.sass'
 })
 export class MotionsComponent implements AfterViewInit {
 

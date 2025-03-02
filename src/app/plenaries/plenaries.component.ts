@@ -17,20 +17,19 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @UntilDestroy()
 @Component({
-  selector: 'plenaries',
-  standalone: true,
-  imports: [
-    CommonModule,
-    SearchBarComponent,
-    PaginationComponent,
-    RouterLink,
-    TranslateModule,
-    LanguagePluralPipe,
-    FaIconComponent,
-    PaginationComponent,
-  ],
-  templateUrl: './plenaries.component.html',
-  styleUrl: './plenaries.component.sass',
+    selector: 'plenaries',
+    imports: [
+        CommonModule,
+        SearchBarComponent,
+        PaginationComponent,
+        RouterLink,
+        TranslateModule,
+        LanguagePluralPipe,
+        FaIconComponent,
+        PaginationComponent,
+    ],
+    templateUrl: './plenaries.component.html',
+    styleUrl: './plenaries.component.sass'
 })
 export class PlenariesComponent implements AfterViewInit {
   searchTerm = ''

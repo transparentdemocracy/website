@@ -9,17 +9,16 @@ import {faFilePdf, faUpRightFromSquare} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: 'document-references',
-  standalone: true,
-  imports: [
-    FontAwesomeModule,
-    DocumentSummaryComponent,
-    NgForOf,
-    NgIf,
-    TranslateModule
-  ],
-  templateUrl: './document-references.component.html',
-  styleUrl: './document-references.component.sass'
+    selector: 'document-references',
+    imports: [
+        FontAwesomeModule,
+        DocumentSummaryComponent,
+        NgForOf,
+        NgIf,
+        TranslateModule
+    ],
+    templateUrl: './document-references.component.html',
+    styleUrl: './document-references.component.sass'
 })
 export class DocumentReferencesComponent implements OnInit, OnDestroy {
 

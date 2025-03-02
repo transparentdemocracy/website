@@ -3,13 +3,12 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'pagination',
-  standalone: true,
-  imports: [
-    FaIconComponent
-  ],
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.sass'
+    selector: 'pagination',
+    imports: [
+        FaIconComponent
+    ],
+    templateUrl: './pagination.component.html',
+    styleUrl: './pagination.component.sass'
 })
 export class PaginationComponent implements OnChanges {
 

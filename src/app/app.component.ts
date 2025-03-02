@@ -7,16 +7,15 @@ import {FooterComponent} from './footer/footer.component';
 import {environment} from '../environments/environment';
 
 @Component({
-  selector: 'root',
-  standalone: true,
-  imports: [
-    RouterModule,
-    HeaderComponent,
-    FooterComponent,
-    TranslateModule,
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.sass',
+    selector: 'root',
+    imports: [
+        RouterModule,
+        HeaderComponent,
+        FooterComponent,
+        TranslateModule,
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.sass'
 })
 export class AppComponent {
   maintenanceModeEnabled: boolean;

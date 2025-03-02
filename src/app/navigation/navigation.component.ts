@@ -5,11 +5,10 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'navigation',
-  standalone: true,
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.sass',
-  imports: [FontAwesomeModule, RouterLink, RouterModule, TranslateModule],
+    selector: 'navigation',
+    templateUrl: './navigation.component.html',
+    styleUrl: './navigation.component.sass',
+    imports: [FontAwesomeModule, RouterLink, RouterModule, TranslateModule]
 })
 export class NavigationComponent {
   questionIcon = faQuestionCircle;
