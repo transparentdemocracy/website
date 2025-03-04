@@ -33,6 +33,7 @@ jobs:
     environment: dev
     permissions:
       contents: write
+    needs: test
     steps:
       - name: Build and deploy dev
         env:
@@ -46,6 +47,7 @@ jobs:
     environment: prod
     permissions:
       contents: write
+    needs: deploy-dev
     steps:
       - name: Build and deploy prod
         env:
