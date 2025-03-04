@@ -4,10 +4,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -29,6 +28,12 @@ jobs:
       - name: Run tests
         run: npm run test:headless
 
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    permissions:
+      contents: write
+    steps:
       - name: Build and deploy dev
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -36,8 +41,13 @@ jobs:
           npm run build:dev
           npm run deploy:dev
 
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment: prod
+    permissions:
+      contents: write
+    steps:
       - name: Build and deploy prod
-        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
