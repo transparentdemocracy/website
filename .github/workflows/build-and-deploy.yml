@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # https://github.com/actions/checkout
@@ -35,6 +36,17 @@ jobs:
       contents: write
     needs: test
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # https://github.com/actions/setup-node?tab=readme-ov-file
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Build and deploy dev
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -49,6 +61,17 @@ jobs:
       contents: write
     needs: deploy-dev
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # https://github.com/actions/setup-node?tab=readme-ov-file
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Build and deploy prod
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
