@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - '*'
+      - main
   pull_request:
 
 jobs:
@@ -29,14 +29,17 @@ jobs:
       - name: Run tests
         run: npm run test:headless
 
-      - name: Build
-        run: npm run build:prod
+      - name: Build and deploy dev
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          npm run build:dev
+          npm run deploy:dev
 
-      - name: Deploy # deployment to https://transparentdemocracy.github.io/website/ Github pages, in the gh-pages branch.
-        uses: peaceiris/actions-gh-pages@v4 # https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#getting-started
-        if: github.ref == 'refs/heads/main' && success()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/website/browser
-          enable_jekyll: true
-          cname: watdoetdepolitiek.be # https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+      - name: Build and deploy prod
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          npm run build:prod
+          npm run deploy:prod
