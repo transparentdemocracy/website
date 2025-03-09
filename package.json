@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:dev": "ng build --configuration production --base-href https://wddp-dev.pages.dev",
+    "build:dev": "ng build --configuration development --base-href https://wddp-dev.pages.dev",
     "build:prod": "ng build --configuration production --base-href https://watdoetdepolitiek.be",
     "deploy:dev": "wrangler --project-name wddp-dev pages deploy dist/website/browser",
     "deploy:prod": "wrangler --project-name website pages deploy dist/website/browser",
