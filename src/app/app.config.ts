@@ -7,6 +7,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {provideLuxonDateAdapter} from "@angular/material-luxon-adapter";
+import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import {getAuth, provideAuth} from '@angular/fire/auth';
+import {environment} from '../environments/environment';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -27,6 +30,11 @@ export const appConfig: ApplicationConfig = {
           deps: [HttpClient],
         },
       })
-    ), provideAnimationsAsync('noop'),
+    ),
+    provideAnimationsAsync('noop'),
+    ...(environment.firebaseConfig?[
+      provideFirebaseApp(() => initializeApp(environment.firebaseConfig!)),
+      provideAuth(() => getAuth())
+      ]:[])
   ],
 };

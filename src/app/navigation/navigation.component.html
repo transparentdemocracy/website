@@ -20,4 +20,13 @@
 
     {{ "header.nav.help" | translate }}</a
   >
+  <div>
+    <language-selector class="headerLanguage"></language-selector>
+  </div>
+  @if (showLogin) {
+    <a [routerLink]="['/login']">
+      <fa-icon [icon]="userIcon"></fa-icon>
+    </a>
+  }
+
 </nav>

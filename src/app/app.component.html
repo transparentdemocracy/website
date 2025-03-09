@@ -12,7 +12,7 @@
     @if('main.searchRange' | translate) {
       <div class="alert alert-primary" role="alert" [innerHTML]="'main.searchRange' | translate"></div>
     }
-    
+
     @if(maintenanceModeEnabled) {
       <p class="alert alert-danger" role="alert">
         <strong>{{ "maintenance.announcement" | translate }}</strong>

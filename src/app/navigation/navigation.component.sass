@@ -4,8 +4,10 @@
 .mainMenu
   display: flex
 
-  & a
+  & a:not(:last-child), div:not(:last-child)
     border-right: 2px solid colors.$color-primary-light
+
+  & a, div
     padding: 0 1.5rem
     font-weight: 600
     white-space: nowrap
@@ -22,6 +24,6 @@
     gap: 1.5rem
     margin-top: 0.5rem
 
-    & a
+    & a, div
       padding: 0
       border: none

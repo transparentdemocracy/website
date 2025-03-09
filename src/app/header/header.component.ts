@@ -1,11 +1,10 @@
-import { Component, HostListener } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { LanguageSelector } from '../language/language-selector/language-selector.component';
-import { NavigationComponent } from '../navigation/navigation.component';
+import {Component, HostListener} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
+import {NavigationComponent} from '../navigation/navigation.component';
 
 @Component({
     selector: 'header',
-    imports: [TranslateModule, LanguageSelector, NavigationComponent],
+  imports: [TranslateModule, NavigationComponent],
     templateUrl: './header.component.html',
     styleUrl: './header.component.sass'
 })
@@ -27,4 +26,5 @@ export class HeaderComponent {
   public toogleMenuMobile() {
     this.isMenuMobileOpen = !this.isMenuMobileOpen;
   }
+
 }
