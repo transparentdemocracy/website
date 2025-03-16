@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration local",
     "build": "ng build",
     "build:dev": "ng build --configuration development --base-href https://wddp-dev.pages.dev",
     "build:prod": "ng build --configuration production --base-href https://watdoetdepolitiek.be",
