@@ -1,29 +1,29 @@
 <ng-container *ngIf="authState$ | async as authState; else notLoggedIn">
-  <mat-card>
+  <mat-card class="login-card">
     <mat-card-header>
       You are logged in as {{ authState?.email }}
     </mat-card-header>
-    <mat-card-footer>
-      <button mat-flat-button (click)="logout()">Logout</button>
-    </mat-card-footer>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" (click)="logout()">Logout</button>
+    </mat-card-actions>
   </mat-card>
 </ng-container>
 
 <ng-template #notLoggedIn>
-  <mat-card>
+  <mat-card class="login-card">
     <mat-card-header>
       Log in using email and password
     </mat-card-header>
     <mat-card-content>
       <mat-form-field>
-        <input id="username" name="username" placeholder="you@example.com" [(ngModel)]="userInput">
+        <input matInput required id="username" name="username" placeholder="you@example.com" [(ngModel)]="userInput">
       </mat-form-field>
       <mat-form-field>
-        <input id="password" type="password" name="password" placeholder="password" [(ngModel)]="passwordInput">
+        <input matInput required id="password" type="password" name="password" placeholder="password" [(ngModel)]="passwordInput">
       </mat-form-field>
     </mat-card-content>
-    <mat-card-footer>
-      <button mat-flat-button (click)="login()">Login</button>
-    </mat-card-footer>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" (click)="login()">Login</button>
+    </mat-card-actions>
   </mat-card>
 </ng-template>

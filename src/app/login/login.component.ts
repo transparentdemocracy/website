@@ -1,6 +1,6 @@
 import {Component} from '@angular/core'
 import {AuthService} from '../auth.service'
-import {MatCard, MatCardContent, MatCardFooter, MatCardHeader} from "@angular/material/card";
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {MatFormField} from "@angular/material/form-field";
 import {MatButton} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
@@ -14,13 +14,13 @@ import {FormsModule} from "@angular/forms";
     MatCardHeader,
     MatCard,
     MatFormField,
-    MatCardFooter,
     MatButton,
     CommonModule,
     MatCardContent,
     MatInputModule,
     AsyncPipe,
-    FormsModule
+    FormsModule,
+    MatCardActions
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.sass'
