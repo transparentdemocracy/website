@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withInterceptors(
-      [authInterceptor]
+      environment.firebaseConfig?[authInterceptor]:[]
     )),
     provideLuxonDateAdapter(),
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
