@@ -4,7 +4,7 @@ export const environment = {
   searchPlenariesUrl: 'https://lriab2tv73b4i4aau6kpmoj7240lvarc.lambda-url.eu-west-1.on.aws/',
   getMotionUrl: 'https://iphipqnevfb76rdjkiyvcw4p7q0obavq.lambda-url.eu-west-1.on.aws/',
   maintenanceModeEnabled: false,
-  showLogin: false,
+  showLogin: true,
   firebaseConfig: {
     apiKey: "AIzaSyAXt3nTsg0w4CG26Emjn_f2tUaRr36eU90",
     authDomain: "wddp-d1431.firebaseapp.com",
