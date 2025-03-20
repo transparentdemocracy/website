@@ -1,28 +1,37 @@
-import {HttpHandlerFn, HttpRequest} from '@angular/common/http';
-import {inject} from "@angular/core";
-import {from, switchMap, take} from "rxjs";
-import {Auth} from "@angular/fire/auth";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {from, Observable, switchMap, take} from "rxjs";
+import {Injectable} from "@angular/core";
+import {AuthService} from "./auth.service";
+import {of} from "rxjs/internal/observable/of";
 
 
-export function authInterceptor(request: HttpRequest<unknown>, next: HttpHandlerFn) {
-  const auth = inject(Auth);
-  const user = auth.currentUser;
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
 
-  if (user == null) {
-    return next(request);
+  constructor(private authService: AuthService) {
   }
 
-  return from(user.getIdToken()).pipe(
-    take(1),
-    switchMap((token) => {
-      const clonedRequest = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return this.authService.authState$.pipe(
+      take(1),
+      switchMap((user) => {
+        if (user == null) {
+          return of(null)
         }
-      });
+        return from(user.getIdToken())
+      }),
+      switchMap(accessToken => {
+        if (!accessToken) {
+          return next.handle(req);
+        }
+        const clonedRequest = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+        return next.handle(clonedRequest);
+      })
+    )
+  }
 
-      return next(clonedRequest);
-    })
-  )
 }
-
