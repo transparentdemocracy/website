@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 import {FormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
 import {CurrentUserCardComponent} from "../current-user-card/current-user-card.component";
+import {sendPasswordResetEmail} from "@angular/fire/auth";
 
 @Component({
   selector: 'login',
@@ -44,10 +45,6 @@ export class LoginComponent {
     this.authService.login(this.userInput, this.passwordInput)
     this.userInput = '';
     this.passwordInput = '';
-  }
-
-  logout() {
-    this.authService.logout()
   }
 
 }
