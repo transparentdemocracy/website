@@ -1,0 +1,55 @@
+<ng-container *ngIf="authState$ | async as authState; else notLoggedIn">
+  <current-user-card [email]="authState?.email"></current-user-card>
+</ng-container>
+
+<ng-template #notLoggedIn>
+  <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+    <mat-card class="signup-card">
+      <mat-card-header class="signup-header">
+        Sign up using email and password
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field class="signup-field">
+          <mat-label>Email</mat-label>
+          <input matInput required id="username" formControlName="username" name="username" placeholder="you@example.com">
+          <mat-error *ngIf="signupForm.get('username')?.hasError('required')">
+            Required
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('username')?.hasError('email')">
+            This doesn't look like a valid email address
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="signup-field">
+          <mat-label>Password</mat-label>
+          <input matInput required id="password" formControlName="password" type="password" name="password" placeholder="password"/>
+          <mat-error *ngIf="signupForm.get('password')?.hasError('minlength')">
+            Password must be at least 8 characters
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="signup-field">
+          <mat-label>Password, again</mat-label>
+          <input matInput required id="password2" formControlName="password2" type="password" name="password" placeholder="password">
+          <mat-error *ngIf="signupForm.get('password2')?.hasError('passwordsDoNotMatch')">
+            Passwords do not match
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('password2')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+        @if (lastError) {
+          <div>{{ lastError }}</div>
+        }
+      </mat-card-content>
+      <mat-card-footer class="signup-footer">
+        <button type="submit" mat-flat-button color="primary" [disabled]="!signupForm.valid">Sign up</button>
+        <hr>
+        Already have an account?
+        <button [routerLink]="['/login']" mat-flat-button color="primary">Login</button>
+      </mat-card-footer>
+    </mat-card>
+  </form>
+</ng-template>
