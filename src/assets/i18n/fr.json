@@ -59,15 +59,15 @@
   },
   "help": {
     "title": "Aide",
-    "motions":{
-      "title":"Motions",
+    "motions": {
+      "title": "Motions",
       "description": "Vous pouvez utiliser cette page pour :",
       "element01": "Parcourir tous les motions de vote du parlement fédéral.",
       "element02": "Stemmingen op te zoeken over een bepaald onderwerp (tik het onderwerp in in de zoekbalk).",
       "element03": "Rechercher des motions sur un sujet particulier (tapez le sujet dans la barre de recherche)."
     },
-    "plenaries":{
-      "title":"Plénières",
+    "plenaries": {
+      "title": "Plénières",
       "description": "Vous pouvez utiliser cette page pour :",
       "element01": "Pour parcourir les sessions plénières qui ont eu lieu.",
       "element02": "Pour rechercher les plénières au cours desquelles un sujet spécifique a été voté (tapez le sujet dans la barre de recherche).",
@@ -86,5 +86,32 @@
   },
   "footer": {
     "license": "Les <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">données utilisées sur ce site</a> sont librement accessibles sous la <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">license MIT</a>"
+  },
+  "auth": {
+    "login": "Connexion",
+    "loggedInAs": "Vous êtes connecté en tant que: ",
+    "logout": "Déconnexion",
+    "loginWithEmailAndPassword": "Connexion avec e-mail et mot de passe",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié?",
+    "resetPasswordShort": "Réinitialiser",
+    "resetPassword": "Réinitialiser votre mot de passe",
+    "needAnAccount": "Avez-vous besoin d'un compte?",
+    "signUp": "S'inscrire",
+    "passwordPlaceholder": "mot de passe",
+    "passwordAgain": "Mot de passe, à nouveau",
+    "emailPlaceholder": "vous@example.com",
+    "signUpWithEmailAndPassword": "S'inscrire avec e-mail et mot de passe",
+    "alreadyHaveAnAccount": "Vous avez déjà un compte?",
+    "formErrorEmail": "Cette adresse e-mail ne semble pas valide",
+    "formErrorRequired": "Obligatoire",
+    "formErrorPasswordLength": "Le mot de passe doit contenir au moins 8 caractères",
+    "formErrorPasswordsDoNotMatch": "Les mots de passe ne correspondent pas",
+    "resetPasswordConfirmation": "Si nous trouvons le compte demandé, nous enverrons un e-mail avec des instructions pour réinitialiser votre mot de passe.",
+    "resetAgain": "Réessayer.",
+    "signUpEmailAlreadyInUse": "Ce n'est pas une adresse e-mail valide ou elle est déjà utilisée.",
+    "signUpWeakPassword": "Le mot de passe que vous avez fourni est trop faible. Il doit contenir au moins 8 caractères.",
+    "signUpGeneralError": "Désolé, cela ne fonctionne pas, apparemment. Veuillez réessayer plus tard."
   }
 }

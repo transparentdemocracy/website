@@ -1,19 +1,18 @@
 import {Component, Input} from '@angular/core';
-import {AsyncPipe, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardActions, MatCardHeader} from "@angular/material/card";
 import {AuthService} from "../auth.service";
 import {Observable} from "rxjs";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'current-user-card',
   imports: [
-    AsyncPipe,
     MatButton,
     MatCard,
     MatCardActions,
     MatCardHeader,
-    NgIf
+    TranslateModule
   ],
   templateUrl: './current-user-card.component.html',
   styleUrl: './current-user-card.component.sass'

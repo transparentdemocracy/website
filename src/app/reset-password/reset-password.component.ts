@@ -5,20 +5,22 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'reset-password',
-    imports: [
-        MatButton,
-        MatCard,
-        MatCardContent,
-        MatCardFooter,
-        MatCardHeader,
-        MatFormField,
-        MatInput,
-        MatLabel,
-        ReactiveFormsModule
-    ],
+  imports: [
+    MatButton,
+    MatCard,
+    MatCardContent,
+    MatCardFooter,
+    MatCardHeader,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    ReactiveFormsModule,
+    TranslateModule
+  ],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.sass'
 })

@@ -5,25 +5,26 @@
 <ng-template #notLoggedIn>
   <mat-card class="login-card">
     <mat-card-header class="login-header">
-      Log in using email and password
+      {{ "auth.loginWithEmailAndPassword" | translate }}
     </mat-card-header>
     <mat-card-content>
       <mat-form-field class="login-field">
-        <mat-label>Email</mat-label>
-        <input matInput required id="username" name="username" placeholder="you@example.com" [(ngModel)]="userInput">
+        <mat-label>{{ "auth.email" | translate }}</mat-label>
+        <input matInput required id="username" name="username" [placeholder]="'auth.emailPlaceholder'|translate" [(ngModel)]="userInput">
       </mat-form-field>
       <br>
       <mat-form-field class="login-field">
-        <mat-label>Password</mat-label>
-        <input matInput required id="password" type="password" name="password" placeholder="password" [(ngModel)]="passwordInput">
+        <mat-label>{{ "auth.password" | translate }}</mat-label>
+        <input matInput required id="password" type="password" name="password" [placeholder]="'auth.passwordPlaceholder'| translate"
+               [(ngModel)]="passwordInput">
       </mat-form-field>
     </mat-card-content>
     <mat-card-footer class="login-footer">
       <button mat-flat-button color="primary" (click)="login()">Log in</button>
       <hr>
-      Forgot your password? <a href="/reset-password">Reset your password</a>
+      {{ "auth.forgotPassword"| translate }} <a href="/reset-password">{{ "auth.resetPasswordShort" | translate }}</a>
       <hr>
-      Need an account? <a href="/signup">Sign up</a>
+      {{ "auth.needAnAccount" | translate }} <a href="/signup">{{ "auth.signUp" | translate }}</a>
     </mat-card-footer>
   </mat-card>
 </ng-template>

@@ -63,15 +63,15 @@
   },
   "help": {
     "title": "Help",
-    "motions":{
-      "title":"Stemmingen",
+    "motions": {
+      "title": "Stemmingen",
       "description": "Je kan deze pagina gebruiken om:",
       "element01": "Door alle stemmingen te bladeren die zijn gehouden in het federaal parlement.",
       "element02": "Stemmingen op te zoeken over een bepaald onderwerp (tik het onderwerp in in de zoekbalk).",
       "element03": "een specifieke stemming op te zoeken (tik het nummer of de datum van de stemming in in de zoekbalk)."
     },
-    "plenaries":{
-      "title":"Vergaderingen",
+    "plenaries": {
+      "title": "Vergaderingen",
       "description": "Je kan deze pagina gebruiken om:",
       "element01": "Te bladeren door de plenaire vergaderingen die zijn gehouden.",
       "element02": "Vergaderingen op te zoeken waarin over een bepaald onderwerp is gestemd (tik het onderwerp in in de zoekbalk).",
@@ -90,5 +90,32 @@
   },
   "footer": {
     "license": "De <a href=\"https://github.com/transparentdemocracy/voting-data/\" target=\"_blank\">data gebruikt op deze website</a> is vrij beschikbaar onder de <a href=\"https://choosealicense.com/licenses/mit/\" target=\"_blank\">MIT license</a>"
+  },
+  "auth":{
+    "login": "Inloggen",
+    "loggedInAs": "U bent ingelogd als: ",
+    "logout": "Uitloggen",
+    "loginWithEmailAndPassword": "Inloggen met e-mail en wachtwoord",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "resetPasswordShort": "Opnieuw instellen",
+    "resetPassword": "Wachtwoord opnieuw instellen",
+    "needAnAccount": "Heeft u een account nodig?",
+    "signUp": "Registreren",
+    "passwordPlaceholder": "wachtwoord",
+    "passwordAgain": "Wachtwoord, opnieuw",
+    "emailPlaceholder": "iemand@example.com",
+    "signUpWithEmailAndPassword": "Registeren met e-mail en wachtwoord",
+    "alreadyHaveAnAccount": "Heeft u al een account?",
+    "formErrorEmail": "Dit lijkt geen geldig e-mailadres",
+    "formErrorRequired": "Verplicht",
+    "formErrorPasswordLength": "Wachtwoord moet minimaal 8 tekens zijn",
+    "formErrorPasswordsDoNotMatch": "Wachtwoorden komen niet overeen",
+    "resetPasswordConfirmation": "Als we het gevraagde account terugvinden sturen we een email met instructies voor het opnieuw instellen van uw wachtwoord.",
+    "resetAgain": "Herbeginnen.",
+    "signUpEmailAlreadyInUse": "Dat is geen geldig e-mailadres of het is al in gebruik.",
+    "signUpWeakPassword": "Het wachtwoord dat je hebt opgegeven is te zwak. Het moet minimaal 8 tekens bevatten.",
+    "signUpGeneralError": "Sorry, dit werkt blijkbaar niet. Probeer het later opnieuw."
   }
 }

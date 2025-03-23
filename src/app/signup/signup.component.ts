@@ -9,6 +9,7 @@ import {AsyncPipe, NgIf} from "@angular/common";
 import {CurrentUserCardComponent} from "../current-user-card/current-user-card.component";
 import {Observable} from "rxjs";
 import {AuthService} from "../auth.service";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'signup',
@@ -26,7 +27,8 @@ import {AuthService} from "../auth.service";
     AsyncPipe,
     CurrentUserCardComponent,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.sass'
@@ -38,7 +40,7 @@ export class SignupComponent {
   signupForm: FormGroup
   lastError = ''
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder, private translateService: TranslateService) {
     this.authState$ = authService.authState$
 
     this.signupForm = fb.group({
@@ -73,25 +75,32 @@ export class SignupComponent {
       function (err: any) {
         switch (err.code) {
           case 'auth/email-already-in-use':
-            me.lastError = "This email is already in use";
+            me.setTranslatedError('auth.signUpEmailAlreadyInUse')
             break;
           case 'auth/invalid-email':
-            me.lastError = 'That is not a valid email address or it is already in use.';
+            me.setTranslatedError('auth.signUpEmailAlreadyInUse')
             break;
           case'auth/operation-not-allowed':
-            me.lastError = "Sorry, this isn't working. Please try again later.";
+            me.setTranslatedError('auth.signUpGeneralError')
             break;
           case 'auth/weak-password':
-            me.lastError = 'The password you provided is too weak. It must have at least 6 characters and include a special character.';
+            me.setTranslatedError('auth.signUpWeakPassword')
             break;
           case 'auth/missing-password':
-            me.lastError = "It looks like you sent an empty password.";
+            // There's no point having an error message for this, it should be prevented by the form
+            me.setTranslatedError('auth.signUpGeneralError')
             break;
           default:
-            me.lastError = "Sorry, this isn't working. Please try again later.";
+            me.setTranslatedError('auth.signUpGeneralError')
         }
       }
     )
     this.lastError = '';
+  }
+
+  setTranslatedError(key: string) {
+    this.translateService.get(key).subscribe(
+      (value: string) => this.lastError = value
+    )
   }
 }
