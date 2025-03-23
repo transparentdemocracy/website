@@ -1,9 +1,8 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatCard, MatCardContent, MatCardFooter, MatCardHeader} from "@angular/material/card";
 import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Auth, createUserWithEmailAndPassword} from "@angular/fire/auth";
-import {Router, RouterLink} from "@angular/router";
+import {Router} from "@angular/router";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {AsyncPipe, NgIf} from "@angular/common";
@@ -22,7 +21,6 @@ import {AuthService} from "../auth.service";
     FormsModule,
     MatFormFieldModule,
     MatCardFooter,
-    RouterLink,
     MatInput,
     MatButton,
     AsyncPipe,
@@ -39,7 +37,6 @@ export class SignupComponent {
 
   signupForm: FormGroup
   lastError = ''
-  auth = inject(Auth)
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.authState$ = authService.authState$
@@ -71,10 +68,10 @@ export class SignupComponent {
     let formValue = this.signupForm.value;
     const username = formValue.username
     const password = formValue.password
-    createUserWithEmailAndPassword(this.auth, username, password).then(
-      (user) => this.router.navigate(['/login']),
-      function (bad) {
-        switch (bad.code) {
+    this.authService.createUserWithEmailAndPassword(username, password).then(
+      (_) => this.router.navigate(['/login']),
+      function (err: any) {
+        switch (err.code) {
           case 'auth/email-already-in-use':
             me.lastError = "This email is already in use";
             break;

@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {Auth, authState, sendPasswordResetEmail, signInWithEmailAndPassword, signOut} from '@angular/fire/auth';
+import {Auth, authState, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut} from '@angular/fire/auth';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 
@@ -27,5 +27,9 @@ export class AuthService {
 
   async resetPassword(username: string) {
     return sendPasswordResetEmail(this.auth, username)
+  }
+
+  createUserWithEmailAndPassword(username: string, password: string) {
+    return createUserWithEmailAndPassword(this.auth, username, password)
   }
 }

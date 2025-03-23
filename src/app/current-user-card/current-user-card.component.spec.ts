@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CurrentUserCardComponent } from './current-user-card.component';
+import {CurrentUserCardComponent} from './current-user-card.component';
+import {AuthService} from "../auth.service";
+import {EMPTY} from "rxjs";
 
 describe('CurrentUserCardComponent', () => {
   let component: CurrentUserCardComponent;
@@ -8,14 +10,16 @@ describe('CurrentUserCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CurrentUserCardComponent]
+      imports: [CurrentUserCardComponent],
+      providers: [{provide: AuthService, useValue: {authState$: EMPTY}}]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CurrentUserCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  })
+  ;
 
   it('should create', () => {
     expect(component).toBeTruthy();
